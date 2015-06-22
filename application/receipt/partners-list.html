@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<style>
+			body,.mui-content {
+				background-color: #BBBBBB;
+				color: #fff;
+			}
+			header.mui-bar{
+				display: none;
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			.title{
+			  	margin: 35px 15px 10px;
+			  }
+			  .title+.content{
+			  	margin: 10px 15px 35px;
+			  	color: #BBBBBB;
+			  	text-indent: 1em;
+			  	font-size: 14px;
+			  	line-height: 24px;
+			  }
+			  .mui-table-view{
+			  	margin-bottom: 35px;
+			  }
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="close-btn">
+			<div style="text-align:center" >请选择送货商</div>
+				<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted" id="style11">
+					<li class="mui-table-view-cell">
+						 <a href="101" al="任丘市（季亚松）纸箱"> 任丘市（季亚松）纸箱 </a>
+					</li>
+					<li class="mui-table-view-cell">
+						 <a href="102" al="新羽玻璃制品厂"> 新羽玻璃制品厂 </a>
+					</li>
+					<li class="mui-table-view-cell">
+						 <a href="103" al="何中海玻璃制品厂"> 何中海玻璃制品厂 </a>
+					</li>
+					<li class="mui-table-view-cell">
+						 <a href="105" al="何树刚渠道"> 何树刚渠道 </a>
+					</li>
+					<li class="mui-table-view-cell">
+						 <a href="106" al="张来义工厂"> 张来义工厂 </a>
+					</li>
+					<li class="mui-table-view-cell">
+						 <a href="107" al="大史张亮"> 大史张亮 </a>
+					</li>
+				</ul>
+		</div>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+		mui.init({
+			keyEventBind: {
+				backbutton: false,
+				menubutton: false
+			}
+		});
+		var main = null;
+		mui.plusReady(function () {
+			main = plus.webview.currentWebview().opener();
+		})
+		
+		function closeMenu () {
+			mui.fire(main,"menu:swiperight");
+		}
+		
+		/*
+		function selectORcloseMenu () {
+			//window.document.getElementById("show-btn").innerText = "23123";
+			//var detailPage = plus.webview.getWebviewById('receipt-fill-in-form.html');
+			var id=12;
+			//触发详情页面的newsId事件
+			//mui.fire(main,"menu:swiperight");
+			var radio1 = document.getElementById("radio1");
+			//console.log("id is: "+radio1.value);
+			id = radio1.value;
+			//id = radio1.Text;
+			mui.fire(main,"menu:newsId",{
+				id:id
+			});
+			//,{
+			//    id:id
+			//  }
+			  
+			closeMenu () ;
+		}*/
+				
+		//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+		//window.addEventListener("swiperight",closeMenu);
+		
+		//document.getElementById("close-btn").addEventListener('tap',closeMenu);
+		
+		//document.getElementById("style11").addEventListener('tap', closeMenu);
+		//document.getElementById("style11").addEventListener('tap', selectORcloseMenu);
+			
+			
+		mui('#style11').on('tap', 'a', function() {
+				var id = this.getAttribute('href');
+				var al = this.getAttribute('al');
+				//console.log("al is: "+al);
+				//var href = this.href;
+				//var type = this.getAttribute("open-type");
+				mui.fire(main,"menu:newsId",{
+					id:id,
+					al:al
+				});
+				closeMenu () ;
+		});
+			
+	</script>
+</body>
+
+</html>
