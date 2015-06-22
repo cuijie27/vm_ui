@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/pinyin/test.js"></script>
+    <script src="../js/pinyin/quanpin.js"></script>
+    <!--<script data-main="../js/repinyin.js" src="../js/lib/require.js"></script>
+   	<script src="../js/pinyin/pinyin.js"></script>-->
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    	<style>
+			h5 {
+				margin: 5px 7px;
+			}
+			
+			.copyright2_line {
+				  padding: 5% 5% 5% 5%;
+				  width:100%;
+				  position:fixed; _position:absolute;_bottom:expression(eval(document.body.scrollTop));z-index:1024;right:0;bottom:0; 
+				}
+		</style>
+</head>
+
+<body>
+		<header class="mui-bar mui-bar-nav">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-title">索问登陆</h1>
+			<a id="info" class="mui-icon mui-icon-info-filled mui-pull-right" style="color: #999;"></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<input id="loginPhoneNum" class="mui-input-clear" type="text" placeholder="登陆手机号">
+					</div>
+					<div class="mui-input-row">
+						<input id="loginPswd" type="password" class="mui-input-clear" placeholder="密码">
+					</div>
+
+					
+					<div class="mui-button-row" style="height: auto;">
+						<button id="loginBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">登陆</font></button>
+					</div>
+					<br>
+					<div align="center">
+						<a id="loginProblem" ><font size="2">登陆遇到问题？</font></a>
+					<div class="copyright2_line" align="center"><a id="register"><font size="2">注册</font></a></div>
+						
+					</div>
+					
+				</form>
+				
+			</div>
+		</div>
+</body>
+<script>
+	document.getElementById('loginProblem').addEventListener('tap', function() {
+  	//打开注册遇到问题页面
+  	mui.openWindow({
+    	url: 'loginProblem.html', 
+    	id:'loginProblem',
+    	extras:{
+    		name:'mui',
+        	version:'0.5.8'
+    	}
+  	});
+});
+
+document.getElementById('register').addEventListener('tap', function() {
+	console.log('click the register');
+  	//打开注册遇到问题页面
+  	mui.openWindow({
+    	url: 'register1.html', 
+    	id:'register1'
+  	});
+});
+
+	document.getElementById('loginBtn').addEventListener('tap',function(){
+		var loginPhoneNum = document.getElementById('loginPhoneNum').value;
+		var loginPswd = document.getElementById('loginPswd').value;
+		
+		console.log("单击loginBtn");
+		console.log("login phone num is "+loginPhoneNum);
+		console.log("login pswd is "+loginPswd);
+	});
+
+
+var arrRslt = makePy("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付");  
+console.log(arrRslt);
+
+
+console.log(codefans_net_CC2PY("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付"))
+
+/*
+console.log(pinyin("中心", {
+  style: pinyin.STYLE_INITIALS, // 设置拼音风格
+  heteronym: true
+}));  
+  var pinyin = require('pinyin/pinyin');
+console.log(pinyin("中心", {
+  style: pinyin.STYLE_INITIALS, // 设置拼音风格
+  heteronym: true
+}));    
+
+var pinyin = requirejs('pinyin/pinyin');
+console.log(pinyin("中心", {
+  style: pinyin.STYLE_INITIALS, // 设置拼音风格
+  heteronym: true
+}));    
+
+
+console.log(pinyin("崔杰", {
+  style: pinyin.STYLE_FIRST_LETTER, // 设置拼音风格
+  heteronym: true
+}));  
+*/
+
+</script>
+</html>

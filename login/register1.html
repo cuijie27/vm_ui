@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/list.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+		<div id="users" class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<h5>默认搜索框：</h5>
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear search" placeholder="">
+				</div>
+			</div>
+			<div class="title">
+				右侧无导航箭头
+			</div>
+			<ul class="mui-table-view list">
+				 <li class="mui-table-view-cell"><p class="name">Item zhangsan</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item 李i</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item wangwu</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item zhangsi</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item 李san</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item zhaoliu</p></li>
+		         <li class="mui-table-view-cell"><p class="name">Item andy</p></li>
+			</ul>
+		</div>
+</body>
+<script>
+	var options = {
+  valueNames: [ 'name']
+};
+
+var userList = new List('users', options);
+</script>
+</html>

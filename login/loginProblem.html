@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init({
+      		swipeBack:true //启用右滑关闭功能
+      	});
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title" >登陆遇到问题</h1>
+	</header>
+	
+	<div class="mui-content" >
+		<div class="mui-content-padded">
+			<button style="width: 100%;" type="button" class="mui-btn mui-btn-primary  ">找回索问密码</button>
+		</div>
+		<div class="mui-content-padded">
+			<button style="width: 100%;" type="button" class="mui-btn mui-btn-primary  ">通过短信验证码登陆</button>
+		</div>
+		<div class="mui-content-padded">
+			<button style="width: 100%;" type="button" class=" mui-action-back  mui-btn-primary  ">取消</button>
+		</div>
+	</div>
+</body>
+
+<script>
+
+	mui.plusReady(function() {
+	
+	var self = plus.webview.currentWebview();
+		var name = self.name;
+		var version = self.version;
+		
+		console.log("name is "+name+" version is "+version);
+	});
+</script>
+</html>
