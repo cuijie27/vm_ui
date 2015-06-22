@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <script src="js/Long.min.js"></script>
+	<script src="js/ByteBufferAB.min.js"></script>
+	<script src="js/ProtoBuf.min.js"></script>
+	<script src="js/Suowen.js"></script>
+	<script	>
+		//初始化API
+		suowen.api.Init("http://localhost:9081");
+		//添加协议文件
+		suowen.api.AddProto("/sys/DicQuery.json");
+		//编译api成JS调用对象
+		var root = suowen.api.Build();
+
+		var dicQueryRequest = new root.sys.DicQueryRequest()
+		dicQueryRequest.setDic(root.sys.Dic.INDUSTRY);
+		dicQueryRequest.setFields("name");
+
+        //执行API操作,TODO 结合MUI自动出现loading效果
+		suowen.api.Fetch(".sys.DicQueryRequest.cmd",dicQueryRequest,function(response){
+			var dicQueryResponse = response.get('.sys.DicQueryResponse.cmd');
+			var data = dicQueryResponse.getData();
+			for(var i=0;i<data.length;i++){
+				var e = data[i].getObject();
+				for(var j=0;j<e.length;j++){
+					alert(e[j].getKey());
+					alert(e[j].getValue());
+				}
+			}
+		},function(message){
+			alert(message);
+		})
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
