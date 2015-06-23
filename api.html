@@ -22,9 +22,8 @@
 		dicQueryRequest.setFields("name");
 
         //执行API操作,TODO 结合MUI自动出现loading效果
-		suowen.api.Fetch(".sys.DicQueryRequest.cmd",dicQueryRequest,function(response){
-			var dicQueryResponse = response.get('.sys.DicQueryResponse.cmd');
-			var data = dicQueryResponse.getData();
+		suowen.api.Fetch(dicQueryRequest,function(response){
+			var data = response.getData();
 			for(var i=0;i<data.length;i++){
 				var e = data[i].getObject();
 				for(var j=0;j<e.length;j++){

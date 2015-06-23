@@ -50,7 +50,7 @@
      * @param success 当执行成功后的操作
      * @param fail 当执行失败后的操作
      */
-    SuowenAPI.Fetch = function(cmd,protobufRequest,success,fail){
+    SuowenAPI.Fetch = function(protobufRequest,success,fail){
         if(this.url == null){
             throw Error("URL Not Configuration");
         }
@@ -74,13 +74,15 @@
             if(error){
                 fail(response.getMessage())
             }else{
-                success(response)
+                var responseCmd = protobufRequest.toString().replace(/Request$/,"Response")+".cmd";
+                var protobufResponse = response.get(responseCmd)
+                success(protobufResponse)
             };
         };
         var baseRequest= new this.root.sys.BaseRequest()
         baseRequest.setToken(this.token);
         baseRequest.setVersion(this.version);
-        baseRequest.set(cmd,protobufRequest)
+        baseRequest.set(protobufRequest.toString()+".cmd",protobufRequest)
 
         xhr.send(baseRequest.toArrayBuffer());
     };
