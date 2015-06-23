@@ -16,6 +16,9 @@
     SuowenAPI.Init = function(url){
         this.url = url;
         this.builder = ProtoBuf.newBuilder({ convertFieldsToCamelCase: true });
+        //添加公共类
+        suowen.api.AddProto("/sys/Common.json");
+        suowen.api.AddProto("/sys/Model.json");
     };
     /**
      * 增加一个协议定义，目前尚不能增加多个协议.
@@ -73,19 +76,6 @@
             }else{
                 success(response)
             };
-            /*
-            var dicQueryResponse = response.get('.sys.DicQueryResponse.cmd')
-            var data = dicQueryResponse.getData();
-            for(var i=0;i<data.length;i++){
-                var e = data[i].getObject();
-                for(var j=0;j<e.length;j++){
-                    alert(e[j].getKey())
-                    alert(e[j].getValue());
-                }
-            }
-            //alert(response.getMessage());
-            */
-
         };
         var baseRequest= new this.root.sys.BaseRequest()
         baseRequest.setToken(this.token);
