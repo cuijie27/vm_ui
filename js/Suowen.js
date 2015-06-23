@@ -36,7 +36,7 @@
      */
     SuowenAPI.Build = function(){
         if(this.root){
-            throw Error("Suowen Protocol Builted!");
+            throw Error("Suowen Protocol Built!");
         }else{
             this.root = this.builder.build();
             return this.root;
