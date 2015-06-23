@@ -66,15 +66,15 @@
 			pickDateBtn.innerText = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 				
 			document.getElementById("pickDateBtn").addEventListener('tap', function() {
-				var dDate = new Date();
-				dDate.setFullYear(2015, 7, 16);
+				var dDate = new Date();	// 现在的时间
+				//dDate.setFullYear(2015, 5, 24);
 				var minDate = new Date();
-				minDate.setFullYear(2010, 0, 1);
+				minDate.setFullYear(2010, 1, 1);
 				var maxDate = new Date();
 				maxDate.setFullYear(2017, 11, 31);
 				plus.nativeUI.pickDate(function(e) {
 					var d = e.date;
-					pickDateBtn.innerText = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+					pickDateBtn.innerText = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
 				}, function(e) {
 					//pickDateBtn.innerText = "您没有选择日期";
 				}, {
