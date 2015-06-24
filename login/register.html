@@ -9,7 +9,29 @@
 	<script src="../js/ByteBufferAB.min.js"></script>
 	<script src="../js/ProtoBuf.noparse.min.js"></script>
 	<script src="../js/Suowen.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/mui.listpicker.js"></script>
     <link href="../css/mui.min.css" rel="stylesheet"/>
+    <!--App自定义的css-->
+	<link href="../css/mui.listpicker.css" rel="stylesheet" />
+	<link href="../css/mui.poppicker.css" rel="stylesheet" />
+	<style>
+		.mui-btn {
+			font-size: 16px;
+		}
+		h5.mui-content-padded {
+			margin-left: 3px;
+			margin-top: 20px !important;
+		}
+		h5.mui-content-padded:first-child {
+			margin-top: 12px !important;
+		}
+		.ui-alert {
+			text-align: center;
+			padding: 20px 10px;
+			font-size: 16px;
+		}
+	</style>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
@@ -35,10 +57,11 @@
 				<input id="cellphoneNum" class="mui-input-clear" type="text" placeholder="联系电话">
 			</div>
 			<h5>渠道主营<font color="#FF0000" size="4">*</font>：</h5>
-			<button id='showChannelPicker' class="mui-btn " style="width: 100%;" type='button'>选择渠道 ...</button>
+			<button id='showChannelPicker' class="mui-btn " style="width: 100%;" type='button'>选择所属渠道 ...</button>
 			<div id='channelResult' class="ui-alert"></div>
 		</div>
 	</div>
+	
 	<script>
 		
 		function plusReady(){
@@ -66,12 +89,59 @@
         },function(message){
             alert(message);
         });
-    }
-    //if(window.plus){
+        
+        (function($, doc) {
+		$.init();
+		$.ready(function() {
+			//普通示例
+			var userPicker = new $.PopPicker();
+			userPicker.setData([{
+						value: 'ywj',
+						text: '董事长 叶文洁'
+					}, {
+						value: 'aaa',
+						text: '总经理 艾AA'
+					}, {
+						value: 'lj',
+						text: '罗辑'
+					}, {
+						value: 'ymt',
+						text: '云天明'
+					}, {
+						value: 'shq',
+						text: '史强'
+					}, {
+						value: 'zhbh',
+						text: '章北海'
+					}, {
+						value: 'zhy',
+						text: '庄颜'
+					}, {
+						value: 'gyf',
+						text: '关一帆'
+					}, {
+						value: 'zhz',
+						text: '智子'
+					}, {
+						value: 'gezh',
+						text: '歌者'
+					}]);
+			var showChannelPicker = doc.getElementById('showChannelPicker');
+			var channelResult = doc.getElementById('channelResult');
+			showChannelPicker.addEventListener('tap', function(event) {
+				userPicker.show(function(items) {
+					channelResult.innerText = JSON.stringify(items[0]);
+				});
+			}, false); 
+		});
+	})(mui, document);
+        
+    };
+
         plusReady();
-    //}else{
-    //    document.addEventListener("plusready",plusReady,false);
-    //}
-	</script>
+
+        
+	
+		</script>
 </body>
 </html>
