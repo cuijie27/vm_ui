@@ -5,12 +5,70 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <script src="../js/mui.min.js"></script>
+    <script src="../js/Long.min.js"></script>
+	<script src="../js/ByteBufferAB.min.js"></script>
+	<script src="../js/ProtoBuf.noparse.min.js"></script>
+	<script src="../js/Suowen.js"></script>
     <link href="../css/mui.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
 </head>
 <body>
-	
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">用户注册</h1>
+	</header>
+
+	<div class="mui-content">
+		<div class="mui-content-padded" style="margin: 5px;">
+			<h5>企业名称<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+				<input id="companyName" class="mui-input-clear" type="text" placeholder="企业名称">
+			</div>
+			<h5>负责人<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+				<input id="personInCharge" class="mui-input-clear" type="text" placeholder="负责人">
+			</div>
+			<h5>联系电话<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+				<input id="cellphoneNum" class="mui-input-clear" type="text" placeholder="联系电话">
+			</div>
+		</div>
+	</div>
+	<script>
+		
+		function plusReady(){
+        //初始化API
+        suowen.api.Init("http://suowen.ganshane.com");
+        //添加协议文件
+        suowen.api.AddProto("/sys/DicQuery.json");
+        //编译api成JS调用对象
+        var root = suowen.api.Build();
+
+        var dicQueryRequest = new root.sys.DicQueryRequest()
+        dicQueryRequest.setDic(root.sys.Dic.INDUSTRY);
+        dicQueryRequest.setFields("name");
+
+        //执行API操作,TODO 结合MUI自动出现loading效果
+        suowen.api.Fetch(dicQueryRequest,function(response){
+            var data = response.getData();
+            for(var i=0;i<data.length;i++){
+                var e = data[i].getObject();
+                for(var j=0;j<e.length;j++){
+                    console.log(e[j].getKey());
+                    console.log(e[j].getValue());
+                }
+            }
+        },function(message){
+            alert(message);
+        });
+    }
+    //if(window.plus){
+        plusReady();
+    //}else{
+    //    document.addEventListener("plusready",plusReady,false);
+    //}
+	</script>
 </body>
 </html>
