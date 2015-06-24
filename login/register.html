@@ -65,6 +65,8 @@
 	<script>
 		
 		function plusReady(){
+			
+		//var dataStr = "in plus ready [";
         //初始化API
         suowen.api.Init("http://suowen.ganshane.com");
         //添加协议文件
@@ -74,67 +76,67 @@
 
         var dicQueryRequest = new root.sys.DicQueryRequest()
         dicQueryRequest.setDic(root.sys.Dic.INDUSTRY);
-        dicQueryRequest.setFields("name");
+        dicQueryRequest.setFields("id,name");
 
         //执行API操作,TODO 结合MUI自动出现loading效果
         suowen.api.Fetch(dicQueryRequest,function(response){
+        	var dataStr = "[";	
             var data = response.getData();
             for(var i=0;i<data.length;i++){
+            	var elementStr = "{";
                 var e = data[i].getObject();
                 for(var j=0;j<e.length;j++){
-                    console.log(e[j].getKey());
-                    console.log(e[j].getValue());
+                	
+                	if (j == 0){
+                		elementStr += "value: \'";
+                		elementStr += e[j].getValue();
+                		elementStr += "\',";
+                	}else if (j==1){
+                		elementStr += "text: \'";
+                		elementStr += e[j].getValue();
+                		elementStr += "\'";
+                	}
+                	
+                    //console.log(e[j].getKey());
+                    //console.log(e[j].getValue());
                 }
+                elementStr += "}";
+                if(i < data.length - 1)
+                	elementStr += ",";
+                
+                //console.log("element str is "+elementStr);
+                
+                dataStr += elementStr;
             }
+            
+            dataStr += "]";
+        	console.log("data str is "+dataStr);
+        	
+        	
+        	
+		        (function($, doc) {
+				$.init();
+				$.ready(function() {
+					//普通示例
+					var userPicker = new $.PopPicker();
+					userPicker.setData(eval(dataStr));
+					var showChannelPicker = doc.getElementById('showChannelPicker');
+					var channelResult = doc.getElementById('channelResult');
+					showChannelPicker.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							channelResult.innerText = JSON.stringify(items[0]);
+						});
+					}, false); 
+				});
+			})(mui, document);
+	
+	
         },function(message){
             alert(message);
         });
         
-        (function($, doc) {
-		$.init();
-		$.ready(function() {
-			//普通示例
-			var userPicker = new $.PopPicker();
-			userPicker.setData([{
-						value: 'ywj',
-						text: '董事长 叶文洁'
-					}, {
-						value: 'aaa',
-						text: '总经理 艾AA'
-					}, {
-						value: 'lj',
-						text: '罗辑'
-					}, {
-						value: 'ymt',
-						text: '云天明'
-					}, {
-						value: 'shq',
-						text: '史强'
-					}, {
-						value: 'zhbh',
-						text: '章北海'
-					}, {
-						value: 'zhy',
-						text: '庄颜'
-					}, {
-						value: 'gyf',
-						text: '关一帆'
-					}, {
-						value: 'zhz',
-						text: '智子'
-					}, {
-						value: 'gezh',
-						text: '歌者'
-					}]);
-			var showChannelPicker = doc.getElementById('showChannelPicker');
-			var channelResult = doc.getElementById('channelResult');
-			showChannelPicker.addEventListener('tap', function(event) {
-				userPicker.show(function(items) {
-					channelResult.innerText = JSON.stringify(items[0]);
-				});
-			}, false); 
-		});
-	})(mui, document);
+        
+        
         
     };
 
