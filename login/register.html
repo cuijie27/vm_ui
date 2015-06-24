@@ -68,7 +68,7 @@
 			
 		//var dataStr = "in plus ready [";
         //初始化API
-        suowen.api.Init("http://suowen.ganshane.com");
+        suowen.api.Init("http://suowen.tiger.mopaas.com");
         //添加协议文件
         suowen.api.AddProto("/sys/DicQuery.json");
         //编译api成JS调用对象
@@ -140,7 +140,12 @@
         
     };
 
-        plusReady();
+
+	if(window.plus){
+		plusReady();
+	}else{
+		document.addEventListener("plusready",plusReady,false);
+	}	
 
         
 	
