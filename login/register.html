@@ -69,6 +69,7 @@
 			<h5>渠道主营<font color="#FF0000" size="4">*</font>：</h5>
 			<button id='showChannelPicker' class="mui-btn " style="width: 100%;" type='button'>选择所属渠道 ...</button>
 			<div id='channelResult' class="ui-alert"></div>
+			<button id="registerBtn" type="button" style="width: 100%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="">注册</font></button>
 		</div>
 	</div>
 	
@@ -81,10 +82,12 @@
         suowen.api.Init("http://suowen.tiger.mopaas.com");
         //添加协议文件
         suowen.api.AddProto("/sys/DicQuery.json");
+        suowen.api.AddProto("/sys/Registry.json");
         //编译api成JS调用对象
         var root = suowen.api.Build();
 
         var dicQueryRequest = new root.sys.DicQueryRequest()
+        var registerRequest = new root.sys.RegistryRequest()
         dicQueryRequest.setDic(root.sys.Dic.INDUSTRY);
         dicQueryRequest.setFields("id,name");
 
@@ -123,12 +126,66 @@
 							jQuery.noConflict();
  							(function( $ ) {
 							    // Your jQuery code here, using the $
-							    $("#showChannelPicker").text(JSON.stringify(items[0]["text"]));
+							    //获取渠道名称和id值
+							    $("#showChannelPicker").text(items[0]["text"]);
+							    $("#showChannelPicker").data("industryId", items[0]["value"]);
 							})( jQuery );
 							//jquery 冲突的解决办法 
 
 						});
 					}, false); 
+					
+					///////////////////注册按钮////////////////////
+					var registerBtn = doc.getElementById('registerBtn');
+					registerBtn.addEventListener('tap', function(event) {
+							var companyNameStr = "";
+							var loginName = "";
+							var loginPswd = "";
+							var pswdConfirm = "";
+							var industryId = 0;
+							
+							//jquery 冲突的解决办法 
+							jQuery.noConflict();
+ 							(function( $ ) {
+							    // Your jQuery code here, using the $
+							    //获取渠道名称和id值
+							    companyNameStr = $("#companyName").val();
+							    loginName = $("#cellphoneNum").val();
+							    loginPswd = $("#loginPswd").val();
+							    pswdConfirm = $("#pswdConfirm").val();
+							    industryId = $("#showChannelPicker").data("industryId");
+							})( jQuery );
+							//jquery 冲突的解决办法 
+							
+							var btnArray = ['是', '否'];
+							mui.confirm("company name is "+companyNameStr+
+							"\nlogin name is"+loginName+
+							"\nlogin pswd is"+loginPswd+
+							"\npswd confirm is"+pswdConfirm+
+							"\nindustry id is"+industryId, '注册确认', btnArray, function(e) {
+								// 选择是
+								if (e.index == 0) {
+									//info.innerText = '你刚确认MUI是个好框架';
+
+									registerRequest.setLogin(loginName);
+									registerRequest.setPassword(loginPswd);
+									registerRequest.setCorporateName(companyNameStr);
+									registerRequest.setIndustry(parseInt(industryId));	// 需要转换为int型才能成功insert记录
+							        //执行API操作,TODO 结合MUI自动出现loading效果
+							        suowen.api.Fetch(registerRequest,function(response){
+							        	console.log(response);
+							        },function(message){
+							            alert(message);
+							        });
+								} 
+								// 选择否
+								else {
+									//info.innerText = 'MUI没有得到你的认可，继续加油'
+								}
+							});
+							
+					}, false); 
+					///////////////////注册按钮////////////////////
 				});
 			})(mui, document);
 	
@@ -144,8 +201,6 @@
 		document.addEventListener("plusready",plusReady,false);
 	}	
 
-       
-	
 		</script>
 </body>
 </html>
