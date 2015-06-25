@@ -80,46 +80,29 @@
 
         //执行API操作,TODO 结合MUI自动出现loading效果
         suowen.api.Fetch(dicQueryRequest,function(response){
-        	var dataStr = "[";	
             var data = response.getData();
-            for(var i=0;i<data.length;i++){
-            	var elementStr = "{";
-                var e = data[i].getObject();
+        	//////////////////////////////////
+        	var result = [];
+        	for(var i=0;i<data.length;i++){
+        		var e = data[i].getObject();
+        		result[i] = {};
                 for(var j=0;j<e.length;j++){
-                	
-                	if (j == 0){
-                		elementStr += "value: \'";
-                		elementStr += e[j].getValue();
-                		elementStr += "\',";
-                	}else if (j==1){
-                		elementStr += "text: \'";
-                		elementStr += e[j].getValue();
-                		elementStr += "\'";
-                	}
-                	
-                    //console.log(e[j].getKey());
-                    //console.log(e[j].getValue());
+                	if (j==0)
+                		result[i]["value"] =  e[j].getValue();
+                	else
+                		result[i]["text"] =  e[j].getValue();
                 }
-                elementStr += "}";
-                if(i < data.length - 1)
-                	elementStr += ",";
-                
-                //console.log("element str is "+elementStr);
-                
-                dataStr += elementStr;
-            }
-            
-            dataStr += "]";
-        	console.log("data str is "+dataStr);
-        	
-        	
+              }
+        	//console.log("result is "+JSON.stringify(result));
+        	//console.log("test info");
+        	//////////////////////////////////
         	
 		        (function($, doc) {
 				$.init();
 				$.ready(function() {
 					//普通示例
 					var userPicker = new $.PopPicker();
-					userPicker.setData(eval(dataStr));
+					userPicker.setData(result);
 					var showChannelPicker = doc.getElementById('showChannelPicker');
 					var channelResult = doc.getElementById('channelResult');
 					showChannelPicker.addEventListener('tap', function(event) {
