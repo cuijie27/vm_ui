@@ -70,7 +70,63 @@
     //编译api成JS调用对象
     var root = suowen.api.Build();
 
-    var loginRequest = new root.sys.LoginRequest ()
+    var loginRequest = new root.sys.LoginRequest ();
+    
+	mui.plusReady(function(){
+		
+			console.log(plus.storage.getItem("token_val"));
+			
+			document.getElementById('loginBtn').addEventListener('tap',function(){
+			var loginPhoneNum = document.getElementById('loginPhoneNum').value;
+			var loginPswd = document.getElementById('loginPswd').value;
+			
+			var loginPhoneNumLen = document.getElementById('loginPhoneNum').value.length;
+			var loginPswdLen = document.getElementById('loginPswd').value.length;
+			var canLogin = false;
+			
+			if(0 == loginPhoneNumLen || 0 == loginPswdLen){
+				mui.alert('登陆名和密码不能为空，请您重新输入', '错误', function() {
+					document.getElementById('loginPhoneNum').focus();
+				});
+			}
+			else
+				canLogin = true;
+				
+			if(canLogin){
+		        //loginRequest.setFields("id,name");
+				loginRequest.setLogin(loginPhoneNum);
+				loginRequest.setPassword(loginPswd);
+		        //执行API操作,TODO 结合MUI自动出现loading效果
+		        
+		        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+		        //suowen.api.token = "";
+		        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+		        
+		        suowen.api.Fetch(loginRequest,
+		        	function(response){
+		        		//var data = response.getData()
+		        		var copName = response.getCorporateName();
+		        		var tokenVal = response.getToken();
+		        		mui.alert("登陆成功,公司名称为："+copName+
+		        		"\ntoken为："+tokenVal, '成功', function() {
+		        			
+						});
+						// 将token的值存储在plus.storage中，随时可以取出。
+						plus.storage.setItem("token_val", tokenVal);						
+		        	},
+		        	function(message){
+		        		mui.alert(message, '返回错误', function() {
+						});
+		        	});
+			}
+			
+			/*console.log("单击loginBtn");
+			console.log("login phone num is "+loginPhoneNum);
+			console.log("login pswd is "+loginPswd);*/
+		});
+	});
+	
+	
 
 	document.getElementById('loginProblem').addEventListener('tap', function() {
 	  	//打开注册遇到问题页面
@@ -93,48 +149,7 @@
 	  	});
 	});
 
-	document.getElementById('loginBtn').addEventListener('tap',function(){
-		var loginPhoneNum = document.getElementById('loginPhoneNum').value;
-		var loginPswd = document.getElementById('loginPswd').value;
-		
-		var loginPhoneNumLen = document.getElementById('loginPhoneNum').value.length;
-		var loginPswdLen = document.getElementById('loginPswd').value.length;
-		var canLogin = false;
-		if(0 == loginPhoneNumLen || 0 == loginPswdLen){
-			mui.alert('登陆名和密码不能为空，请您重新输入', '错误', function() {
-				document.getElementById('loginPhoneNum').focus();
-			});
-		}
-		else
-			canLogin = true;
-			
-		if(canLogin){
-	        //loginRequest.setFields("id,name");
-			loginRequest.setLogin(loginPhoneNum);
-			loginRequest.setPassword(loginPswd);
-	        //执行API操作,TODO 结合MUI自动出现loading效果
-	        
-	        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
-	        //suowen.api.token = "";
-	        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
-	        
-	        suowen.api.Fetch(loginRequest,
-	        	function(response){
-	        		//var data = response.getData();
-	        		mui.alert("登陆成功,公司名称为："+response.getCorporateName()+
-	        		"\ntoken为："+response.getToken(), '成功', function() {
-					});
-	        	},
-	        	function(message){
-	        		mui.alert(message, '返回错误', function() {
-					});
-	        	});
-		}
-		
-		/*console.log("单击loginBtn");
-		console.log("login phone num is "+loginPhoneNum);
-		console.log("login pswd is "+loginPswd);*/
-	});
+	
 
 //////////////////拼音全拼，和拼音首字母的调用方法/////////////////////
 /*
