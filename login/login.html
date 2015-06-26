@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="../js/pinyin/test.js"></script>
+    <!--
+    <script src="../js/pinyin/firstPinyin.js"></script>
     <script src="../js/pinyin/quanpin.js"></script>
-    <script src="../js/jquery-2.1.0.js"></script>
-    <!--<script data-main="../js/repinyin.js" src="../js/lib/require.js"></script>
-   	<script src="../js/pinyin/pinyin.js"></script>-->
+   -->
     <script src="../js/mui.min.js"></script>
     <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script src="../js/Long.min.js"></script>
+	<script src="../js/ByteBufferAB.min.js"></script>
+	<script src="../js/ProtoBuf.noparse.min.js"></script>
+	<script src="../js/Suowen.js"></script>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
@@ -61,68 +64,85 @@
 		</div>
 </body>
 <script>
-	document.getElementById('loginProblem').addEventListener('tap', function() {
-  	//打开注册遇到问题页面
-  	mui.openWindow({
-    	url: 'loginProblem.html', 
-    	id:'loginProblem',
-    	extras:{
-    		name:'mui',
-        	version:'0.5.8'
-    	}
-  	});
-});
+	suowen.api.Init("http://suowen.tiger.mopaas.com");
+    //添加协议文件
+    suowen.api.AddProto("/sys/Login.json");
+    //编译api成JS调用对象
+    var root = suowen.api.Build();
 
-document.getElementById('register').addEventListener('tap', function() {
-	console.log('click the register');
-  	//打开注册遇到问题页面
-  	mui.openWindow({
-    	url: 'register.html', 
-    	id:'register'
-  	});
-});
+    var loginRequest = new root.sys.LoginRequest ()
+
+	document.getElementById('loginProblem').addEventListener('tap', function() {
+	  	//打开注册遇到问题页面
+	  	mui.openWindow({
+	    	url: 'loginProblem.html', 
+	    	id:'loginProblem',
+	    	extras:{
+	    		name:'mui',
+	        	version:'0.5.8'
+	    	}
+	  	});
+	});
+
+	document.getElementById('register').addEventListener('tap', function() {
+		console.log('click the register');
+	  	//打开注册遇到问题页面
+	  	mui.openWindow({
+	    	url: 'register.html', 
+	    	id:'register'
+	  	});
+	});
 
 	document.getElementById('loginBtn').addEventListener('tap',function(){
 		var loginPhoneNum = document.getElementById('loginPhoneNum').value;
 		var loginPswd = document.getElementById('loginPswd').value;
 		
-		console.log("单击loginBtn");
+		var loginPhoneNumLen = document.getElementById('loginPhoneNum').value.length;
+		var loginPswdLen = document.getElementById('loginPswd').value.length;
+		var canLogin = false;
+		if(0 == loginPhoneNumLen || 0 == loginPswdLen){
+			mui.alert('登陆名和密码不能为空，请您重新输入', '错误', function() {
+				document.getElementById('loginPhoneNum').focus();
+			});
+		}
+		else
+			canLogin = true;
+			
+		if(canLogin){
+	        //loginRequest.setFields("id,name");
+			loginRequest.setLogin(loginPhoneNum);
+			loginRequest.setPassword(loginPswd);
+	        //执行API操作,TODO 结合MUI自动出现loading效果
+	        
+	        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+	        //suowen.api.token = "";
+	        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+	        
+	        suowen.api.Fetch(loginRequest,
+	        	function(response){
+	        		//var data = response.getData();
+	        		mui.alert("登陆成功,公司名称为："+response.getCorporateName()+
+	        		"\ntoken为："+response.getToken(), '成功', function() {
+					});
+	        	},
+	        	function(message){
+	        		mui.alert(message, '返回错误', function() {
+					});
+	        	});
+		}
+		
+		/*console.log("单击loginBtn");
 		console.log("login phone num is "+loginPhoneNum);
-		console.log("login pswd is "+loginPswd);
+		console.log("login pswd is "+loginPswd);*/
 	});
 
-
-var arrRslt = makePy("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付");  
-console.log(arrRslt);
-
-
-console.log(codefans_net_CC2PY("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付"));
-
-//$("h1").text("suo wen login");
-
+//////////////////拼音全拼，和拼音首字母的调用方法/////////////////////
 /*
-console.log(pinyin("中心", {
-  style: pinyin.STYLE_INITIALS, // 设置拼音风格
-  heteronym: true
-}));  
-  var pinyin = require('pinyin/pinyin');
-console.log(pinyin("中心", {
-  style: pinyin.STYLE_INITIALS, // 设置拼音风格
-  heteronym: true
-}));    
-
-var pinyin = requirejs('pinyin/pinyin');
-console.log(pinyin("中心", {
-  style: pinyin.STYLE_INITIALS, // 设置拼音风格
-  heteronym: true
-}));    
-
-
-console.log(pinyin("崔杰", {
-  style: pinyin.STYLE_FIRST_LETTER, // 设置拼音风格
-  heteronym: true
-}));  
+var arrRslt = makePy("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付");
+console.log(arrRslt);
+console.log(codefans_net_CC2PY("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付"));
 */
+//////////////////拼音全拼，和拼音首字母的调用方法/////////////////////
 
 </script>
 </html>
