@@ -4,13 +4,108 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/Long.min.js"></script>
+	<script src="../js/ByteBufferAB.min.js"></script>
+	<script src="../js/ProtoBuf.noparse.min.js"></script>
+	<script src="../js/Suowen.js"></script>
+    
+    <link href="../css/mui.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
 </head>
 <body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">新建商品信息</h1>
+	</header>
+	
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<form class="mui-input-group">
+				
+				<div class="mui-input-row">
+					<input id="goodsName" class="mui-input-clear" type="text" placeholder="商品名称*"/>
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="goodsCode" class="mui-input-clear" type="text" placeholder="商品编码">
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="initialStock" class="mui-input-clear" type="text" placeholder="初始库存">
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="goodsPlace" class="mui-input-clear" type="text" placeholder="货位">
+				</div>
+				
+				<button id='showChannelPicker' class="mui-btn " style="width: 100%;" type='button'>包装方式...</button>
+				<!--<div id='channelResult' class="ui-alert"></div>-->
+				
+				<div class="mui-input-row">
+					<input id="personInCharge" class="mui-input-clear" type="text" placeholder="备注">
+				</div>
+				<button id="goodsAddBtn" type="button" style="width: 100%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="">确定</font></button>
+				</form>
+			</div>
+		</div>
+	
+	<script>
+	//初始化API
+    suowen.api.Init("http://suowen.tiger.mopaas.com");
+    //添加协议文件
+    suowen.api.AddProto("/sys/GoodsForm.json");
+    //编译api成JS调用对象
+    var root = suowen.api.Build();
+    
+	var goodsFormRequest = new root.sys.GoodsFormRequest();
+	
+	mui.plusReady(function(){
+		
+		var tokenVal = plus.storage.getItem("token_val");
+		console.log(tokenVal);
+		
+		// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+        suowen.api.token = tokenVal;
+        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+        
+		var goodsAddBtn = document.getElementById("goodsAddBtn");	
+		goodsAddBtn.addEventListener('tap', function(event){
+			var goodsName = "", goodsNameLen = 0, goodsCode = "";
+		
+			goodsName = document.getElementById('goodsName').value;
+			//document.getElementById('goodsName').value = "1234";
+			goodsNameLen = document.getElementById("goodsName").value.length;
+			
+			goodsCode = document.getElementById("goodsCode").value;
+			
+			console.log("goods name is "+goodsName);
+			// 商品名称长度大于1，可以添加商品
+			if(goodsNameLen > 1){
+		        goodsFormRequest.setName(goodsName);
+		        goodsFormRequest.setCode(goodsCode);
+		
+		        //执行API操作,TODO 结合MUI自动出现loading效果
+		        suowen.api.Fetch(goodsFormRequest,function(response){
+		        	mui.alert('商品：'+goodsName+'\n商品信息添加成功！', '成功', function() {
+												
+					});
+		        },
+		        function(message){
+		        	mui.alert(message, '错误', function() {
+					});
+		        });
+			}
+			else{
+				mui.alert("商品名称必须大于1个字符", '错误', function() {
+					document.getElementById("goodsName").focus();
+				});
+			}
+		},false);
+	});
+	</script>
 	
 </body>
 </html>
