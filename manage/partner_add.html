@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/Long.min.js"></script>
+	<script src="../js/ByteBufferAB.min.js"></script>
+	<script src="../js/ProtoBuf.noparse.min.js"></script>
+	<script src="../js/Suowen.js"></script>
+	
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">新建伙伴信息</h1>
+	</header>
+	
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				<form class="mui-input-group">
+				
+				<div class="mui-input-row">
+					<input id="mobile" class="mui-input-clear" type="text" placeholder="伙伴手机号*"/>
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="corporateName" class="mui-input-clear" type="text" placeholder="公司名称*">
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="linkMan" class="mui-input-clear" type="text" placeholder="联络人*">
+				</div>
+				
+				<div class="mui-input-row">
+					<input id="goodsPlace" class="mui-input-clear" type="text" placeholder="货位">
+				</div>
+				
+				<button id='showChannelPicker' class="mui-btn " style="width: 100%;" type='button'>包装方式...</button>
+				<!--<div id='channelResult' class="ui-alert"></div>-->
+				
+				<div class="mui-input-row">
+					<input id="personInCharge" class="mui-input-clear" type="text" placeholder="备注">
+				</div>
+				<button id="partnerAddBtn" type="button" style="width: 100%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="">确定</font></button>
+				</form>
+			</div>
+		</div>
+	<script>
+	//初始化API
+    suowen.api.Init("http://suowen.tiger.mopaas.com");
+    //添加协议文件,注意这里的路径改变为partner,而不是之前的sys路径
+    suowen.api.AddProto("/partner/PartnerForm.json");
+    //编译api成JS调用对象
+    var root = suowen.api.Build();
+    //这里面的root.partner调用，应该修改为partner而不是root.sys
+	var partnerFormRequest = new root.partner.PartnerFormRequest();
+	
+	mui.plusReady(function(){
+		var tokenVal = plus.storage.getItem("token_val");
+		console.log(tokenVal);
+		
+		// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+        suowen.api.token = tokenVal;
+        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+        
+		var partnerAddBtn = document.getElementById("partnerAddBtn");	
+		partnerAddBtn.addEventListener('tap', function(event){
+			
+			var mobile = "", mobileLen = 0, 
+			corporateName = "", corporateNameLen = 0,
+			linkMan = "", linkManLen = 0;
+		
+			mobile = document.getElementById('mobile').value;
+			mobileLen = document.getElementById("mobile").value.length;
+			
+			corporateName = document.getElementById("corporateName").value;
+			corporateNameLen = document.getElementById("corporateName").value.length;
+			
+			linkMan = document.getElementById("linkMan").value;
+			linkManLen = document.getElementById("linkMan").value.length;
+			
+			console.log("mobile is "+mobile);
+			
+			if(mobileLen >1 && corporateNameLen > 1 && linkManLen > 1){
+				var partner = {};
+				
+				partner["mobile"] = mobile;
+				partner["corporateName"] = corporateName;
+				partner["linkMan"] = linkMan;
+				partnerFormRequest.setPartner(partner); 
+				suowen.api.Fetch(partnerFormRequest, function(response){
+					mui.alert('伙伴：'+mobile+'\n伙伴信息添加成功！', '成功', function() {
+												
+					});
+				}, function(message){
+					mui.alert(message, '错误', function() {
+					});
+				});
+			}
+			else{
+				mui.alert("标星号项字符长度必须大于1个字符", '错误', function() {
+					document.getElementById("mobile").focus();
+				});
+			}
+		},false);
+	});
+	</script>
+</body>
+</html>

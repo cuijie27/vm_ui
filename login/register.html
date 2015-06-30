@@ -96,6 +96,7 @@
         //执行API操作,TODO 结合MUI自动出现loading效果
         suowen.api.Fetch(dicQueryRequest,function(response){
             var data = response.getData();
+            console.log(JSON.stringify(data));
         	/////////////////生成jsonArray/////////////////
         	var result = [];
         	for(var i=0;i<data.length;i++){
