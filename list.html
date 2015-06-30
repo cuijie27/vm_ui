@@ -502,7 +502,8 @@
 							aniShow: aniShow
 						},
 						waiting: {
-							autoShow: false
+							autoShow:true,//自动显示等待框，默认为true
+      						title:'正在加载...',//等待对话框上显示的提示内容
 						}
 					});
 				} else if (id && ~id.indexOf('.html')) {

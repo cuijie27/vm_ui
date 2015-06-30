@@ -72,6 +72,8 @@
 
     var loginRequest = new root.sys.LoginRequest ();
     
+    var registerView;
+    
 	mui.plusReady(function(){
 		
 			console.log(plus.storage.getItem("token_val"));
@@ -124,6 +126,8 @@
 			console.log("login phone num is "+loginPhoneNum);
 			console.log("login pswd is "+loginPswd);*/
 		});
+		
+		//registerView = plus.webview.create("register.html");
 	});
 	
 	
@@ -141,12 +145,20 @@
 	});
 
 	document.getElementById('register').addEventListener('tap', function() {
-		console.log('click the register');
+		//console.log('click the register');
 	  	//打开注册遇到问题页面
+	  	//registerView.show("slide-in-right",150);
+	  	
+	  	//console.log('show the register');
 	  	mui.openWindow({
 	    	url: 'register.html', 
-	    	id:'register'
+	    	id:'register',
+	    	waiting:{
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
 	  	});
+	  	
 	});
 
 	
