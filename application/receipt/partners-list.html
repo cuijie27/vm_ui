@@ -68,6 +68,58 @@
 		</div>
 	
 	<script type="text/javascript" charset="utf-8">
+	////////////获取数据库中伙伴数据/////////////add by cuijie 150630
+		//初始化API
+    suowen.api.Init("http://suowen.tiger.mopaas.com");
+    //添加协议文件
+    suowen.api.AddProto("/partner/PartnerQuery.json");
+    //编译api成JS调用对象
+    var root = suowen.api.Build();
+    
+	var partnerQueryRequest = new root.partner.PartnerQueryRequest();
+	
+	function plusReady(){
+		var tokenVal = plus.storage.getItem("token_val");
+		console.log(tokenVal);
+		
+		// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+        suowen.api.token = tokenVal;
+        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+        //partnerQueryRequest.setMobile("15910816978");
+        
+        suowen.api.Fetch(partnerQueryRequest, function(response){
+        	var partner = response.getPartner();
+            console.log(JSON.stringify(partner));
+            var result = [];
+            var ulToShow = document.getElementById("style11");
+            var ulToShowHtml = "";
+            for(var i=0;i<partner.length;i++){
+            	//var e = partner[i].getId();
+        		result[i] = {};
+            	result[i]["id"] = partner[i].getId();
+            	result[i]["linkMan"] = partner[i].getLinkMan();
+            	
+            	ulToShowHtml += "<li class=\"mui-table-view-cell\">";
+            	ulToShowHtml += "<a href=\""+partner[i].getId()+"\" al=\"";
+            	ulToShowHtml += partner[i].getLinkMan()+"\">"+partner[i].getLinkMan()+"</a></li>";
+            }
+            ulToShow.innerHTML = ulToShowHtml;
+            
+            console.log("result is "+JSON.stringify(result));
+            
+        }, function(message){
+        	mui.alert(message, '错误', function() {
+			});
+        });
+	};
+	if(window.plus){
+		plusReady();
+	}else{
+		document.addEventListener("plusready",plusReady,false);
+	}	
+		////////////获取数据库中伙伴数据/////////////
+		
+	
 		//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
 		mui.init({
 			keyEventBind: {
@@ -127,51 +179,7 @@
 				closeMenu () ;
 		});
 		
-		////////////获取数据库中伙伴数据/////////////add by cuijie 150630
-		//初始化API
-    suowen.api.Init("http://suowen.tiger.mopaas.com");
-    //添加协议文件
-    suowen.api.AddProto("/partner/PartnerQuery.json");
-    //编译api成JS调用对象
-    var root = suowen.api.Build();
-    
-	var partnerQueryRequest = new root.partner.PartnerQueryRequest();
-	
-	mui.plusReady(function(){
-		var tokenVal = plus.storage.getItem("token_val");
-		console.log(tokenVal);
 		
-		// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
-        suowen.api.token = tokenVal;
-        // 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
-        //partnerQueryRequest.setMobile("15910816978");
-        
-        suowen.api.Fetch(partnerQueryRequest, function(response){
-        	var partner = response.getPartner();
-            console.log(JSON.stringify(partner));
-            var result = [];
-            var ulToShow = document.getElementById("style11");
-            var ulToShowHtml = "";
-            for(var i=0;i<partner.length;i++){
-            	//var e = partner[i].getId();
-        		result[i] = {};
-            	result[i]["id"] = partner[i].getId();
-            	result[i]["linkMan"] = partner[i].getLinkMan();
-            	
-            	ulToShowHtml += "<li class=\"mui-table-view-cell\">";
-            	ulToShowHtml += "<a href=\""+partner[i].getId()+"\" al=\"";
-            	ulToShowHtml += partner[i].getLinkMan()+"\">"+partner[i].getLinkMan()+"</a></li>";
-            }
-            ulToShow.innerHTML = ulToShowHtml;
-            
-            console.log("result is "+JSON.stringify(result));
-            
-        }, function(message){
-        	mui.alert(message, '错误', function() {
-			});
-        });
-	});
-		////////////获取数据库中伙伴数据/////////////
 	</script>
 </body>
 
