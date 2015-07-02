@@ -25,6 +25,7 @@
 		<h1 class="mui-title">索问</h1>
 	</header>
 	<script>
+		var showMenu = false;
 		mui.init({
 			swipeBack: false,
 			statusBarBackground: '#f7f7f7',
@@ -32,8 +33,8 @@
 				doubletap: true
 			},
 			subpages: [{
-				id: 'receipt',
-				url: '/application/receipt/receipt.html',
+				id: '9GridPages',
+				url: '/9gridPages/gridIndex.html',
 				styles: {
 					top: '45px',
 					bottom: 0,
@@ -41,7 +42,7 @@
 				}
 			}]
 		});
-		
+	
 		//首页返回键处理
 		//处理逻辑：1秒内，连续两次按返回键，则退出应用；
 		var first = null;
@@ -52,7 +53,7 @@
 				//首次按键，提示‘再按一次退出应用’
 				if (!first) {
 					first = new Date().getTime();
-					mui.toast('再按一次退出应用');
+					mui.toast('再按一次退出索问');
 					setTimeout(function() {
 						first = null;
 					}, 1000);
