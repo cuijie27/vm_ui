@@ -92,10 +92,13 @@
 		})
 	
 	mui('#goodsSelList').on('tap', 'div', function() {
+		var msgStr = this.querySelector("h4").innerHTML;
+		console.log(msgStr);
+		mui.back();
 		mui.fire(opener,"goodsSelListMsg",{
-			msg:this.innerHTML
+			msg:msgStr
 		});
-		mui.back()
+		
 	});
 	
 	</script>
