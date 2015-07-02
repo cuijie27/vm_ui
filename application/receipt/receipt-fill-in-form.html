@@ -31,6 +31,13 @@
 				 	<button class="mui-action-menu" id='show-btn' type="button" style="width: 60%; height: auto;">请选择送货商</button>
 					<input name="style" type="hidden" checked="" value="menu-move">
 				</div>
+				
+				<div class="mui-input-row">
+					<label>添加商品：</label>
+				 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 60%; height: auto;">添加商品</button>
+					<input name="style" type="hidden" checked="" value="menu-move">
+				</div>
+				
 <div style="display:inline" class="mui-input-row">
 					<div class="mui-checkbox mui-left" style="float:left;left:40px;">
 						<label>退货</label>
@@ -63,10 +70,12 @@
     suowen.api.Init("http://suowen.tiger.mopaas.com");
     //添加协议文件
     suowen.api.AddProto("/partner/PartnerQuery.json");
+    suowen.api.AddProto("/stock/ReceivingNoteForm.json");
     //编译api成JS调用对象
     var root = suowen.api.Build();
 	
 	var partnerQueryRequest = new root.partner.PartnerQueryRequest();
+	var receivingNoteFormRequest = new root.stock.ReceivingNoteFormRequest();
 	
 			 //mui初始化
 			mui.init({
@@ -367,6 +376,14 @@
 			  console.log("id is: "+id+" al is: "+al);
 			});
 
+			//添加newId自定义事件监听
+			window.addEventListener('goodsSelListMsg',function(event){
+			  //获得事件参数
+			  
+			  //根据id向服务器请求新闻详情
+			  console.log("msg is "+event.detail.msg);
+			});
+			
 			 //重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
 			mui.menu = function() {
 				if (showMenu) {
@@ -375,6 +392,18 @@
 					openMenu();
 				}
 			}
+			
+		document.getElementById("addGoodsBtn").addEventListener('tap', function() {
+	  	//打开添加商品页面
+	  	mui.openWindow({
+	    	url: 'goods_list_sel.html', 
+	    	id:'goodsListSel',
+	    	extras:{
+	    		name:'mui',
+	        	version:'0.5.8'
+	    	}
+	  	});
+	});
 		</script>
 		
 		

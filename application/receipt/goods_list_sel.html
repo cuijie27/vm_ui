@@ -10,11 +10,94 @@
 	<script src="../../js/ProtoBuf.noparse.min.js"></script>
 	<script src="../../js/Suowen.js"></script>
     <link href="../../css/mui.min.css" rel="stylesheet"/>
+	<!--App自定义的css-->
+	<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+	<style>
+		.mui-table h4,.mui-table h5,.mui-table .mui-h5,.mui-table .mui-h6,.mui-table p{
+	        margin-top: 0;
+	    }
+	    .mui-table h4{
+	        line-height: 21px;
+	        font-weight: 500;
+	    }
+	
+	    .mui-table .oa-icon{
+	        position: absolute;
+	        right:0;
+	        bottom: 0;
+	    }
+	    .mui-table .oa-icon-star-filled{
+	        color:#f14e41;
+	    }
+	</style>
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
 </head>
 <body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">商品选择列表</h1>
+	</header>
+	<div class="mui-content">
+		<ul id="goodsSelList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+			
+			
+			<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	                <div class="mui-table-cell mui-col-xs-10">
+	                    <h4 class="mui-ellipsis">71558</h4>
+	                    <h5>漫漫屋玻璃杯曲线</h5>
+	                    <p class="mui-h6 mui-ellipsis">库存：1000</p>
+	                </div>
+	                <div class="mui-table-cell mui-col-xs-9 mui-text-right">
+	                    <span class="mui-h5">收货次数:50</span>
+	                </div>
+	            </div>
+		    </li>
+		    
+		    <li class="mui-table-view-cell">
+	            <div class="mui-table">
+	                <div class="mui-table-cell mui-col-xs-10">
+	                    <h4 class="mui-ellipsis">71389</h4>
+	                    <h5>漫漫屋子弹头玻璃水瓶</h5>
+	                    <p class="mui-h6 mui-ellipsis">库存：10000</p>
+	                </div>
+	                <div class="mui-table-cell mui-col-xs-9 mui-text-right">
+	                    <span class="mui-h5">收货次数:150</span>
+	                </div>
+	            </div>
+		    </li>
+		    
+		    <li class="mui-table-view-cell">
+	            <div class="mui-table">
+	                <div class="mui-table-cell mui-col-xs-10">
+	                    <h4 class="mui-ellipsis">40212</h4>
+	                    <h5>漫漫屋耐高温玻璃花茶壶子弹头玻璃水瓶</h5>
+	                    <p class="mui-h6 mui-ellipsis">库存：1000000</p>
+	                </div>
+	                <div class="mui-table-cell mui-col-xs-9 mui-text-right">
+	                    <span class="mui-h5">收货次数:1500</span>
+	                </div>
+	            </div>
+		    </li>
+		    
+		    
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8">
+	var opener = null;
+		mui.plusReady(function () {
+			opener = plus.webview.currentWebview().opener();
+		})
 	
+	mui('#goodsSelList').on('tap', 'div', function() {
+		mui.fire(opener,"goodsSelListMsg",{
+			msg:this.innerHTML
+		});
+		mui.back()
+	});
+	
+	</script>
 </body>
 </html>
