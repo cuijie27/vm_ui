@@ -11,6 +11,78 @@
     </script>
 </head>
 <body>
-    索问
+    <div class="mui-content">
+        <ul id="suowenGrid" class="mui-table-view mui-grid-view mui-grid-9">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="../application/receipt/receipt-fill-in-form.html">
+                <span class="mui-icon mui-icon-home"></span>
+                <div class="mui-media-body">收货</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
+                <div class="mui-media-body">发货</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-chatbubble"></span>
+                <div class="mui-media-body">盘点</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-location"></span>
+                <div class="mui-media-body">收款</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-search"></span>
+                <div class="mui-media-body">打款</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-phone"></span>
+                <div class="mui-media-body">对账</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-gear"></span>
+                <div class="mui-media-body">报表</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-info"></span>
+                <div class="mui-media-body">合作伙伴</div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+                <span class="mui-icon mui-icon-more"></span>
+                <div class="mui-media-body">系统管理 </div></a></li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="../list.html">
+                <span class="mui-icon mui-icon-more"></span>
+                <div class="mui-media-body">ListDemo</div></a></li>
+        </ul> 
+	</div>
+	<script>
+	var aniShow = "pop-in";
+	//只有ios支持的功能需要在Android平台隐藏；
+	if (mui.os.android) {
+		var list = document.querySelectorAll('.ios-only');
+		if (list) {
+			for (var i = 0; i < list.length; i++) {
+				list[i].style.display = 'none';
+			}
+		}
+		//Android平台暂时使用slide-in-right动画
+		aniShow = "slide-in-right"
+	}
+	
+	mui('#suowenGrid').on('tap', 'a', function() {
+		var id = this.getAttribute('href');
+		var href = this.href;
+		
+		//console.log("id is "+id+"\n href is "+href);
+		
+		mui.openWindow({
+			id: id,
+			url: this.href,
+			show: {
+				aniShow: aniShow
+			},
+			waiting: {
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
+		});
+		/*
+		mui.back();
+		mui.fire(opener,"goodsSelListMsg",{
+			msg:msgStr
+		});
+		*/
+	});
+	</script>
 </body>
 </html>
