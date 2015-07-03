@@ -85,24 +85,31 @@
 					<h5>添加商品<font color="#FF0000" size="4">*</font>：</h5>
 					<div class="mui-input-row">
 					 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 100%; height: auto;">添加商品...</button>
-						<input name="style" type="hidden" checked="" value="menu-move">
+						<input id="goodsId" name="style" type="hidden" checked="" value="menu-move">
 					</div>
 					<li class="mui-table-view-cell">
 						<span>退货</span>
-						<div class="mui-switch mui-active">
+						<div id="goodsRejected" class="mui-switch mui-active">
 							<div class="mui-switch-handle"></div>
 						</div>
 					</li>
 					<li class="mui-table-view-cell">
 						<span>内部调拨</span>
-						<div class="mui-switch">
+						<div id="internalAllocation" class="mui-switch">
 							<div class="mui-switch-handle"></div>
 						</div>
 					</li>
+					<div class="mui-input-row">
+						<label>总金额</label>
+						<input id="totalAmount" type="text" class="mui-input-clear" placeholder="元">
+					</div>
+					<p align="center">
+						<a id="picture-btn" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="align-content: center; width: 95%; padding: 3px 20px;"><font size="3">提交图片</font></a>
+					</p>
 				</ul>
 			</div>
 			<div class="mui-button-row" style="height: auto;">
-				<button id="receiptConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">提交收货单</font></button>
+				<button id="receiptConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交收货单</font></button>
 			</div>
 		</div>
 		
@@ -115,9 +122,11 @@
 						<li class="mui-table-view-cell">
 							<a href="../../login/login.html">收货单列表</a>
 						</li>
-						<li class="mui-table-view-cell"><a href="#">收到退货单列表</a>
+						<li class="mui-table-view-cell">
+							<a href="#">收到退货单列表</a>
 						</li>
-						<li class="mui-table-view-cell"><a href="#">内部调拨收货列表</a>
+						<li class="mui-table-view-cell">
+							<a href="#">内部调拨收货列表</a>
 						</li>
 					</ul>
 				</div>
@@ -125,7 +134,35 @@
 
 		</div>
 	</body>
+	<script>
+		///////////////////////提交图片处理函数
+		document.getElementById("picture-btn").addEventListener('tap',function () {
+			var btnArray = [{title:"拍照或录像"},{title:"选取现有的"}];
+			plus.nativeUI.actionSheet( {
+				title:"选择照片",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				var text = "你刚点击了\"";
+				switch (index){
+					case 0:
+						text += "取消";
+						break;
+					case 1:
+						text += "拍照或录像";
+						break;
+					case 2:
+						text += "选取现有的";
+						break;
+				}
+				//info.innerHTML = text+"\"按钮";
+				console.log(text+"\"按钮");
+			} );
+		});
+		///////////////////////提交图片处理函数
 		
+	</script>
 	<script>
 		///////////////////////开关按钮的事件处理函数
 		mui('.mui-content .mui-switch').each(function() { //循环所有toggle
