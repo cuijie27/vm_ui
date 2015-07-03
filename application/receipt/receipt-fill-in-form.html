@@ -71,43 +71,93 @@
 			<h1 class="mui-title">收货</h1>
 		</header>
 		<div class="mui-content">
-			<div class="mui-content">
+			<h5>收货日期<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+			 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
+			</div>
+			<h5>送货商品<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+			 	<button class="mui-action-menu" id='selectPartner' type="button" style="width: 100%; height: auto;">请选择送货商...</button>
+				<input id="partnerId" name="style" type="hidden" checked="" value="menu-move">
+			</div>
+			<h5>添加商品<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+			 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 100%; height: auto;">添加商品...</button>
+				<input id="goodsId" name="style" type="hidden" checked="" value="menu-move">
+			</div>
+			<h5>收货来源<font color="#FF0000" size="4">*</font>：</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<span>退货</span>
+					<div id="goodsRejected" class="mui-switch mui-active">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<span>内部调拨</span>
+					<div id="internalAllocation" class="mui-switch">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+				
+			<p align="center">
+				<a id="picture-btn" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="align-content: center; width: 95%; padding: 3px 20px;"><font size="3">选择凭证图片</font></a>
+			</p>
+				
+			<div class="mui-card">
 				<ul class="mui-table-view">
-					<h5>收货日期<font color="#FF0000" size="4">*</font>：</h5>
-					<div class="mui-input-row">
-					 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
-					</div>
-					<h5>送货商品<font color="#FF0000" size="4">*</font>：</h5>
-					<div class="mui-input-row">
-					 	<button class="mui-action-menu" id='selectPartner' type="button" style="width: 100%; height: auto;">请选择送货商...</button>
-						<input id="partnerId" name="style" type="hidden" checked="" value="menu-move">
-					</div>
-					<h5>添加商品<font color="#FF0000" size="4">*</font>：</h5>
-					<div class="mui-input-row">
-					 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 100%; height: auto;">添加商品...</button>
-						<input id="goodsId" name="style" type="hidden" checked="" value="menu-move">
-					</div>
-					<li class="mui-table-view-cell">
-						<span>退货</span>
-						<div id="goodsRejected" class="mui-switch mui-active">
-							<div class="mui-switch-handle"></div>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">商品1</a>
+						<div class="mui-collapse-content">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<label>单价</label>
+									<input type="text" class="mui-input-clear" placeholder="单价">
+								</div>
+								<div class="mui-input-row">
+									<label>数量</label>
+									<input type="text" class="mui-input-clear" placeholder="数量">
+								</div>
+								<div class="mui-input-row">
+									<label>总金额</label>
+									<input type="text" class="mui-input-clear" placeholder="总金额">
+								</div>
+								
+							</form>
 						</div>
 					</li>
-					<li class="mui-table-view-cell">
-						<span>内部调拨</span>
-						<div id="internalAllocation" class="mui-switch">
-							<div class="mui-switch-handle"></div>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">商品2</a>
+						<div class="mui-collapse-content">
+							<form class="mui-input-group">
+								<div class="mui-input-row">
+									<label>单价</label>
+									<input type="text" class="mui-input-clear" placeholder="单价">
+								</div>
+								<div class="mui-input-row">
+									<label>数量</label>
+									<input type="text" class="mui-input-clear" placeholder="数量">
+								</div>
+								<div class="mui-input-row">
+									<label>总金额</label>
+									<input type="text" class="mui-input-clear" placeholder="总金额">
+								</div>
+								
+							</form>
 						</div>
 					</li>
-					<div class="mui-input-row">
-						<label>总金额</label>
-						<input id="totalAmount" type="text" class="mui-input-clear" placeholder="元">
-					</div>
-					<p align="center">
-						<a id="picture-btn" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="align-content: center; width: 95%; padding: 3px 20px;"><font size="3">提交图片</font></a>
-					</p>
 				</ul>
 			</div>
+			<ul class="mui-table-view">
+				
+				<div class="mui-input-row">
+					<label>总金额</label>
+					<input id="totalAmount" type="text" class="mui-input-clear" placeholder="元">
+				</div>
+			</ul>
+				
+			
 			<div class="mui-button-row" style="height: auto;">
 				<button id="receiptConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交收货单</font></button>
 			</div>
@@ -185,6 +235,9 @@
 		});
 		mui('body').on('hidden', '.mui-popover', function(e) {
 			console.log('hidden', e.detail.id);//detail为当前popover元素
+		});
+		mui(".mui-navigate-right").on('tap', 'a', function() {
+			console.log("click in mui navigate right "+this.innerText);
 		});
 		mui("#receiptPopover").on('tap', 'a', function() {
 			console.log(this.innerText);
