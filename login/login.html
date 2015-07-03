@@ -41,10 +41,10 @@
 				
 				<form class="mui-input-group">
 					<div class="mui-input-row">
-						<input id="loginPhoneNum" class="mui-input-clear" type="text" placeholder="登陆手机号">
+						<input id="loginPhoneNum" class="mui-input-clear" type="text" placeholder="登陆手机号" value="111">
 					</div>
 					<div class="mui-input-row">
-						<input id="loginPswd" type="password" class="mui-input-clear" placeholder="密码">
+						<input id="loginPswd" type="password" class="mui-input-clear" placeholder="密码" value="111">
 					</div>
 
 					
@@ -111,7 +111,10 @@
 		        		var tokenVal = response.getToken();
 		        		mui.alert("登陆成功,公司名称为："+copName+
 		        		"\ntoken为："+tokenVal, '成功', function() {
-		        			
+		        			mui.openWindow({
+								id: "indexSuowen",
+								url: "../indexSuowen.html"
+							});
 						});
 						// 将token的值存储在plus.storage中，随时可以取出。
 						plus.storage.setItem("token_val", tokenVal);						
@@ -170,6 +173,27 @@ console.log(arrRslt);
 console.log(codefans_net_CC2PY("漫漫屋飘逸杯泡茶杯马杰楼房刘哥阿付"));
 */
 //////////////////拼音全拼，和拼音首字母的调用方法/////////////////////
-
+//首页返回键处理
+		//处理逻辑：1秒内，连续两次按返回键，则退出应用；
+		var showMenu = false;
+		var first = null;
+		mui.back = function() {
+			if (showMenu) {
+				closeMenu();
+			} else {
+				//首次按键，提示‘再按一次退出应用’
+				if (!first) {
+					first = new Date().getTime();
+					mui.toast('再按一次退出索问');
+					setTimeout(function() {
+						first = null;
+					}, 1000);
+				} else {
+					if (new Date().getTime() - first < 1000) {
+						plus.runtime.quit();
+					}
+				}
+			}
+		};
 </script>
 </html>
