@@ -16,7 +16,7 @@
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="../application/receipt/receipt-fill-in-form.html">
                 <span class="mui-icon mui-icon-home"></span>
                 <div class="mui-media-body">收货</div></a></li>
-            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="../application/receipt/receipt_list.html">
                 <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
                 <div class="mui-media-body">发货</div></a></li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
@@ -45,6 +45,65 @@
                 <div class="mui-media-body">ListDemo</div></a></li>
         </ul> 
 	</div>
+	<script>
+		var templates = {};
+			var getTemplate = function(name, header, content) {
+				var template = templates[name];
+				if (!template) {
+					//预加载共用父模板；
+					var headerWebview = mui.preload({
+						url: header,
+						id: name + "-main",
+						styles: {
+							popGesture: "hide",
+						},
+						extras: {
+							mType: 'main'
+						}
+					});
+					//预加载共用子webview
+					var subWebview = mui.preload({
+						url: !content ? "" : content,
+						id: name + "-sub",
+						styles: {
+							top: '45px',
+							bottom: '0px',
+						},
+						extras: {
+							mType: 'sub'
+						}
+					});
+					subWebview.addEventListener('loaded', function() {
+						setTimeout(function() {
+							subWebview.show();
+						}, 50);
+					});
+					subWebview.hide();
+					headerWebview.append(subWebview);
+					//iOS平台支持侧滑关闭，父窗体侧滑隐藏后，同时需要隐藏子窗体；
+					if (mui.os.ios) { //5+父窗体隐藏，子窗体还可以看到？不符合逻辑吧？
+						headerWebview.addEventListener('hide', function() {
+							subWebview.hide("none");
+						});
+					}
+					templates[name] = template = {
+						name: name,
+						header: headerWebview,
+						content: subWebview,
+					};
+				}
+				return template;
+			};
+			var initTemplates = function() {
+				getTemplate('default', '../examples/template.html');
+			};
+			mui.plusReady(function() {
+				//初始化模板
+				initTemplates(); //预加载所有模板	
+				//关闭splash页面；
+				plus.navigator.closeSplashscreen();
+			});
+	</script>
 	<script>
 	var aniShow = "pop-in";
 	//只有ios支持的功能需要在Android平台隐藏；
@@ -82,7 +141,38 @@
 			msg:msgStr
 		});
 		*/
+		/*
+		//TODO  by chb 当初这么设计，是为了一个App中有多个模板，目前仅有一个模板的情况下，实际上无需这么复杂
+		//使用父子模板方案打开的页面
+		//获得共用模板组
+		var template = getTemplate('default');
+		//判断是否显示右上角menu图标；
+		var showMenu = ~href.indexOf('popovers.html') ? true : false;
+		//获得共用父模板
+		var headerWebview = template.header;
+		//获得共用子webview
+		var contentWebview = template.content;
+		var title = this.innerText.trim();
+		//通知模板修改标题，并显示隐藏右上角图标；
+		mui.fire(headerWebview, 'updateHeader', {
+			title: title,
+			showMenu: showMenu
+		});
+		var reload = true;
+		if (!template.loaded) {
+			if (contentWebview.getURL() != this.href) {
+				contentWebview.loadURL(this.href);
+			} else {
+				reload = false;
+			}
+		} else {
+			reload = false;
+		}
+		(!reload) && contentWebview.show();
+		
+		headerWebview.show(aniShow, 150);*/
 	});
-	</script>
+
+</script>
 </body>
 </html>
