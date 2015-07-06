@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../../js/mui.min.js"></script>
+    <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">收货单详情</h1>
+	</header>
+	<div id="receiptNoteDetail" class="mui-content">
+		<h3 class="mui-content-padded">河北新羽玻璃制品有限公司</h3>
+		<h5 class="mui-content-padded"><b>收货日期：2015-07-01  收货金额 ：71750元</b></h5>
+		<h5 class="mui-content-padded">71389 玻璃水瓶 </h5>
+		<div class="mui-card">
+			<form class="mui-input-group">
+				<div class="mui-input-row ">
+					<label>单价</label>
+					<input id="unit_price_71389" goodsId="71389" type="text" class="mui-input-clear" placeholder="单价" value="7.5">
+				</div>
+				<div class="mui-input-row ">
+					<label>数量</label>
+					<input id="quantity_71389" goodsId="71389" type="text" class="mui-input-clear" placeholder="数量" value="2000">
+				</div>
+				<div class="mui-input-row ">
+					<label>总额</label>
+					<input id="sum_71389" disabled="disabled" type="text" class="mui-input-clear" placeholder="总额" value="15000">
+				</div>
+			</form>
+		</div>
+		
+		<h5 class="mui-content-padded">40303 飘逸杯</h5>
+		<div class="mui-card">
+			<form class="mui-input-group">
+				<div class="mui-input-row ">
+					<label>单价</label>
+					<input id="unit_price_40303" goodsId="40303" type="text" class="mui-input-clear" placeholder="单价" value="17">
+				</div>
+				<div class="mui-input-row ">
+					<label>数量</label>
+					<input id="quantity_40303" goodsId="40303" type="text" class="mui-input-clear" placeholder="数量" value="2000">
+				</div>
+				<div class="mui-input-row ">
+					<label>总额</label>
+					<input id="sum_40303" disabled="disabled" type="text" class="mui-input-clear" placeholder="总额" value="34000">
+				</div>
+			</form>
+		</div>
+		
+		<h5 class="mui-content-padded">40212  花茶壶</h5>
+		<div class="mui-card">
+			<form class="mui-input-group">
+				<div class="mui-input-row ">
+					<label>单价</label>
+					<input id="unit_price_40212" goodsId="40212" type="text" class="mui-input-clear" placeholder="单价" value="6.5">
+				</div>
+				<div class="mui-input-row ">
+					<label>数量</label>
+					<input id="quantity_40212" goodsId="40212" type="text" class="mui-input-clear" placeholder="数量" value="3500">
+				</div>
+				<div class="mui-input-row ">
+					<label>总额</label>
+					<input id="sum_40212" disabled="disabled" type="text" class="mui-input-clear" placeholder="总额" value="22750">
+				</div>
+			</form>
+		</div>
+		<div class="mui-button-row ">
+			<button id="loginBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">修改</font></button>
+		</div>
+	</div>
+</body>
+<script>
+	mui('#receiptNoteDetail').on('change', 'input', function() {
+		//var id = "receipt_note_detail.html";
+		//var href = "receipt_note_detail.html";
+		
+		console.log("id is "+this.id);
+		console.log("goods id is "+this.goodsId);
+		/*
+		mui.openWindow({
+			id: id,
+			url: href,
+			show: {
+				aniShow: aniShow
+			},
+			waiting: {
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
+		});*/
+		
+	});
+</script>
+</html>
