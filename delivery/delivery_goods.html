@@ -7,7 +7,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../css/mui.min.css">
 		<style>
 			html,body {
 				background-color: #efeff4;
@@ -48,11 +48,11 @@
 			}
 			
 		</style>
-	<script src="../../js/mui.min.js"></script>
-	<script src="../../js/Long.min.js"></script>
-	<script src="../../js/ByteBufferAB.min.js"></script>
-	<script src="../../js/ProtoBuf.noparse.min.js"></script>
-	<script src="../../js/Suowen.js"></script>	
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/Long.min.js"></script>
+	<script src="../js/ByteBufferAB.min.js"></script>
+	<script src="../js/ProtoBuf.noparse.min.js"></script>
+	<script src="../js/Suowen.js"></script>	
 	<script type="text/javascript" charset="utf-8">
       	mui.init({
 				swipeBack: true //启用右滑关闭功能
@@ -68,24 +68,24 @@
             	描述：下列<a>中的href中的#XX 要和弹出菜单<div>中的id一致，这样才会出效果。
             -->
 			<a class="mui-icon mui-icon-bars mui-pull-right" href="#receiptPopover"></a>
-			<h1 class="mui-title">收货</h1>
+			<h1 class="mui-title">发货</h1>
 		</header>
 		<div class="mui-content">
-			<h5>收货日期<font color="#FF0000" size="4">*</font>：</h5>
+			<h5>发货日期<font color="#FF0000" size="4">*</font>：</h5>
 			<div class="mui-input-row">
 			 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
 			</div>
-			<h5>送货商<font color="#FF0000" size="4">*</font>：</h5>
+			<h5>收货商<font color="#FF0000" size="4">*</font>：</h5>
 			<div class="mui-input-row">
-			 	<button class="mui-action-menu" id='selectPartner' type="button" style="width: 100%; height: auto;">请选择送货商...</button>
+			 	<button class="mui-action-menu" id='selectPartner' type="button" style="width: 100%; height: auto;">请选择收货商...</button>
 				<input id="partnerId" name="style" type="hidden" checked="" value="menu-move">
 			</div>
 			<h5>添加商品<font color="#FF0000" size="4">*</font>：</h5>
 			<div class="mui-input-row">
-			 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 100%; height: auto;">添加商品...</button>
+			 	<button class="mui-action-menu" id='addGoodsBtn' type="button" style="width: 100%; height: auto;">添加发货商品...</button>
 				<input id="goodsId" name="style" type="hidden" checked="" value="menu-move">
 			</div>
-			<h5>收货来源<font color="#FF0000" size="4">*</font>：</h5>
+			<h5>发货去向<font color="#FF0000" size="4">*</font>：</h5>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<span>退货</span>
@@ -170,13 +170,13 @@
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">收货单列表</a>
+							<a href="../application/receipt/receipt_list.html">发货单列表</a>
 						</li>
 						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">收到退货单列表</a>
+							<a href="../application/receipt/receipt_list.html">发货退货单列表</a>
 						</li>
 						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">内部调拨收货列表</a>
+							<a href="../application/receipt/receipt_list.html">内部调拨发货列表</a>
 						</li>
 					</ul>
 				</div>
@@ -391,7 +391,7 @@
 				setTimeout(function () {
 					menu = mui.preload({
 						id: 'partners-list',
-						url: 'partners-list.html',
+						url: '../application/receipt/partners-list.html',
 						styles: {
 							left: "30%",
 							width: '70%',
@@ -608,7 +608,7 @@
 			}*/
 		  	//打开添加商品页面
 		  	mui.openWindow({
-		    	url: 'goods_list_sel.html', 
+		    	url: '../application/receipt/goods_list_sel.html', 
 		    	id:'goodsListSel',
 		    	styles:webview_style,
 		    	show: {
