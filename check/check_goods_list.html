@@ -13,17 +13,18 @@
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">商品盘点列表</h1>
+	    <h1 class="mui-title">货品盘点列表</h1>
 	</header>
 	<div class="mui-content">
 		<h5>默认搜索框：</h5>
 		<div class="mui-input-row mui-search">
 			<input type="search" class="mui-input-clear" placeholder="">
 		</div>
-		<ul id="goodsSelList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+		<ul id="checkGoodsList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 			
 			
-			<li class="mui-table-view-cell">
+			<li class="mui-table-view-cell ">
+				<a class="mui-navigate-right">
 	            <div class="mui-table">
 	                <div class="mui-table-cell mui-col-xs-10">
 	                    <h4 class="mui-ellipsis">71558</h4>
@@ -34,9 +35,11 @@
 	                    <span class="mui-h5">收货次数:50</span>
 	                </div>
 	            </div>
+	           </a>
 		    </li>
 		    
 		    <li class="mui-table-view-cell">
+		    	<a class="mui-navigate-right">
 	            <div class="mui-table">
 	                <div class="mui-table-cell mui-col-xs-10">
 	                    <h4 class="mui-ellipsis">71389</h4>
@@ -47,9 +50,11 @@
 	                    <span class="mui-h5">收货次数:150</span>
 	                </div>
 	            </div>
+	           </a>
 		    </li>
 		    
 		    <li class="mui-table-view-cell">
+		    	<a class="mui-navigate-right">
 	            <div class="mui-table">
 	                <div class="mui-table-cell mui-col-xs-10">
 	                    <h4 class="mui-ellipsis">40212</h4>
@@ -60,10 +65,48 @@
 	                    <span class="mui-h5">收货次数:1500</span>
 	                </div>
 	            </div>
+	           </a>
 		    </li>
 		    
 		    
 		</ul>
 	</div>
 </body>
+<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		var aniShow = "pop-in";
+	//只有ios支持的功能需要在Android平台隐藏；
+	if (mui.os.android) {
+		var list = document.querySelectorAll('.ios-only');
+		if (list) {
+			for (var i = 0; i < list.length; i++) {
+				list[i].style.display = 'none';
+			}
+		}
+		//Android平台暂时使用slide-in-right动画
+		aniShow = "slide-in-right"
+	}
+		
+		mui('#checkGoodsList').on('tap', 'a', function() {
+		var id = "check_good_detail.html";
+		var href = "check_good_detail.html";
+		
+		//console.log("id is "+id+"\n href is "+href);
+		
+		mui.openWindow({
+			id: id,
+			url: href,
+			show: {
+				aniShow: aniShow
+			},
+			waiting: {
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
+		});
+		
+	});
+	</script>
 </html>
