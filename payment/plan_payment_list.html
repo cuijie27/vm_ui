@@ -16,7 +16,11 @@
 	    <h1 class="mui-title">计划打款</h1>
 	</header>
 		<div class="mui-content">
-		    <ul id="receiptNoteList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+			<h5>默认搜索框：</h5>
+			<div class="mui-input-row mui-search">
+				<input type="search" class="mui-input-clear" placeholder="">
+			</div>
+		    <ul id="planPaymentList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
 		    	<li class="mui-table-view-cell">
 				<a class="mui-navigate-right">
 		            <div class="mui-table">
@@ -71,4 +75,41 @@
 		    </ul>
 		</div>
 </body>
+<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		var aniShow = "pop-in";
+	//只有ios支持的功能需要在Android平台隐藏；
+	if (mui.os.android) {
+		var list = document.querySelectorAll('.ios-only');
+		if (list) {
+			for (var i = 0; i < list.length; i++) {
+				list[i].style.display = 'none';
+			}
+		}
+		//Android平台暂时使用slide-in-right动画
+		aniShow = "slide-in-right"
+	}
+		
+		mui('#planPaymentList').on('tap', 'a', function() {
+		var id = "payment_detail.html";
+		var href = "payment_detail.html";
+		
+		//console.log("id is "+id+"\n href is "+href);
+		
+		mui.openWindow({
+			id: id,
+			url: href,
+			show: {
+				aniShow: aniShow
+			},
+			waiting: {
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
+		});
+		
+	});
+	</script>
 </html>
