@@ -18,6 +18,7 @@
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	    <h1 class="mui-title">预付款</h1>
+		<a id="ad_re_list" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">列表</a>
 	</header>
 	<div class="mui-content">
 		<h5>收货日期<font color="#FF0000" size="4">*</font>：</h5>
@@ -392,5 +393,17 @@ document.getElementById("picture-btn").addEventListener('tap',function () {
 });
 ///////////////////////提交图片处理函数
 
+</script>
+<script>
+	document.getElementById("ad_re_list").addEventListener('tap', function() {
+		mui.openWindow({
+	    	url: 'advances_received_list.html', 
+	    	id:'ad_re_list',
+	    	waiting:{
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			}
+	  	});
+	});
 </script>
 </html>
