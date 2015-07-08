@@ -9,11 +9,120 @@
     <script type="text/javascript" charset="utf-8">
       	mui.init();
     </script>
+    <style>
+    #progress {
+	    background: #333;
+	    border-radius: 13px;
+	    height: 12px;
+	    width: 97%;
+	    padding: 1px;
+	}
+
+	#progress:after {
+	    content: '50%';
+	    display: block;
+	    background: orange;
+	    width: 50%;
+	    height: 100%;
+	    border-radius: 9px;
+	}
+    </style>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	    <h1 class="mui-title">计划对应账单</h1>
 	</header>
+	<div class="mui-content">
+		<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
+		<h4 class="mui-content-padded mui-text-center">&nbsp;&nbsp;计划：2015-07-02&nbsp;&nbsp;155000元</h4>
+		<h5 class="mui-content-padded">对应账单明细</h5>
+		<ul id="receiptNoteList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+		    <li class="mui-table-view-cell">
+				<a >
+		            <div class="mui-table">
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h4 class="mui-ellipsis-2">对账时间：2015-07-01&nbsp;&nbsp;对账金额：45000元</h4>
+		                    <h5>&nbsp;&nbsp;收货时间：2015-06-10&nbsp;&nbsp;收货金额：45000元</h5>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：71389 水瓶 3400*7=23,800元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 200*17=3,400元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 1000*17=17,000元</p>
+		                </div>
+		                
+		            </div>
+		        </a>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<a >
+		            <div class="mui-table">
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h4 class="mui-ellipsis-2">对账时间：2015-07-02&nbsp;&nbsp;对账金额：15000元</h4>
+		                    <h5>&nbsp;&nbsp;收货时间：2015-06-15&nbsp;&nbsp;收货金额：15000元</h5>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：71389 水瓶 1000*7=7,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 2000*5=10,000元</p>
+		                </div>
+		            </div>
+		        </a>
+			</li>
+			
+			<li class="mui-table-view-cell">
+				<a >
+		            <div class="mui-table">
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h4 class="mui-ellipsis-2">对账时间：2015-06-30&nbsp;&nbsp;对账金额：90000元</h4>
+		                    <h5>&nbsp;&nbsp;收货时间：2015-06-15&nbsp;&nbsp;收货金额：100000元</h5>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：71389 水瓶 1000*7=7,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 4000*5=20,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：71389 水瓶 5000*7=35,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 2000*5=10,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：71389 水瓶 6000*7=42,000元</p>
+		                    <p class="mui-h6 mui-ellipsis">&nbsp;&nbsp;&nbsp;&nbsp;明细：40303 飘逸杯 2000*5=10,000元</p>
+		                </div>
+		            </div>
+		        </a>
+			</li>
+
+		    </ul>
+		<h5 class="mui-content-padded">对应汇总单明细</h5>
+		<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+			<li class="mui-table-view-cell">
+				<a >
+		            <div class="mui-table">
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h5 class="mui-ellipsis"><font color="#000000">汇总金额：155000元</font></h5>
+							<h5 class="mui-ellipsis"><font color="#000000">已付金额：55000元</font></h5>
+		                </div>
+		                <div class="mui-table-cell mui-col-xs-10">
+		                	<h5 class="mui-ellipsis"><font color="#000000">实际金额：159000元</font></h5>
+		                	<h5 class="mui-ellipsis"><font color="#000000">未付金额：100000元</font></h5>
+		                </div>
+		            </div>
+		        </a>
+			</li>
+		</ul>
+		<h5 class="mui-content-padded">付款进度条</h5>
+		<div id="progress"></div>
+		<h5 class="mui-content-padded">付款明细</h5>
+		<div class="mui-card" style="margin-bottom: 35px;">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right mui-badge-success">
+							2015-06-05&nbsp;&nbsp;&nbsp;10000元&nbsp;&nbsp;&nbsp;已付
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right mui-badge-success">
+							2015-06-25&nbsp;&nbsp;&nbsp;100000元&nbsp;&nbsp;&nbsp;已付
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right mui-badge-red">
+							2015-07-05&nbsp;&nbsp;&nbsp;50000元&nbsp;&nbsp;&nbsp;未付
+						</a>
+					</li>
+				</ul>
+			</div>
+	</div>
 </body>
 </html>
