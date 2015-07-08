@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+		<style>
+			/*跨webview需要手动指定位置*/
+			
+			header.mui-bar {
+				/*display: none!important;*/
+			}
+			.mui-bar-nav~.mui-content {
+				/*padding: 0!important;*/
+			}
+			#topPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#topPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			.mui-popover {
+				height: 190px;
+				width: 100px;
+				
+				
+			}
+			.mui-content {
+				padding: 10px;
+			}
+			.mui-wo{
+				color: #fff;
+				background-color: #008000;
+				width:360PX; 
+				height: 40px;
+				margin-top: -10px; 
+				margin-left: -20px;  
+				line-height: 40px;
+			}
+			.mui-ta{
+				
+				color: #000;
+				background-color: #fcff00;
+				
+				height: 40px;
+				margin-top: -10px; 
+				margin-left: -20px;  
+				line-height: 40px;
+			}
+		</style>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <a  href="#topPopover" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right"></a>
+		    <h1 class="mui-title">新羽玻璃制品有限公司-对账</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-row">
+				<label>对账名称：</label>
+				<input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
+			</div>
+		    <div class="mui-slider">
+		        <div class="mui-slider-group mui-slider-loop">
+		        	
+		        	<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一个图文表格) -->
+		            
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方2月对账数据
+                    -->
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media " style="background-color: #d8ffd2;">
+		                    			<div class="mui-wo">
+		                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+		                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;我方账单：11234元</span>
+		                    			</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 飘逸杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 2323元</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 小杯A014</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 1062元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：2562元</div>
+		                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 花茶壶A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 2323元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：2323元</div>
+		                            
+		                            <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：以下是对方对账信息
+                                    -->
+                                    <div style="border-right:0px solid #000; margin-left: -15px; width: 355px; background-color: #000000;">
+                                    	<div style="border-right:0px solid #000; margin-left: -15px; height: 20px; background-color: #fff;">&nbsp;</div>
+                                    	    <div class="mui-slider" style="display:;width: 355px;">
+			        							<div class="mui-slider-group mui-slider-loop" >
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：1月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-01</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：2月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									            <!--
+                                                	作者：122606286@qq.com
+                                                	时间：2015-07-08
+                                                	描述：3月对方账目
+                                                -->
+									            	<div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									          </div>
+									     </div>
+                                    </div>
+                                    <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：end
+                                    -->
+		                    </li>
+		                </ul>
+		            </div>
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方2月对账数据 end--------------------------------------
+                    -->
+		            
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方3月对账数据
+                    -->
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media " style="background-color: #d8ffd2;">
+		                    			<div class="mui-wo">
+		                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+		                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;我方账单：23234元</span>
+		                    			</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：8562元</div>
+		                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+		                            
+		                            <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：以下是对方对账信息
+                                    -->
+                                    <div style="border-right:0px solid #000; margin-left: -15px; width: 355px; background-color: #000000;">
+                                    	<div style="border-right:0px solid #000; margin-left: -15px; height: 20px; background-color: #fff;">&nbsp;</div>
+                                    	    <div class="mui-slider" style="display:;width: 355px;">
+			        							<div class="mui-slider-group mui-slider-loop" >
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：2月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									            <!--
+                                                	作者：122606286@qq.com
+                                                	时间：2015-07-08
+                                                	描述：3月对方账目
+                                                -->
+									            	<div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									          </div>
+									     </div>
+                                    </div>
+                                    <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：end
+                                    -->
+		                    </li>
+		                </ul>
+		            </div>
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方3月对账数据 end
+                    -->
+		            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
+<!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方2月对账数据
+                    -->
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media " style="background-color: #d8ffd2;">
+		                    			<div class="mui-wo">
+		                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+		                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;我方账单：11234元</span>
+		                    			</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 飘逸杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 2323元</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 小杯A014</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 1062元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：2562元</div>
+		                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 花茶壶A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 2323元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：2323元</div>
+		                            
+		                            <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：以下是对方对账信息
+                                    -->
+                                    <div style="border-right:0px solid #000; margin-left: -15px; width: 355px; background-color: #000000;">
+                                    	<div style="border-right:0px solid #000; margin-left: -15px; height: 20px; background-color: #fff;">&nbsp;</div>
+                                    	    <div class="mui-slider" style="display:;width: 355px;">
+			        							<div class="mui-slider-group mui-slider-loop" >
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：1月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-01</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-01-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：2月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									            <!--
+                                                	作者：122606286@qq.com
+                                                	时间：2015-07-08
+                                                	描述：3月对方账目
+                                                -->
+									            	<div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									          </div>
+									     </div>
+                                    </div>
+                                    <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：end
+                                    -->
+		                    </li>
+		                </ul>
+		            </div>
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方2月对账数据 end--------------------------------------
+                    -->
+		            
+		            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一个图文表格) -->
+<!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方3月对账数据
+                    -->
+		            <div class="mui-slider-item">
+		                <ul class="mui-table-view mui-grid-view">
+		                    <li class="mui-table-view-cell mui-media " style="background-color: #d8ffd2;">
+		                    			<div class="mui-wo">
+		                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+		                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;我方账单：23234元</span>
+		                    			</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：8562元</div>
+		                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+		                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+		                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+		                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+		                            
+		                            <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：以下是对方对账信息
+                                    -->
+                                    <div style="border-right:0px solid #000; margin-left: -15px; width: 355px; background-color: #fff;">
+                                    	<div style="border-right:0px solid #000; margin-left: -15px; height: 20px; background-color: #fff;">&nbsp;</div>
+                                    	    <div class="mui-slider" style="display:;width: 355px;">
+			        							<div class="mui-slider-group mui-slider-loop" >
+			        								<!--
+                                                    	作者：122606286@qq.com
+                                                    	时间：2015-07-08
+                                                    	描述：2月对方账目
+                                                    -->
+			                                    <div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-02</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-02-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									            <!--
+                                                	作者：122606286@qq.com
+                                                	时间：2015-07-08
+                                                	描述：3月对方账目
+                                                -->
+									            	<div class="mui-slider-item mui-slider-item-duplicate">
+									                <ul class="mui-table-view mui-grid-view">
+									                    <li class="mui-table-view-cell mui-media " style="margin-left: 0px; width:360px; background-color: #feffae;">
+									                    		<div class="mui-ta">
+								                    				<span style="font-size: 16px; text-align: left;">时间：2015-03</span>
+								                    				<span style="font-size: 16px; text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;对方账单：23234元</span>
+								                    			</div>
+									                        <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A019</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-13 玻璃杯A014</div>
+								                            <div style="margin-left: 30px; font-size: 15px;">2元 X 2031个 = 4062元</div>
+								                            <div style="font-size: 15px;width:330px;text-align: right;">累计：8562元</div>
+								                            <div style="border-right:5px solid #000; height: 1px;margin-left: -15px; background-color: #000000;">&nbsp;</div>
+								                            <div style="text-align: left;font-size: 15px;"><input type="checkbox"> 2015-03-16 玻璃杯A019</div>
+								                            <div class="" style="margin-left: 30px; font-size: 15px;">2.1元 X 2031个 = 4323元</div>
+								                            <div style="width: 330px; font-size: 15px;text-align: right;">累计：4323元</div>
+									                    </li>
+									                </ul>
+									            </div>
+									          </div>
+									     </div>
+                                    </div>
+                                    <!--
+                                    	作者：122606286@qq.com
+                                    	时间：2015-07-08
+                                    	描述：end
+                                    -->
+		                    </li>
+		                </ul>
+		            </div>
+		            <!--
+                    	作者：122606286@qq.com
+                    	时间：2015-07-08
+                    	描述：我方3月对账数据 end
+                    -->
+		            
+		            
+		            
+		            
+		            
+		        </div>
+		        <div class="mui-slider-indicator" style="position: static;background-color: #fff;">
+		            <span class="mui-action mui-action-previous mui-icon mui-icon-back"></span>
+		            <div class="mui-number">
+		                <span>1</span> / 2
+		            </div>
+		            <span class="mui-action mui-action-next mui-icon mui-icon-forward"></span>
+		        </div>
+		    </div>
+		</div>
+		<!--右上角弹出菜单-->
+		<div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell"><a href="#">按天对账</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">按周对账</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">按月对账</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">按年对账</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+	    //mui.init();
+	</script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui('.mui-scroll-wrapper').scroll();
+			mui('body').on('shown', '.mui-popover', function(e) {
+				//console.log('shown', e.detail.id);//detail为当前popover元素
+			});
+			mui('body').on('hidden', '.mui-popover', function(e) {
+				//console.log('hidden', e.detail.id);//detail为当前popover元素
+			});
+		</script>
+</html>
