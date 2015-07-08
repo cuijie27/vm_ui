@@ -14,7 +14,12 @@
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 	    <h1 class="mui-title">付款明细</h1>
-	    <a class="mui-icon mui-pull-right" href="#receiptPopover"><font size="2">计划对应账单...</font></a>
+	    <!--
+        	作者：49264664@qq.com
+        	时间：2015-07-08
+        	描述：
+        	<a id="planToReceiptNote" class="mui-icon mui-pull-right"><font size="2">计划对应账单...</font></a>
+        -->
 	</header>
 	<div id="checkGoodDetail" class="mui-content">
 		<h3 class="mui-content-padded">河北新羽玻璃制品有限公司</h3>
@@ -22,30 +27,49 @@
 		<h4 class="mui-content-padded">&nbsp;&nbsp;已计划：1,100,000元，共15个计划</h4>
 		<h4 class="mui-content-padded">&nbsp;&nbsp;已付款：11,100,000元，共109个计划</h4>
 
-		<h5 class="mui-content-padded">计划明细</h5>
-		<div class="mui-card">
-				<form class="mui-input-group">
-					<div class="mui-input-row mui-checkbox mui-left">
-						<label>计划：2015-07-04&nbsp;&nbsp;103500元<span class="mui-badge mui-badge-danger">未付</span></label>
+		<h5 class="mui-content-padded">计划明细（红色为未付，绿色为已付）</h5>
+		<ul id="planPaymentList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+	    	<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2">
+	            		<label class="mui-h5 mui-ellipsis"><font color="#8d0000">计划：2015-07-04&nbsp;&nbsp;1035000元</font></label>
 						<input name="checkbox" value="Item 1" type="checkbox" >
 					</div>
-					<div class="mui-input-row mui-checkbox mui-left">
-						<label>计划：2015-07-10&nbsp;&nbsp;83500元<span class="mui-badge mui-badge-danger">未付</span></label>
-						<input name="checkbox" value="Item 2" type="checkbox" checked>
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+				
+	    	<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2">
+	            		<label class="mui-h5 mui-ellipsis"><font color="8d0000">计划：2015-07-05&nbsp;&nbsp;83500元</font></label>
+						<input name="checkbox" value="Item 1" type="checkbox" >
 					</div>
-					<div class="mui-input-row mui-checkbox mui-left mui-disabled">
-					<label>计划：2015-06-30&nbsp;&nbsp;53500元<span class="mui-badge mui-badge-success">已付</span></label>
-						<input name="checkbox" type="checkbox" disabled="disabled">
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+			
+			<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2 mui-disabled">
+	            		<label class="mui-h5 mui-ellipsis"><font color="#008000">计划：2015-07-05&nbsp;&nbsp;83500元</font></label>
+						<input name="checkbox" value="Item 1" type="checkbox"  disabled="disabled">
 					</div>
-					<div class="mui-input-row mui-checkbox mui-left mui-disabled">
-					<label>计划：2015-06-20&nbsp;&nbsp;63500元<span class="mui-badge mui-badge-success">已付</span></label>
-						<input name="checkbox" type="checkbox" disabled="disabled">
-					</div>
-				</form>
-			</div>
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+		    </ul>
+			
+			
 		<p align="center">
-				<a id="picture-btn" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="align-content: center; width: 95%; padding: 3px 20px;"><font size="3">选择凭证图片</font></a>
-			</p>
+			<a id="picture-btn" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="align-content: center; width: 95%; padding: 3px 20px;"><font size="3">选择凭证图片</font></a>
+		</p>
 		<div class="mui-button-row ">
 			<button id="payBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">平账</font></button>
 		</div>
@@ -79,5 +103,32 @@
 		});
 		///////////////////////提交图片处理函数
 		
+	</script>
+	<script>
+	/*
+		document.getElementById('planToReceiptNote').addEventListener('tap', function() {
+		  	mui.openWindow({
+		    	url: 'plan_to_receipt_note.html', 
+		    	id:'plan_to_receipt_note.html',
+		    	waiting:{
+					autoShow:true,//自动显示等待框，默认为true
+					title:'正在加载...',//等待对话框上显示的提示内容
+				}
+		  	});
+		});
+		*/
+	</script>
+	
+	<script>
+		mui('#planPaymentList').on('tap', 'a', function() {
+			mui.openWindow({
+		    	url: 'plan_to_receipt_note.html', 
+		    	id:'plan_to_receipt_note.html',
+		    	waiting:{
+					autoShow:true,//自动显示等待框，默认为true
+					title:'正在加载...',//等待对话框上显示的提示内容
+				}
+		  	});
+		});
 	</script>
 </html>
