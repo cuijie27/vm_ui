@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">付款明细</h1>
+	    <!--
+        	作者：49264664@qq.com
+        	时间：2015-07-08
+        	描述：
+        	<a id="planToReceiptNote" class="mui-icon mui-pull-right"><font size="2">计划对应账单...</font></a>
+        -->
+	</header>
+	<div id="checkGoodDetail" class="mui-content">
+		<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
+		<h4 class="mui-content-padded">&nbsp;&nbsp;应付：2,100,000元</h4>
+		<h4 class="mui-content-padded">&nbsp;&nbsp;已计划：1,100,000元，共15个计划</h4>
+		<h4 class="mui-content-padded">&nbsp;&nbsp;已付款：11,100,000元，共109个计划</h4>
+
+		<h5 class="mui-content-padded">计划明细（红色为未付，绿色为已付）</h5>
+		<ul id="planPaymentList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+	    	<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2">
+	            		<label class="mui-h5 mui-ellipsis"><font color="#8d0000">计划：2015-07-04&nbsp;&nbsp;1035000元</font></label>
+						<input name="checkbox" value="Item 1" type="checkbox" >
+					</div>
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+				
+	    	<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2">
+	            		<label class="mui-h5 mui-ellipsis"><font color="8d0000">计划：2015-07-05&nbsp;&nbsp;83500元</font></label>
+						<input name="checkbox" value="Item 1" type="checkbox" >
+					</div>
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+			
+			<li class="mui-table-view-cell">
+	            <div class="mui-table">
+	            	<div class="mui-input-row mui-table-cell mui-checkbox mui-left mui-col-xs-12 mui-ellipsis-2 mui-disabled">
+	            		<label class="mui-h5 mui-ellipsis"><font color="#008000">计划：2015-07-05&nbsp;&nbsp;83500元</font></label>
+						<input name="checkbox" value="Item 1" type="checkbox"  disabled="disabled">
+					</div>
+	                <div class="mui-table-cell mui-col-xs-4 mui-text-left">
+	                    <a class="mui-h5 mui-ellipsis mui-navigate-right" align="left">对应账单</a>
+	                </div>
+	            </div>
+			</li>
+		    </ul>
+			
+		<div class="mui-button-row" >
+			<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font></button>
+		</div>
+
+		<div class="mui-button-row ">
+			<button id="payBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">平账</font></button>
+		</div>
+	</div>
+</body>
+<script>
+		///////////////////////提交图片处理函数
+		document.getElementById("picture-btn").addEventListener('tap',function () {
+			var btnArray = [{title:"拍照或录像"},{title:"选取现有的"}];
+			plus.nativeUI.actionSheet( {
+				title:"选择照片",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				var text = "你刚点击了\"";
+				switch (index){
+					case 0:
+						text += "取消";
+						break;
+					case 1:
+						text += "拍照或录像";
+						break;
+					case 2:
+						text += "选取现有的";
+						break;
+				}
+				//info.innerHTML = text+"\"按钮";
+				console.log(text+"\"按钮");
+			} );
+		});
+		///////////////////////提交图片处理函数
+		
+	</script>
+	<script>
+	/*
+		document.getElementById('planToReceiptNote').addEventListener('tap', function() {
+		  	mui.openWindow({
+		    	url: 'plan_to_receipt_note.html', 
+		    	id:'plan_to_receipt_note.html',
+		    	waiting:{
+					autoShow:true,//自动显示等待框，默认为true
+					title:'正在加载...',//等待对话框上显示的提示内容
+				}
+		  	});
+		});
+		*/
+	</script>
+	
+	<script>
+		mui('#planPaymentList').on('tap', 'a', function() {
+			mui.openWindow({
+		    	url: 'plan_to_receipt_note.html', 
+		    	id:'plan_to_receipt_note.html',
+		    	waiting:{
+					autoShow:true,//自动显示等待框，默认为true
+					title:'正在加载...',//等待对话框上显示的提示内容
+				}
+		  	});
+		});
+	</script>
+</html>
