@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    <style>
+			/*跨webview需要手动指定位置*/
+			#receiptPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#receiptPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			/* 如下大小为三行popover弹出 菜单大小，可以根据实际大小调整 */
+			.mui-popover {
+				height: 150px;
+				width: 200px;
+			}
+		</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">收款</h1>
+	    <a class="mui-icon mui-icon-bars mui-pull-right" href="#receiveMoneyPopover"></a>
+	</header>
+	<div id="checkGoodDetail" class="mui-content">
+		<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
+	</div>
+	<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
+	<div class="mui-input-row">
+	 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
+	</div>
+	<form class="mui-input-group">
+		<div class="mui-input-row">
+			<label>到账金额</label>
+			<input type="text" class="mui-input-clear" placeholder="元">
+		</div>
+	</form>
+	<div class="mui-button-row" >
+		<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font></button>
+	</div>
+	<div class="mui-button-row" style="height: auto;">
+		<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交预付款</font></button>
+	</div>
+			<!--右上角弹出菜单-->
+		<div id="receiveMoneyPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="receipt_list.html">账单列表</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="receipt_list.html">查看收款计划</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="receipt_list.html">内部调拨收货列表</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+</body>
+<script>
+///////////////////////时间控件
+	var d = new Date();
+	var pickDateBtn = document.getElementById("pickDateBtn");
+	pickDateBtn.innerText = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+		
+	document.getElementById("pickDateBtn").addEventListener('tap', function() {
+		var dDate = new Date();	// 现在的时间
+		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+		var minDate = new Date();
+		minDate.setFullYear(2010, 1, 1);
+		var maxDate = new Date();
+		maxDate.setFullYear(2017, 11, 31);
+		plus.nativeUI.pickDate(function(e) {
+			var d = e.date;
+			dayVal = d.getMonth()+1;
+			pickDateBtn.innerText = d.getFullYear() + "-" + dayVal + "-" + d.getDate();
+		}, function(e) {
+			//pickDateBtn.innerText = "您没有选择日期";
+		}, {
+			title: "请选择收货日期",
+			date: dDate,
+			minDate: minDate,
+			maxDate: maxDate
+		});
+	});
+///////////////////////时间控件
+</script>
+
+<script>
+///////////////////////提交图片处理函数
+document.getElementById("picture-btn").addEventListener('tap',function () {
+	var btnArray = [{title:"拍照或录像"},{title:"选取现有的"}];
+	plus.nativeUI.actionSheet( {
+		title:"选择照片",
+		cancel:"取消",
+		buttons:btnArray
+	}, function(e){
+		var index = e.index;
+		var text = "你刚点击了\"";
+		switch (index){
+			case 0:
+				text += "取消";
+				break;
+			case 1:
+				text += "拍照或录像";
+				break;
+			case 2:
+				text += "选取现有的";
+				break;
+		}
+		//info.innerHTML = text+"\"按钮";
+		console.log(text+"\"按钮");
+	} );
+});
+///////////////////////提交图片处理函数
+
+</script>
+</html>
