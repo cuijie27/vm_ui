@@ -17,15 +17,15 @@
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">预收款</h1>
-		<a id="ad_re_list" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">列表</a>
+	    <h1 class="mui-title">预付款</h1>
+		<a id="ad_pay_list" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">列表</a>
 	</header>
 	<div class="mui-content">
-		<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
+		<h5>付款日期<font color="#FF0000" size="4">*</font>：</h5>
 		<div class="mui-input-row">
 		 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
 		</div>
-		<h5>收款来源<font color="#FF0000" size="4">*</font>：</h5>
+		<h5>付款来源<font color="#FF0000" size="4">*</font>：</h5>
 		<div class="mui-input-row">
 		 	<button class="mui-action-menu" id='selectPartner' type="button" style="width: 100%; height: auto;">请选择送货商...</button>
 			<input id="partnerId" name="style" type="hidden" checked="" value="menu-move">
@@ -395,10 +395,10 @@ document.getElementById("picture-btn").addEventListener('tap',function () {
 
 </script>
 <script>
-	document.getElementById("ad_re_list").addEventListener('tap', function() {
+	document.getElementById("ad_pay_list").addEventListener('tap', function() {
 		mui.openWindow({
-	    	url: 'advances_received_list.html', 
-	    	id:'ad_re_list',
+	    	url: 'advance_payment_list.html', 
+	    	id:'ad_pay_list',
 	    	waiting:{
 				autoShow:true,//自动显示等待框，默认为true
 				title:'正在加载...',//等待对话框上显示的提示内容
