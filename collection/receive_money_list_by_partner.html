@@ -17,26 +17,26 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">收款列表清单</h1>
 		</header>
-		
+
 		<div class="mui-content">
 			<h3 class="mui-content-padded mui-text-center">北京小米科技有限公司</h3>
-			<ul class="mui-table-view">
+			<ul id="recvMoneyListByPartner" class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
+					<a class="mui-navigate-right" href="../payment/voucher.html">
 
 					2015-07-13&nbsp;&nbsp;收款&nbsp;&nbsp;50,000元
 
 				</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
+					<a class="mui-navigate-right" href="../payment/voucher.html">
 
 					2015-07-10&nbsp;&nbsp;收款&nbsp;&nbsp;150,000元
 
 				</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
+					<a class="mui-navigate-right" href="../payment/voucher.html">
 
 					2015-07-03&nbsp;&nbsp;收款&nbsp;&nbsp;100,000元
 
@@ -45,5 +45,37 @@
 			</ul>
 		</div>
 	</body>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+		mui('#recvMoneyListByPartner').on('tap', 'a', function() {
+			var id = this.getAttribute('href');
+			var href = this.href;
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
 
 </html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<style>
+			#progress {
+				background: #333;
+				border-radius: 13px;
+				height: 12px;
+				width: 97%;
+				padding: 1px;
+			}
+			#progress:after {
+				content: '50%';
+				display: block;
+				background: orange;
+				width: 50%;
+				height: 100%;
+				border-radius: 9px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">账单列表</h1>
+		</header>
+		<div class="mui-content">
+			<h3 class="mui-content-padded mui-text-center">北京小米科技有限公司</h3>
+			<h4 class="mui-content-padded">目前预存款余额：50,000元</h4>
+			<h5 class="mui-content-padded">对应账单明细</h5>
+			<ul id="recvMoneyBillList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-10">
+								<h4 class="mui-ellipsis-2">对账时间：2015-07-01&nbsp;&nbsp;对账金额：45000元</h4>
+								<p>
+									<div id="progress"></div>
+								</p>
+								<p class="mui-h5 mui-ellipsis">2015-07-01&nbsp;&nbsp;收到&nbsp;&nbsp;23,800元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-20&nbsp;&nbsp;收到&nbsp;&nbsp;3,400元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-10&nbsp;&nbsp;收到&nbsp;&nbsp;17,000元</p>
+							</div>
+
+						</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-10">
+								<h4 class="mui-ellipsis-2">对账时间：2015-07-02&nbsp;&nbsp;对账金额：15000元</h4>
+								<p>
+									<div id="progress"></div>
+								</p>
+								<p class="mui-h5 mui-ellipsis">2015-07-01&nbsp;&nbsp;收到&nbsp;&nbsp;23,800元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-10&nbsp;&nbsp;收到&nbsp;&nbsp;17,000元</p>
+							</div>
+						</div>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-10">
+								<h4 class="mui-ellipsis-2">对账时间：2015-06-30&nbsp;&nbsp;对账金额：90000元</h4>
+								<p>
+									<div id="progress"></div>
+								</p>
+								<p class="mui-h5 mui-ellipsis">2015-07-01&nbsp;&nbsp;收到&nbsp;&nbsp;23,800元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-10&nbsp;&nbsp;收到&nbsp;&nbsp;17,000元</p>
+								<p class="mui-h5 mui-ellipsis">2015-07-01&nbsp;&nbsp;收到&nbsp;&nbsp;23,800元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-20&nbsp;&nbsp;收到&nbsp;&nbsp;3,400元</p>
+								<p class="mui-h5 mui-ellipsis">2015-06-10&nbsp;&nbsp;收到&nbsp;&nbsp;17,000元</p>
+							</div>
+						</div>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+
+	</body>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+		mui('#recvMoneyBillList').on('tap', 'a', function() {
+			var id = this.getAttribute('href');
+			var href = this.href;
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
+
+</html>

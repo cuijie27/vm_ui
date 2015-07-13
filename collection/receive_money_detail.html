@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <script src="../js/mui.min.js"></script>
-    <link href="../css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
-    <style>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<style>
 			/*跨webview需要手动指定位置*/
+			
 			#receiveMoneyPopover {
 				position: fixed;
 				top: 16px;
@@ -30,25 +32,27 @@
 				padding-right: 10px;
 			}
 			/* 如下大小为三行popover弹出 菜单大小，可以根据实际大小调整 */
+			
 			.mui-popover {
 				height: 150px;
 				width: 200px;
 			}
 		</style>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-	    <h1 class="mui-title">收款</h1>
-	    <a class="mui-icon mui-icon-bars mui-pull-right" href="#receiveMoneyPopover"></a>
-	</header>
-	<div id="checkGoodDetail" class="mui-content">
-		<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
-		<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
-		<div class="mui-input-row">
-		 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
-		</div>
-		<h5>收货来源<font color="#FF0000" size="4">*</font>：</h5>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">收款</h1>
+			<a class="mui-icon mui-icon-bars mui-pull-right" href="#receiveMoneyPopover"></a>
+		</header>
+		<div id="checkGoodDetail" class="mui-content">
+			<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
+			<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
+			<div class="mui-input-row">
+				<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
+			</div>
+			<h5>收货来源<font color="#FF0000" size="4">*</font>：</h5>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<span>预付款</span>
@@ -57,147 +61,150 @@
 					</div>
 				</li>
 			</ul>
-		<form class="mui-input-group">
-			<div class="mui-input-row">
-				<label>到账金额</label>
-				<input type="text" class="mui-input-clear" placeholder="元">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>到账金额</label>
+					<input type="text" class="mui-input-clear" placeholder="元">
+				</div>
+			</form>
+			<div class="mui-button-row">
+				<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font>
+				</button>
 			</div>
-		</form>
-		<div class="mui-button-row" >
-			<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font></button>
+			<div class="mui-button-row" style="height: auto;">
+				<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交预付款</font>
+				</button>
+			</div>
 		</div>
-		<div class="mui-button-row" style="height: auto;">
-			<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交预付款</font></button>
-		</div>
-	</div>
-	
-	<!--右上角弹出菜单-->
-	<div id="receiveMoneyPopover" class="mui-popover">
-	<div class="mui-popover-arrow"></div>
-	<div class="mui-scroll-wrapper">
-		<div class="mui-scroll">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="receive_money_list_by_partner.html">收款列表</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="receive_money_list_by_partner.html">查看收款计划</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="receive_money_list_by_partner.html">账单列表</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</body>
-<script>
-//定义动画效果。
-var aniShow = "pop-in";
-//只有ios支持的功能需要在Android平台隐藏；
-if (mui.os.android) {
-	var list = document.querySelectorAll('.ios-only');
-	if (list) {
-		for (var i = 0; i < list.length; i++) {
-			list[i].style.display = 'none';
+
+		<!--右上角弹出菜单-->
+		<div id="receiveMoneyPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="receive_money_list_by_partner.html">收款列表</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="receive_money_list_by_partner.html">查看收款计划</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="recv_money_bill_list.html">账单列表</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+	</body>
+	<script>
+		 //定义动画效果。
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
 		}
-	}
-	//Android平台暂时使用slide-in-right动画
-	aniShow = "slide-in-right"
-}
-</script>
-<script>
-///////////////////////时间控件
-	var d = new Date();
-	var pickDateBtn = document.getElementById("pickDateBtn");
-	pickDateBtn.innerText = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-		
-	document.getElementById("pickDateBtn").addEventListener('tap', function() {
-		var dDate = new Date();	// 现在的时间
-		dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
-		var minDate = new Date();
-		minDate.setFullYear(2010, 1, 1);
-		var maxDate = new Date();
-		maxDate.setFullYear(2017, 11, 31);
-		plus.nativeUI.pickDate(function(e) {
-			var d = e.date;
-			dayVal = d.getMonth()+1;
-			pickDateBtn.innerText = d.getFullYear() + "-" + dayVal + "-" + d.getDate();
-		}, function(e) {
-			//pickDateBtn.innerText = "您没有选择日期";
-		}, {
-			title: "请选择收货日期",
-			date: dDate,
-			minDate: minDate,
-			maxDate: maxDate
+	</script>
+	<script>
+		 ///////////////////////时间控件
+		var d = new Date();
+		var pickDateBtn = document.getElementById("pickDateBtn");
+		pickDateBtn.innerText = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+		document.getElementById("pickDateBtn").addEventListener('tap', function() {
+			var dDate = new Date(); // 现在的时间
+			dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+			var minDate = new Date();
+			minDate.setFullYear(2010, 1, 1);
+			var maxDate = new Date();
+			maxDate.setFullYear(2017, 11, 31);
+			plus.nativeUI.pickDate(function(e) {
+				var d = e.date;
+				dayVal = d.getMonth() + 1;
+				pickDateBtn.innerText = d.getFullYear() + "-" + dayVal + "-" + d.getDate();
+			}, function(e) {
+				//pickDateBtn.innerText = "您没有选择日期";
+			}, {
+				title: "请选择收货日期",
+				date: dDate,
+				minDate: minDate,
+				maxDate: maxDate
+			});
 		});
-	});
-///////////////////////时间控件
-</script>
+		 ///////////////////////时间控件
+	</script>
 
-<script>
-///////////////////////提交图片处理函数
-document.getElementById("picture-btn").addEventListener('tap',function () {
-	var btnArray = [{title:"拍照或录像"},{title:"选取现有的"}];
-	plus.nativeUI.actionSheet( {
-		title:"选择照片",
-		cancel:"取消",
-		buttons:btnArray
-	}, function(e){
-		var index = e.index;
-		var text = "你刚点击了\"";
-		switch (index){
-			case 0:
-				text += "取消";
-				break;
-			case 1:
-				text += "拍照或录像";
-				break;
-			case 2:
-				text += "选取现有的";
-				break;
-		}
-		//info.innerHTML = text+"\"按钮";
-		console.log(text+"\"按钮");
-	} );
-});
-///////////////////////提交图片处理函数
+	<script>
+		 ///////////////////////提交图片处理函数
+		document.getElementById("picture-btn").addEventListener('tap', function() {
+			var btnArray = [{
+				title: "拍照或录像"
+			}, {
+				title: "选取现有的"
+			}];
+			plus.nativeUI.actionSheet({
+				title: "选择照片",
+				cancel: "取消",
+				buttons: btnArray
+			}, function(e) {
+				var index = e.index;
+				var text = "你刚点击了\"";
+				switch (index) {
+					case 0:
+						text += "取消";
+						break;
+					case 1:
+						text += "拍照或录像";
+						break;
+					case 2:
+						text += "选取现有的";
+						break;
+				}
+				//info.innerHTML = text+"\"按钮";
+				console.log(text + "\"按钮");
+			});
+		});
+		 ///////////////////////提交图片处理函数
+	</script>
+	<script>
+		 ///////////////////////popover菜单的事件处理函数
+		mui('.mui-scroll-wrapper').scroll();
+		 //下列的shown 和 hidden 会随菜单的开和关自动触发
+		mui('body').on('shown', '.mui-popover', function(e) {
+			console.log('shown', e.detail.id); //detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			console.log('hidden', e.detail.id); //detail为当前popover元素
+		});
+		mui(".mui-navigate-right").on('tap', 'a', function() {
+			console.log("click in mui navigate right " + this.innerText);
+		});
+		mui("#receiveMoneyPopover").on('tap', 'a', function() {
+			console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+			mui('.mui-popover').popover('toggle');
+		});
+		 ///////////////////////popover菜单的事件处理函数
+	</script>
 
-</script>
-<script>
-///////////////////////popover菜单的事件处理函数
-mui('.mui-scroll-wrapper').scroll();
-
-//下列的shown 和 hidden 会随菜单的开和关自动触发
-mui('body').on('shown', '.mui-popover', function(e) {
-	console.log('shown', e.detail.id);//detail为当前popover元素
-});
-mui('body').on('hidden', '.mui-popover', function(e) {
-	console.log('hidden', e.detail.id);//detail为当前popover元素
-});
-mui(".mui-navigate-right").on('tap', 'a', function() {
-	console.log("click in mui navigate right "+this.innerText);
-});
-mui("#receiveMoneyPopover").on('tap', 'a', function() {
-	console.log(this.innerText);
-	var id = this.getAttribute('href');
-
-	mui.openWindow({
-		id: id,
-		url: this.href,
-		show: {
-			aniShow: aniShow
-		},
-		styles:{
-			popGesture: "close"
-		},
-		waiting: {
-			autoShow:true,//自动显示等待框，默认为true
-			title:'正在加载...',//等待对话框上显示的提示内容
-		}
-	});
-	//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
-	mui('.mui-popover').popover('toggle');
-});
-///////////////////////popover菜单的事件处理函数
-</script>
 </html>
