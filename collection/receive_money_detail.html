@@ -11,12 +11,12 @@
     </script>
     <style>
 			/*跨webview需要手动指定位置*/
-			#receiptPopover {
+			#receiveMoneyPopover {
 				position: fixed;
 				top: 16px;
 				right: 6px;
 			}
-			#receiptPopover .mui-popover-arrow {
+			#receiveMoneyPopover .mui-popover-arrow {
 				left: auto;
 				right: 6px;
 			}
@@ -48,6 +48,15 @@
 		<div class="mui-input-row">
 		 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
 		</div>
+		<h5>收货来源<font color="#FF0000" size="4">*</font>：</h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<span>预付款</span>
+					<div class="mui-switch mui-switch-mini mui-active ">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
 		<form class="mui-input-group">
 			<div class="mui-input-row">
 				<label>到账金额</label>
@@ -81,6 +90,21 @@
 		</div>
 	</div>
 </body>
+<script>
+//定义动画效果。
+var aniShow = "pop-in";
+//只有ios支持的功能需要在Android平台隐藏；
+if (mui.os.android) {
+	var list = document.querySelectorAll('.ios-only');
+	if (list) {
+		for (var i = 0; i < list.length; i++) {
+			list[i].style.display = 'none';
+		}
+	}
+	//Android平台暂时使用slide-in-right动画
+	aniShow = "slide-in-right"
+}
+</script>
 <script>
 ///////////////////////时间控件
 	var d = new Date();
@@ -138,5 +162,42 @@ document.getElementById("picture-btn").addEventListener('tap',function () {
 });
 ///////////////////////提交图片处理函数
 
+</script>
+<script>
+///////////////////////popover菜单的事件处理函数
+mui('.mui-scroll-wrapper').scroll();
+
+//下列的shown 和 hidden 会随菜单的开和关自动触发
+mui('body').on('shown', '.mui-popover', function(e) {
+	console.log('shown', e.detail.id);//detail为当前popover元素
+});
+mui('body').on('hidden', '.mui-popover', function(e) {
+	console.log('hidden', e.detail.id);//detail为当前popover元素
+});
+mui(".mui-navigate-right").on('tap', 'a', function() {
+	console.log("click in mui navigate right "+this.innerText);
+});
+mui("#receiveMoneyPopover").on('tap', 'a', function() {
+	console.log(this.innerText);
+	var id = this.getAttribute('href');
+
+	mui.openWindow({
+		id: id,
+		url: this.href,
+		show: {
+			aniShow: aniShow
+		},
+		styles:{
+			popGesture: "close"
+		},
+		waiting: {
+			autoShow:true,//自动显示等待框，默认为true
+			title:'正在加载...',//等待对话框上显示的提示内容
+		}
+	});
+	//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+	mui('.mui-popover').popover('toggle');
+});
+///////////////////////popover菜单的事件处理函数
 </script>
 </html>
