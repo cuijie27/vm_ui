@@ -44,41 +44,42 @@
 	</header>
 	<div id="checkGoodDetail" class="mui-content">
 		<h3 class="mui-content-padded mui-text-center">河北新羽玻璃制品有限公司</h3>
-	</div>
-	<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
-	<div class="mui-input-row">
-	 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
-	</div>
-	<form class="mui-input-group">
+		<h5>收款日期<font color="#FF0000" size="4">*</font>：</h5>
 		<div class="mui-input-row">
-			<label>到账金额</label>
-			<input type="text" class="mui-input-clear" placeholder="元">
+		 	<button id='pickDateBtn' type="button" style="width: 100%; height: auto;">请选择日期</button>
 		</div>
-	</form>
-	<div class="mui-button-row" >
-		<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font></button>
-	</div>
-	<div class="mui-button-row" style="height: auto;">
-		<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交预付款</font></button>
-	</div>
-			<!--右上角弹出菜单-->
-		<div id="receiveMoneyPopover" class="mui-popover">
-			<div class="mui-popover-arrow"></div>
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">账单列表</a>
-						</li>
-						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">查看收款计划</a>
-						</li>
-						<li class="mui-table-view-cell">
-							<a href="receipt_list.html">内部调拨收货列表</a>
-						</li>
-					</ul>
-				</div>
+		<form class="mui-input-group">
+			<div class="mui-input-row">
+				<label>到账金额</label>
+				<input type="text" class="mui-input-clear" placeholder="元">
 			</div>
+		</form>
+		<div class="mui-button-row" >
+			<button id="picture-btn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="return false;"><font size="3">选择凭证图片</font></button>
+		</div>
+		<div class="mui-button-row" style="height: auto;">
+			<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交预付款</font></button>
+		</div>
+	</div>
+	
+	<!--右上角弹出菜单-->
+	<div id="receiveMoneyPopover" class="mui-popover">
+	<div class="mui-popover-arrow"></div>
+	<div class="mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">收款列表</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">查看收款计划</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="receive_money_list_by_partner.html">账单列表</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </body>
 <script>
 ///////////////////////时间控件
