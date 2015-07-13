@@ -15,11 +15,14 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">收款列表清单</h1>
+			<h1 class="mui-title">指定账单收款列表</h1>
 		</header>
 
 		<div class="mui-content">
 			<h3 class="mui-content-padded mui-text-center">北京小米科技有限公司</h3>
+			<h4 class="mui-content-padded">账单日期2015-07-01&nbsp;&nbsp;对账金额45,000元</h4>
+			<h4 class="mui-content-padded">目前预存款余额：50,000元</h4>
+			<h5 class="mui-content-padded">对应收款明细</h5>
 			<ul id="recvMoneyListByPartner" class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../payment/voucher.html">
@@ -43,6 +46,14 @@
 				</a>
 				</li>
 			</ul>
+			<div class="mui-button-row ">
+				<button id="useAdvancePaymentBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">使用预存款</font>
+				</button>
+			</div>
+			<div class="mui-button-row ">
+				<button id="clearAccountBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="4">清账</font>
+				</button>
+			</div>
 		</div>
 	</body>
 	<script>
@@ -70,6 +81,18 @@
 				show: {
 					aniShow: aniShow
 				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
+	<script>
+		document.getElementById('useAdvancePaymentBtn').addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'use_advance_payment.html',
+				id: 'use_advance_payment.html',
 				waiting: {
 					autoShow: true, //自动显示等待框，默认为true
 					title: '正在加载...', //等待对话框上显示的提示内容
