@@ -110,6 +110,23 @@
 				}
 			});
 		});
+		mui('#partnersList').on('tap', 'button', function() {
+			//console.log("click the button");
+			var id = "partnerAssociate";
+			var href = "../partners/partner_associate.html";
+			//console.log("id is "+id+"\n href is "+href);
+			mui.openWindow({
+				id: id,
+				url: href,
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
 	</script>
 
 </html>
