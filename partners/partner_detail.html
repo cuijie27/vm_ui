@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<style>
+			/*跨webview需要手动指定位置*/
+			
+			#receiveMoneyPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#receiveMoneyPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			/* 如下大小为三行popover弹出 菜单大小，可以根据实际大小调整 */
+			
+			.mui-popover {
+				height: 320px;
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">详细资料</h1>
+			<a class="mui-icon mui-icon-bars mui-pull-right" href="#partnerDetailPopover"></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>合作伙伴</label>
+						<label class="mui-h5">包装纸箱厂</label>
+					</div>
+					<div class="mui-input-row">
+						<label>负责人</label>
+						<label class="mui-h5">付印</label>
+					</div>
+					<div class="mui-input-row">
+						<label>联系电话</label>
+						<label class="mui-h5">13731729000</label>
+					</div>
+					<div class="mui-input-row">
+						<label>渠道主营</label>
+						<label class="mui-h5">包装</label>
+					</div>
+					<div class="mui-input-row">
+						<label>当前应收</label>
+						<label class="mui-h5">100,000元</label>
+					</div>
+					<div class="mui-input-row">
+						<label>当前应付</label>
+						<label class="mui-h5">50,000元</label>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!--右上角弹出菜单-->
+		<div id="partnerDetailPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="recv_money_bill_list.html">编辑</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="recv_money_plan.html">关联</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="recv_money_plan.html">删除</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="../payment/payment_detail.html">付款明细</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="../collection/recv_money_bill_list.html">收款明细</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="../application/receipt/receipt_list.html">收货明细</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a href="../application/receipt/receipt_list.html">发货明细</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		 //定义动画效果。
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+	</script>
+	<script>
+		 ///////////////////////popover菜单的事件处理函数
+		mui('.mui-scroll-wrapper').scroll();
+		 //下列的shown 和 hidden 会随菜单的开和关自动触发
+		mui('body').on('shown', '.mui-popover', function(e) {
+			console.log('shown', e.detail.id); //detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			console.log('hidden', e.detail.id); //detail为当前popover元素
+		});
+		mui(".mui-navigate-right").on('tap', 'a', function() {
+			console.log("click in mui navigate right " + this.innerText);
+		});
+		mui("#partnerDetailPopover").on('tap', 'a', function() {
+			console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+			mui('.mui-popover').popover('toggle');
+		});
+		 ///////////////////////popover菜单的事件处理函数
+	</script>
+
+</html>
