@@ -21,9 +21,7 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right" href="../partners/new_partners_list.html">
-
 						新的伙伴
-
 					</a>
 				</li>
 			</ul>
@@ -32,18 +30,20 @@
 			</div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-
+					<a>
 						河北新羽玻璃制品有限公司
-
 					</a>
+					<button type="button" class="mui-btn mui-btn-primary">
+						关联
+					</button>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-
+					<a>
 						何中海
-
 					</a>
+					<button type="button" class="mui-btn mui-btn-primary">
+						关联
+					</button>
 				</li>
 
 			</ul>
@@ -52,11 +52,10 @@
 			</div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-
+					<a>
 						王顺通玻璃制品有限公司
-
 					</a>
+					<span class="mui-badge mui-badge-green">已关联</span>
 				</li>
 
 			</ul>
@@ -65,58 +64,52 @@
 			</div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-
+					<a>
 						小米科技有限公司
-
 					</a>
+					<span class="mui-badge mui-badge-green">已关联</span>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-
+					<a>
 						新羽玻璃厂
-
 					</a>
+					<span class="mui-badge mui-badge-green">已关联</span>
 				</li>
 			</ul>
 		</div>
-
 	</body>
-<script>
+	<script>
 		mui.init({
-			swipeBack:true //启用右滑关闭功能
+			swipeBack: true //启用右滑关闭功能
 		});
 		var aniShow = "pop-in";
-	//只有ios支持的功能需要在Android平台隐藏；
-	if (mui.os.android) {
-		var list = document.querySelectorAll('.ios-only');
-		if (list) {
-			for (var i = 0; i < list.length; i++) {
-				list[i].style.display = 'none';
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
 			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
 		}
-		//Android平台暂时使用slide-in-right动画
-		aniShow = "slide-in-right"
-	}
-		
 		mui('#partnersList').on('tap', 'a', function() {
-		var id = this.getAttribute('href');
-		var href = this.href;
-		
-		//console.log("id is "+id+"\n href is "+href);
-		
-		mui.openWindow({
-			id: id,
-			url: href,
-			show: {
-				aniShow: aniShow
-			},
-			waiting: {
-				autoShow:true,//自动显示等待框，默认为true
-				title:'正在加载...',//等待对话框上显示的提示内容
-			}
+			var id = this.getAttribute('href');
+			var href = this.href;
+			//console.log("id is "+id+"\n href is "+href);
+			mui.openWindow({
+				id: id,
+				url: href,
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
 		});
-		
-	});
 	</script>
+
 </html>
