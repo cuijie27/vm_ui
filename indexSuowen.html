@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <script src="js/mui.min.js"></script>
-    <!--
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<!--
     	作者：49264664@qq.com
     	时间：2015-07-02
     	描述：update.js 为升级js文件
     	
     	<script src="js/update.js" type="text/javascript" charset="utf-8"></script>	
     -->
-    
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
-</head>
-<body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-icon mui-icon-bars mui-pull-left"></a>
-		<a id="info" class="mui-icon mui-icon-info-filled mui-pull-right" style="color: #999;"></a>
-		<h1 class="mui-title">索问</h1>
-	</header>
-	<script>
-        var showMenu = false;
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="menu" class="mui-icon mui-icon-bars mui-pull-left"></a>
+
+			<h1 class="mui-title">索问</h1>
+		</header>
+
+		<!--
+    	作者：49264664@qq.com
+    	时间：2015-07-16
+    	描述：切换tab而页的代码
+    -->
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="/indexPages/tabSuowen.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">索问</span>
+			</a>
+			<a class="mui-tab-item" href="/indexPages/tabPartner.html">
+				<span class="mui-icon mui-icon-contact"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">伙伴</span>
+			</a>
+			<a class="mui-tab-item" href="/indexPages/tabReport.html">
+				<span class="mui-icon mui-icon-info"></span>
+				<span class="mui-tab-label">报表</span>
+			</a>
+			<a class="mui-tab-item" href="/indexPages/tabMe.html">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+
+		<script>
+			var showMenu = false;
+			/*
 		mui.init({
 			swipeBack: false,
 			statusBarBackground: '#f7f7f7',
@@ -42,28 +69,100 @@
 				}
 			}]
 		});
-		
-		//首页返回键处理
-		//处理逻辑：1秒内，连续两次按返回键，则退出应用；
-		var first = null;
-		mui.back = function() {
-			if (showMenu) {
-				closeMenu();
-			} else {
-				//首次按键，提示‘再按一次退出应用’
-				if (!first) {
-					first = new Date().getTime();
-					mui.toast('再按一次退出索问');
-					setTimeout(function() {
-						first = null;
-					}, 1000);
+		*/
+			 //首页返回键处理
+			 //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+			var first = null;
+			mui.back = function() {
+				if (showMenu) {
+					closeMenu();
 				} else {
-					if (new Date().getTime() - first < 1000) {
-						plus.runtime.quit();
+					//首次按键，提示‘再按一次退出应用’
+					if (!first) {
+						first = new Date().getTime();
+						mui.toast('再按一次退出索问');
+						setTimeout(function() {
+							first = null;
+						}, 1000);
+					} else {
+						if (new Date().getTime() - first < 1000) {
+							plus.runtime.quit();
+						}
 					}
 				}
-			}
-		};
-	</script>
-</body>
+			};
+		</script>
+
+		<script>
+			 //////////////////////////////tab切换页面js代码
+			 // 子页面路径array
+			var subpages = ['/indexPages/tabSuowen.html',
+				'/indexPages/tabPartner.html',
+				'/indexPages/tabReport.html',
+				'/indexPages/tabMe.html'
+			];
+			var subpage_style = {
+				top: '46px', //页面显示上限，默认值为46px
+				bottom: '50px' //页面显示下限，默认值为50px
+			};
+			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < 4; i++) {
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}
+					self.append(sub);
+				}
+			});
+			 //当前激活选项
+			var activeTab = subpages[0];
+			 //选项卡点击事件
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var targetTab = this.getAttribute('href');
+				if (targetTab == activeTab) {
+					return;
+				}
+				//更换标题
+				//title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				//显示目标选项卡
+				plus.webview.show(targetTab);
+				//隐藏当前;
+				plus.webview.hide(activeTab);
+				//更改当前活跃的选项卡
+				activeTab = targetTab;
+			});
+			 //////////////////////////////tab切换页面js代码
+		</script>
+
+		<script>
+			 ////////////////////////////////页面banner上点击图标弹出菜单js
+			mui.plusReady(function() {});
+			 //console.log(plus.webview.currentWebview().children());
+			var contentWebview = null;
+			document.getElementById("menu").addEventListener('tap', function(e) {
+				e.stopPropagation();
+				if (contentWebview == null) {
+					console.log("click the menu");
+					/*
+					 * 子页面存在个问题，要测试子页面时，需要关闭程序，重新打款app，重新来一遍进入页面后，方可测试
+					 * 要不然，如下语句会报错
+					 * 报错信息为：“ Uncaught TypeError: Cannot read property 'length' of null”
+					 */
+					contentWebview = plus.webview.currentWebview().children()[0];
+					var list = plus.webview.currentWebview().children();
+					console.log("子页面个数为：" + list.length);
+					for (var i = 0; i < list.length; i++) {
+						console.log("Children[" + i + "]: " + list[i].getURL());
+					}
+				}
+				console.log("active tab is " + activeTab);
+				contentWebview.evalJS('mui("#topPopover").popover("toggle")');
+			});
+			 ////////////////////////////////页面banner上点击图标弹出菜单js
+		</script>
+
+	</body>
+
 </html>
