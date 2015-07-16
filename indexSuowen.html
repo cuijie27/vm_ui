@@ -21,7 +21,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a id="menu" class="mui-icon mui-icon-bars mui-pull-left"></a>
+			<a id="menu" class="mui-icon mui-icon-plusempty mui-pull-right"></a>
 
 			<h1 class="mui-title">索问</h1>
 		</header>
@@ -144,20 +144,20 @@
 			document.getElementById("menu").addEventListener('tap', function(e) {
 				e.stopPropagation();
 				if (contentWebview == null) {
-					console.log("click the menu");
+					//console.log("click the menu");
 					/*
 					 * 子页面存在个问题，要测试子页面时，需要关闭程序，重新打款app，重新来一遍进入页面后，方可测试
 					 * 要不然，如下语句会报错
 					 * 报错信息为：“ Uncaught TypeError: Cannot read property 'length' of null”
 					 */
 					contentWebview = plus.webview.currentWebview().children()[0];
-					var list = plus.webview.currentWebview().children();
+					/*var list = plus.webview.currentWebview().children();
 					console.log("子页面个数为：" + list.length);
 					for (var i = 0; i < list.length; i++) {
 						console.log("Children[" + i + "]: " + list[i].getURL());
-					}
+					}*/
 				}
-				console.log("active tab is " + activeTab);
+				//console.log("active tab is " + activeTab);
 				contentWebview.evalJS('mui("#topPopover").popover("toggle")');
 			});
 			 ////////////////////////////////页面banner上点击图标弹出菜单js
