@@ -52,6 +52,11 @@
 
 		<script>
 			var showMenu = false;
+			// tab页面中popover菜单显示标志位，false为不显示，true为显示
+			var tabSuowenShow = false,
+			tabPartnerShow = false,
+			tabReportShow = false,
+			tabMeShow = false;
 			/*
 		mui.init({
 			swipeBack: false,
@@ -94,7 +99,7 @@
 		</script>
 
 		<script>
-			 //////////////////////////////tab切换页面js代码
+			//////////////////////////////tab切换页面js代码
 			 // 子页面路径array
 			var subpages = ['/indexPages/tabSuowen.html',
 				'/indexPages/tabPartner.html',
@@ -132,33 +137,95 @@
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
+				
+				//获取该页面中所有的子页面
+				var list = plus.webview.currentWebview().children();
+				//如果索问tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				if(tabSuowenShow){
+					list[0].evalJS('mui("#TopPopover").popover("toggle")');
+					tabSuowenShow = false;
+				}
+				//如果伙伴tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				if(tabPartnerShow){
+					list[1].evalJS('mui("#TopPopover").popover("toggle")');
+					tabPartnerShow = false;
+				}
+				//如果报表tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				if(tabReportShow){
+					list[2].evalJS('mui("#TopPopover").popover("toggle")');
+					tabReportShow = false;
+				}
+				//如果我tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				if(tabMeShow){
+					list[3].evalJS('mui("#TopPopover").popover("toggle")');
+					tabMeShow = false;
+				}
 			});
 			 //////////////////////////////tab切换页面js代码
 		</script>
 
 		<script>
-			 ////////////////////////////////页面banner上点击图标弹出菜单js
+			////////////////////////////////页面banner上点击图标弹出菜单js
 			mui.plusReady(function() {});
 			 //console.log(plus.webview.currentWebview().children());
-			var contentWebview = null;
+			var contentWebviewSuoWen = null, 
+			contentWebviewPartner = null,
+			contentWebviewReport = null,
+			contentWebviewMe = null;
+			
+
 			document.getElementById("menu").addEventListener('tap', function(e) {
 				e.stopPropagation();
-				if (contentWebview == null) {
-					//console.log("click the menu");
-					/*
-					 * 子页面存在个问题，要测试子页面时，需要关闭程序，重新打款app，重新来一遍进入页面后，方可测试
-					 * 要不然，如下语句会报错
-					 * 报错信息为：“ Uncaught TypeError: Cannot read property 'length' of null”
-					 */
-					contentWebview = plus.webview.currentWebview().children()[0];
-					/*var list = plus.webview.currentWebview().children();
-					console.log("子页面个数为：" + list.length);
-					for (var i = 0; i < list.length; i++) {
-						console.log("Children[" + i + "]: " + list[i].getURL());
-					}*/
+				//console.log("click the menu");
+				/*
+				 * 子页面存在个问题，要测试子页面时，需要关闭程序，重新打款app，重新来一遍进入页面后，方可测试
+				 * 要不然，如下语句会报错
+				 * 报错信息为：“ Uncaught TypeError: Cannot read property 'length' of null”
+				 */
+				//索问页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
+				if(activeTab.indexOf("Suowen")>0){
+					contentWebviewSuoWen = plus.webview.currentWebview().children()[0];
+					contentWebviewSuoWen.evalJS('mui("#TopPopover").popover("toggle")');
+					if (!tabSuowenShow) 
+						tabSuowenShow = true;
+					else 
+						tabSuowenShow = false;						
+					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
+				}
+				//伙伴页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
+				if (activeTab.indexOf("Partner")>0){
+					contentWebviewPartner = plus.webview.currentWebview().children()[1];
+					contentWebviewPartner.evalJS('mui("#TopPopover").popover("toggle")');
+					if (!tabPartnerShow)
+						tabPartnerShow = true;
+					else	
+						tabPartnerShow = false;
+
+					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
+				}
+				//报盘页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
+				if (activeTab.indexOf("Report")>0){
+					contentWebviewReport = plus.webview.currentWebview().children()[2];
+					contentWebviewReport.evalJS('mui("#TopPopover").popover("toggle")');
+					if (!tabReportShow)
+						tabReportShow = true;
+					else
+						tabReportShow = false
+						
+					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
+				}
+				//我页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
+				if (activeTab.indexOf("Me")>0){
+					contentWebviewMe = plus.webview.currentWebview().children()[3];
+					contentWebviewMe.evalJS('mui("#TopPopover").popover("toggle")');
+					if(!tabMeShow)
+						tabMeShow = true;
+					else
+						tabMeShow = false;
+					
+					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
 				}
 				//console.log("active tab is " + activeTab);
-				contentWebview.evalJS('mui("#topPopover").popover("toggle")');
 			});
 			 ////////////////////////////////页面banner上点击图标弹出菜单js
 		</script>
