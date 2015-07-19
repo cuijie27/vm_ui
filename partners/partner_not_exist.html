@@ -15,22 +15,17 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">添加合作伙伴</h1>
+			<h1 class="mui-title">伙伴不存在</h1>
 		</header>
 		<div class="mui-content">
-			<h5> </h5>
-			<form class="mui-input-group">
-				<div class="mui-input-row mui-search">
-					<input type="search" class="mui-input-clear" placeholder="请输入对方注册索问时所使用的手机号">
+
+			<div class="mui-content">
+				<div class="mui-content-padded">
+					<div class="title mui-h4" align="center">索问号：13731729000 的信息不存在</div>
 				</div>
-			</form>
-			<div class="title mui-center" align="center">我的索问号：15910816978</div>
-			<div class="mui-button-row" style="height: auto;">
-				<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交</font>
-				</button>
 			</div>
 			<div class="mui-button-row" style="height: auto;">
-				<button id="NotExistBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">伙伴不存在</font>
+				<button id="AddByHandBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">手工添加伙伴</font>
 				</button>
 			</div>
 		</div>
@@ -50,11 +45,11 @@
 			aniShow = "slide-in-right"
 		}
 		////////////////////////动画效果初始化
-	document.getElementById("ConfirmBtn").addEventListener('tap', function() {
+	document.getElementById("AddByHandBtn").addEventListener('tap', function() {
 	  	//打开添加商品页面
 	  	mui.openWindow({
-	    	url: 'add_partner_confirm.html', 
-	    	id:'add_partner_confirm.html',
+	    	url: 'add_partner_by_hand.html', 
+	    	id:'add_partner_by_hand.html',
 	    	show: {
 				aniShow: aniShow
 			},
@@ -65,20 +60,6 @@
 	  	});
 	});
 	
-	document.getElementById("NotExistBtn").addEventListener('tap', function() {
-	  	//打开添加商品页面
-	  	mui.openWindow({
-	    	url: 'partner_not_exist.html', 
-	    	id:'partner_not_exist.html',
-	    	show: {
-				aniShow: aniShow
-			},
-			waiting: {
-				autoShow:true,//自动显示等待框，默认为true
-				title:'正在加载...',//等待对话框上显示的提示内容
-			}
-	  	});
-	});
 	
 </script>
 </html>

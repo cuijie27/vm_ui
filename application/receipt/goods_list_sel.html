@@ -101,7 +101,10 @@
 		})
 	
 	mui('#goodsSelList').on('tap', 'div', function() {
-		var msgStr = this.querySelector("h4").innerHTML;
+		
+		//如下代码在andriod真实手机上无法通过，报错“ Uncaught TypeError: Cannot read property 'innerHTML' of null at application/receipt/goods_list_sel.html:104”
+		//有时候可以，有时候代码又通过不了。
+		var msgStr = this.querySelector(".mui-ellipsis").innerHTML;
 		console.log(msgStr);
 		mui.back();
 		mui.fire(opener,"goodsSelListMsg",{
