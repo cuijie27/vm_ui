@@ -41,8 +41,8 @@
 			</div>
 		</div>
 	</body>
-<script>
-		////////////////////////动画效果初始化
+	<script>
+		 ////////////////////////动画效果初始化
 		var aniShow = "pop-in";
 		 //只有ios支持的功能需要在Android平台隐藏；
 		if (mui.os.android) {
@@ -55,22 +55,28 @@
 			//Android平台暂时使用slide-in-right动画
 			aniShow = "slide-in-right"
 		}
-		////////////////////////动画效果初始化
-	document.getElementById("addChannelBtn").addEventListener('tap', function() {
-	  	//打开添加商品页面
-	  	mui.openWindow({
-	    	url: 'channel_list_sel.html', 
-	    	id:'channel_list_sel.html',
-	    	show: {
-				aniShow: aniShow
-			},
-			waiting: {
-				autoShow:true,//自动显示等待框，默认为true
-				title:'正在加载...',//等待对话框上显示的提示内容
-			}
-	  	});
-	});
-	
-	
-</script>
+		 ////////////////////////动画效果初始化
+		document.getElementById("addChannelBtn").addEventListener('tap', function() {
+			//打开添加商品页面
+			mui.openWindow({
+				url: 'channel_list_sel.html',
+				id: 'channel_list_sel.html',
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+		 //添加newId自定义事件监听
+		window.addEventListener('channelListMsg', function(event) {
+			//获得事件参数
+			//根据id向服务器请求新闻详情
+			document.getElementById("addChannelBtn").innerText = event.detail.msg;
+			//console.log("msg is " + event.detail.msg);
+		});
+	</script>
+
 </html>

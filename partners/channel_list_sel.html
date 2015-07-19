@@ -19,36 +19,44 @@
 		</header>
 		<div class="mui-content">
 			<h5>默认搜索框：</h5>
-				<div class="mui-input-row mui-search">
-					<input type="search" class="mui-input-clear" placeholder="">
-				</div>
+			<div class="mui-input-row mui-search">
+				<input type="search" class="mui-input-clear" placeholder="">
+			</div>
 			<div class="title">
-				渠道
+				请选择相应渠道
 			</div>
 			<ul id="channelListSel" class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						玻璃生产/加工
-					</a>
+					<a class="mui-navigate-right">玻璃生产/加工</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						纸箱/包装
-					</a>
+					<a class="mui-navigate-right">纸箱/包装</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						快递/物流
-					</a>
+					<a class="mui-navigate-right">快递/物流</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">
-						销售/贸易
-					</a>
+					<a class="mui-navigate-right">销售/贸易</a>
 				</li>
 			</ul>
-			
 		</div>
 	</body>
+	<script>
+		var opener = null;
+		mui.plusReady(function() {
+			// opener为add_partner_by_hand.html页面
+			opener = plus.webview.currentWebview().opener();
+		})
+		 mui('#channelListSel').on('tap', 'a', function() {
+			//如下代码在andriod真实手机上无法通过，报错“ Uncaught TypeError: Cannot read property 'innerHTML' of null at application/receipt/goods_list_sel.html:104”
+			//有时候可以，有时候代码又通过不了。
+			var msgStr = this.innerHTML;
+			console.log(msgStr);
+			mui.back();
+			mui.fire(opener, "channelListMsg", {
+				msg: msgStr
+			});
+		});
+	</script>
 
 </html>
