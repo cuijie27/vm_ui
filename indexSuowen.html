@@ -140,22 +140,22 @@
 				
 				//获取该页面中所有的子页面
 				var list = plus.webview.currentWebview().children();
-				//如果索问tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				//如果索问tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
 				if(tabSuowenShow){
 					list[0].evalJS('mui("#TopPopover").popover("toggle")');
 					tabSuowenShow = false;
 				}
-				//如果伙伴tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				//如果伙伴tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
 				if(tabPartnerShow){
 					list[1].evalJS('mui("#TopPopover").popover("toggle")');
 					tabPartnerShow = false;
 				}
-				//如果报表tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				//如果报表tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
 				if(tabReportShow){
 					list[2].evalJS('mui("#TopPopover").popover("toggle")');
 					tabReportShow = false;
 				}
-				//如果我tab中有popover菜单弹出，则使其隐藏，并置标志位为不显示
+				//如果我tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
 				if(tabMeShow){
 					list[3].evalJS('mui("#TopPopover").popover("toggle")');
 					tabMeShow = false;
@@ -172,8 +172,6 @@
 			contentWebviewPartner = null,
 			contentWebviewReport = null,
 			contentWebviewMe = null;
-			
-
 			document.getElementById("menu").addEventListener('tap', function(e) {
 				e.stopPropagation();
 				//console.log("click the menu");
@@ -193,7 +191,7 @@
 					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
 				}
 				//伙伴页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				if (activeTab.indexOf("Partner")>0){
+				else if (activeTab.indexOf("Partner")>0){
 					contentWebviewPartner = plus.webview.currentWebview().children()[1];
 					contentWebviewPartner.evalJS('mui("#TopPopover").popover("toggle")');
 					if (!tabPartnerShow)
@@ -204,7 +202,7 @@
 					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
 				}
 				//报盘页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				if (activeTab.indexOf("Report")>0){
+				else if (activeTab.indexOf("Report")>0){
 					contentWebviewReport = plus.webview.currentWebview().children()[2];
 					contentWebviewReport.evalJS('mui("#TopPopover").popover("toggle")');
 					if (!tabReportShow)
@@ -215,7 +213,7 @@
 					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
 				}
 				//我页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				if (activeTab.indexOf("Me")>0){
+				else if (activeTab.indexOf("Me")>0){
 					contentWebviewMe = plus.webview.currentWebview().children()[3];
 					contentWebviewMe.evalJS('mui("#TopPopover").popover("toggle")');
 					if(!tabMeShow)
@@ -229,7 +227,48 @@
 			});
 			 ////////////////////////////////页面banner上点击图标弹出菜单js
 		</script>
-
+		<script>
+			//////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
+			//添加newId自定义事件监听
+			window.addEventListener('popoverOpenOrNot',function(event){
+			  //获得事件参数
+			  var type = event.detail.type;
+			  var page = event.detail.page;
+			  if (page.indexOf("Suowen")>0){
+			  	if(type == "show"){
+			  		tabSuowenShow = true;
+			  	}
+			  	else{
+			  		tabSuowenShow = false;
+				}
+			  }
+			  else if(page.indexOf("Report")>0){
+			  	if(type == "show"){
+			  		tabReportShow = true;
+			  	}
+			  	else{
+			  		tabReportShow = false;
+				}
+			  }
+			  else if(page.indexOf("Partner")>0){
+			  	if(type == "show"){
+			  		tabPartnerShow = true;
+			  	}
+			  	else{
+			  		tabPartnerShow = false;
+				}
+			  }
+			  else if(page.indexOf("Me")>0){
+			  	if(type == "show"){
+			  		tabMeShow = true;
+			  	}
+			  	else{
+			  		tabMeShow = false;
+				}
+			  }
+			});
+			//////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
+		</script>
 	</body>
 
 </html>

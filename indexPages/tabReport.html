@@ -95,5 +95,28 @@
 		</div>
 		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
-
+<script>
+	///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
+		var main = null;
+		mui.plusReady(function () {
+			main = plus.webview.currentWebview().opener();
+		})
+		mui('.mui-scroll-wrapper').scroll();
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+			//mui.fire(main, "popoverOpenOrNot");
+			mui.fire(main,"popoverOpenOrNot",{
+				page:"tabReport.html",
+				type:"show"
+			});
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+			mui.fire(main,"popoverOpenOrNot",{
+				page:"tabReport.html",
+				type:"hidden"
+			});
+		});
+		///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
+</script>
 </html>
