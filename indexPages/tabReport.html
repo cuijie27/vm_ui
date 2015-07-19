@@ -69,7 +69,7 @@
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell">
-							<a href="#">报表</a>
+							<a href="../partners/add_partner.html">添加合作伙伴</a>
 						</li>
 						<li class="mui-table-view-cell"><a href="#">Item2</a>
 						</li>
@@ -95,7 +95,22 @@
 		</div>
 		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
-<script>
+	<script>
+		////////////////////////动画效果初始化
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+		////////////////////////动画效果初始化
+				
 	///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
 		var main = null;
 		mui.plusReady(function () {
@@ -117,6 +132,27 @@
 				type:"hidden"
 			});
 		});
+		mui("#TopPopover").on('tap', 'a', function() {
+			//console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+			mui('.mui-popover').popover('toggle');
+		});
 		///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
-</script>
+	</script>
+
 </html>
