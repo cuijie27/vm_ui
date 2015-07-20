@@ -87,7 +87,7 @@
 			</ul>
 			<ul id="settingMenu" class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
-					<a href="#account" class="mui-navigate-right">设置</a>
+					<a href="../manage/setting.html" class="mui-navigate-right">设置</a>
 				</li>
 			</ul>
 			
@@ -181,7 +181,7 @@
 			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
 			mui('.mui-popover').popover('toggle');
 		});
-		
+		///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
 		mui("#mySuowenInfo").on('tap', 'a', function() {
 			//console.log(this.innerText);
 			var id = this.getAttribute('href');
@@ -200,6 +200,25 @@
 				}
 			});
 		});
-		///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
+		
+		mui("#settingMenu").on('tap', 'a', function() {
+			//console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+		
 </script>
 </html>
