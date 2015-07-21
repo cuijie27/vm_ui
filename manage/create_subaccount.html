@@ -10,6 +10,19 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style>
+			/*************设置元素间间隔的css代码**************/
+				#inputSuowenIdForm {
+					margin-top: 10%;
+				}
+				#mySuowenIdDiv {
+					margin-top: 5%;
+				}
+				#nextBtnDiv {
+					margin-top: 5%;
+				}
+				/*************设置元素间间隔的css代码**************/
+		</style>
 	</head>
 
 	<body>
@@ -19,21 +32,47 @@
 		</header>
 		<div class="mui-content">
 			<h5> </h5>
-			<form class="mui-input-group">
+			<form id="inputSuowenIdForm" class="mui-input-group">
 				<div class="mui-input-row mui-search">
 					<input type="search" class="mui-input-clear" placeholder="请输入子账号注册索问时所使用的手机号">
 				</div>
 			</form>
-			<div class="title mui-center" align="center">我的索问号：15910816978</div>
-			<div class="mui-button-row" style="height: auto;">
-				<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">提交</font>
-				</button>
-			</div>
-			<div class="mui-button-row" style="height: auto;">
-				<button id="NotExistBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">伙伴不存在</font>
+			<div id="mySuowenIdDiv" class="title mui-center" align="center">我的索问号：15910816978</div>
+			<div id="nextBtnDiv" class="mui-button-row" style="height: auto;">
+				<button id="nextBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">下一步</font>
 				</button>
 			</div>
 		</div>
 	</body>
+	<script>
+		 ////////////////////////动画效果初始化
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+		 ////////////////////////动画效果初始化
+		document.getElementById("nextBtn").addEventListener('tap', function() {
+			//打开添加商品页面
+			mui.openWindow({
+				url: 'create_subaccount_confirm.html',
+				id: 'create_subaccount_confirm.html',
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
 
 </html>
