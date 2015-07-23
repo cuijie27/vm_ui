@@ -180,5 +180,26 @@
 		});
 		 ///////////////////////popover菜单的事件处理函数
 	</script>
+	<script>
+		
+		mui("#subAccountList").on('tap', 'a', function() {
+			//console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: "subaccount_detail.html",
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
 
 </html>
