@@ -10,14 +10,124 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
+		<style>
+			/*跨webview需要手动指定位置*/
+			
+			#postManagePopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#postManagePopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			/* 如下大小为三行popover弹出 菜单大小，可以根据实际大小调整 */
+			
+			.mui-popover {
+				height: 100px;
+				width: 200px;
+			}
+		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">岗位管理</h1>
-			<a id="menu" class="mui-icon mui-icon-bars mui-pull-right" href="#subAccountPopover"></a>
+			<a id="menu" class="mui-icon mui-icon-bars mui-pull-right" href="#postManagePopover"></a>
 		</header>
+		<div id="subAccountList" class="mui-content">
+			<h4>索问主账号：15910816978</h4>
+			<h4>主账号昵称：北京聚福天下商贸有限公司</h4>
+			<h5>默认搜索框：</h5>
+			<div class="mui-input-row mui-search">
+				<input type="search" class="mui-input-clear" placeholder="">
+			</div>
+
+			<div class="mui-h5">
+				岗位明细
+			</div>
+			<ul id="postInfoList" class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="../manage/post_detail.html">
+						管理
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="../manage/post_detail.html">
+						财务
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="../manage/post_detail.html">
+						仓储
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- ---------------右上角弹出菜单---------------------------->
+		<div id="postManagePopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="create_subaccount.html">新建岗位</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">分配岗位</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
+	
+	<script>
+		 //定义动画效果。
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+	</script>
+	<script>
+		mui("#postInfoList").on('tap', 'a', function() {
+			//console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+		});
+	</script>
 
 </html>
