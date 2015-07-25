@@ -75,7 +75,7 @@
 				</li>
 			</ul>
 		</div>
-		
+
 		<!-- ---------------右上角弹出菜单---------------------------->
 		<div id="postManagePopover" class="mui-popover">
 			<div class="mui-popover-arrow"></div>
@@ -83,7 +83,7 @@
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
 						<li class="mui-table-view-cell">
-							<a href="create_subaccount.html">新建岗位</a>
+							<a href="post_create.html">新建岗位</a>
 						</li>
 						<li class="mui-table-view-cell"><a href="#">分配岗位</a>
 						</li>
@@ -93,7 +93,7 @@
 		</div>
 		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
-	
+
 	<script>
 		 //定义动画效果。
 		var aniShow = "pop-in";
@@ -129,5 +129,39 @@
 			});
 		});
 	</script>
-
+<script>
+		 ///////////////////////popover菜单的事件处理函数
+		mui('.mui-scroll-wrapper').scroll();
+		 //下列的shown 和 hidden 会随菜单的开和关自动触发
+		mui('body').on('shown', '.mui-popover', function(e) {
+			console.log('shown', e.detail.id); //detail为当前popover元素
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			console.log('hidden', e.detail.id); //detail为当前popover元素
+		});
+		mui(".mui-navigate-right").on('tap', 'a', function() {
+			console.log("click in mui navigate right " + this.innerText);
+		});
+		mui("#postManagePopover").on('tap', 'a', function() {
+			console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+			mui('.mui-popover').popover('toggle');
+		});
+		 ///////////////////////popover菜单的事件处理函数
+	</script>
 </html>
