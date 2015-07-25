@@ -49,9 +49,35 @@
 				</div>
 			</form>
 			<div class="mui-button-row" style="height: auto;">
-				<button id="ConfirmBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">确定</font></button>
+				<button id="allotPostBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">分配岗位</font></button>
 			</div>
 		</div>
 	</body>
-
+<script>
+	document.getElementById('allotPostBtn').addEventListener('tap', function() {
+		//console.log('click the register');
+	  	//打开注册遇到问题页面
+	  	//registerView.show("slide-in-right",150);
+	  	
+	  	//console.log('show the register');
+	  	
+	  	titleName = document.querySelector("h1").innerText;
+	  	
+	  	console.log(titleName);
+	  	
+	  	mui.openWindow({
+	    	url: 'post_allot.html', 
+	    	id:'post_allot',
+	    	waiting:{
+				autoShow:true,//自动显示等待框，默认为true
+				title:'正在加载...',//等待对话框上显示的提示内容
+			},
+	    	
+	    	extras:{
+	    		titleName:titleName
+	    	}
+	  	});
+	  	
+	});
+</script>
 </html>
