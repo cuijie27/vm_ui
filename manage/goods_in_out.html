@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+				<!--
+                	作者：49264664@qq.com
+                	时间：2015-07-25
+                	描述：注释如下语句，post_allot.html和subaccount_detail.html页面是标准的
+                	利用消息还传递显示返回按钮的名称信息。
+                	貌似速度很慢。
+                	<span class="mui-icon mui-icon-left-nav"></span>岗位管理
+                -->
+
+			</button>
+			<h1 class="mui-title">货物进出信息</h1>
+		</header>
+
+		<div id="goodsListDiv" class="mui-content">
+			<h4>货物名称：漫漫屋玻璃杯曲线</h4>
+			<h5>货物编码：71558</h5>
+			<h5>当前库存：15000</h5>
+			<h5>收货次数：50次</h5>
+			<h5>出货次数：40次</h5>
+			<ul id="goodsList" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+
+				<li class="mui-table-view-cell ">
+					<span class="mui-badge mui-badge-green">入库</span>
+					<a href="../manage/goods_in_out.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-7">
+								<h4 class="mui-ellipsis">新羽玻璃制品有限公司</h4>
+								<p class="mui-h5 mui-ellipsis ">2015-07-10：采购入库：+1000</p>
+
+							</div>
+
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell ">
+					<span class="mui-badge mui-badge-danger">出库</span>
+					<a href="../manage/goods_in_out.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-7">
+								<h4 class="mui-ellipsis">北库房</h4>
+								<p class="mui-h5 mui-ellipsis ">2015-06-25：中转出库：-1000</p>
+
+							</div>
+
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell ">
+					<span class="mui-badge mui-badge-danger">出库</span>
+					<a href="../manage/goods_in_out.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-7">
+								<h4 class="mui-ellipsis">何中海</h4>
+								<p class="mui-h5 mui-ellipsis ">2015-06-20：拿货出库：-1000</p>
+
+							</div>
+
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell ">
+					<span class="mui-badge mui-badge-green">入库</span>
+					<a href="../manage/goods_in_out.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-7">
+								<h4 class="mui-ellipsis">新羽玻璃制品有限公司</h4>
+								<p class="mui-h5 mui-ellipsis ">2015-06-10：采购入库：+1000</p>
+
+							</div>
+
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell ">
+					<span class="mui-badge mui-badge-green">入库</span>
+					<a href="../manage/goods_in_out.html">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-7">
+								<h4 class="mui-ellipsis">新羽玻璃制品有限公司</h4>
+								<p class="mui-h5 mui-ellipsis ">2015-06-10：采购入库：+200000</p>
+
+							</div>
+
+						</div>
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var titleName = self.titleName;
+			document.querySelector("button").innerHTML = "<span class=\"mui-icon mui-icon-left-nav\"></span>" + titleName;
+		});
+	</script>
+
+</html>
