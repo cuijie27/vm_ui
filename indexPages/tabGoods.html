@@ -11,14 +11,14 @@
 			mui.init();
 		</script>
 		<style>
-			#goodsList{
-		    		margin-top: 20px;
-		    		}
+			#goodsList {
+				margin-top: 20px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<div id="partnersList" class="mui-content">
+		<div id="goodsListDiv" class="mui-content">
 			<h4 align="center">北京聚福天下商贸有限公司</h4>
 			<h5>默认搜索框：</h5>
 			<div class="mui-input-row mui-search">
@@ -82,5 +82,39 @@
 
 		</div>
 	</body>
+	<script>
+		var aniShow = "pop-in";
+		 //只有ios支持的功能需要在Android平台隐藏；
+		if (mui.os.android) {
+			var list = document.querySelectorAll('.ios-only');
+			if (list) {
+				for (var i = 0; i < list.length; i++) {
+					list[i].style.display = 'none';
+				}
+			}
+			//Android平台暂时使用slide-in-right动画
+			aniShow = "slide-in-right"
+		}
+		var titleName = "货物";
+		mui('#goodsListDiv').on('tap', 'a', function() {
+			var id = this.getAttribute('href');
+			var href = this.href;
+			//console.log("id is "+id+"\n href is "+href);
+			mui.openWindow({
+				id: id,
+				url: href,
+				show: {
+					aniShow: aniShow
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				},
+				extras: {
+					titleName: titleName
+				}
+			});
+		});
+	</script>
 
 </html>

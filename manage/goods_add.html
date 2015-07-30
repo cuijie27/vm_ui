@@ -17,7 +17,17 @@
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+				<!--
+                	作者：49264664@qq.com
+                	时间：2015-07-25
+                	描述：注释如下语句，post_allot.html和subaccount_detail.html页面是标准的
+                	利用消息还传递显示返回按钮的名称信息。
+                	貌似速度很慢。
+                	<span class="mui-icon mui-icon-left-nav"></span>岗位管理
+                -->
+
+			</button>
 		<h1 class="mui-title">新建商品信息</h1>
 	</header>
 	
@@ -105,6 +115,15 @@
 			}
 		},false);
 	});
+	</script>
+	
+	
+	<script>
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var titleName = self.titleName;
+			document.querySelector("button").innerHTML = "<span class=\"mui-icon mui-icon-left-nav\"></span>" + titleName;
+		});
 	</script>
 	
 </body>
