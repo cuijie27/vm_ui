@@ -15,7 +15,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 
-			<h1 class="mui-title">新建岗位</h1>
+			<h1 class="mui-title">分配岗位</h1>
 
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 				<!--
@@ -26,20 +26,54 @@
                 	貌似速度很慢。
                 	<span class="mui-icon mui-icon-left-nav"></span>岗位管理
                 -->
-				
+
 			</button>
 
 		</header>
+
+		<div class="mui-content">
+
+			<h5 class="mui-content-padded">子账号名称：张三</h5>
+
+			<h5 class="mui-content-padded">选择相应岗位：</h5>
+			<div class="mui-card">
+				<form class="mui-input-group">
+					<div class="mui-input-row mui-radio mui-left">
+						<label>管理</label>
+						<input name="checkbox" value="Item 1" type="radio">
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>财务</label>
+						<input name="checkbox" value="Item 2" type="radio" checked>
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>仓储</label>
+						<input name="checkbox" value="Item 2" type="radio">
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>管理1</label>
+						<input name="checkbox" value="Item 2" type="radio">
+					</div>
+					<div class="mui-input-row mui-radio mui-left">
+						<label>统计</label>
+						<input name="checkbox" value="Item 2" type="radio">
+					</div>
+
+				</form>
+			</div>
+
+			<div id="addPostDiv" class="mui-button-row" style="height: auto;">
+				<button id="postAllotBtn" type="button" style="width: 95%; height: auto;" class="mui-btn mui-btn-primary mui-btn-blue" onclick="return false;"><font size="3">分配岗位</font>
+				</button>
+			</div>
+		</div>
 	</body>
-<script>
-	mui.plusReady(function() {
-	
-	var self = plus.webview.currentWebview();
-		var titleName = self.titleName;
-		
-		document.querySelector("button").innerHTML = "<span class=\"mui-icon mui-icon-left-nav\"></span>"+titleName;
-		
-		
-	});
-</script>
+	<script>
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+			var titleName = self.titleName;
+			document.querySelector("button").innerHTML = "<span class=\"mui-icon mui-icon-left-nav\"></span>" + titleName;
+		});
+	</script>
+
 </html>
