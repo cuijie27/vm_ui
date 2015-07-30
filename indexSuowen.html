@@ -40,9 +40,9 @@
 				<span class="mui-icon mui-icon-contact"><span class="mui-badge">9</span></span>
 				<span class="mui-tab-label">伙伴</span>
 			</a>
-			<a class="mui-tab-item" href="/indexPages/tabReport.html">
+			<a class="mui-tab-item" href="/indexPages/tabGoods.html">
 				<span class="mui-icon mui-icon-info"></span>
-				<span class="mui-tab-label">报表</span>
+				<span class="mui-tab-label">货物</span>
 			</a>
 			<a class="mui-tab-item" href="/indexPages/tabMe.html">
 				<span class="mui-icon mui-icon-person"></span>
@@ -103,7 +103,7 @@
 			 // 子页面路径array
 			var subpages = ['/indexPages/tabSuowen.html',
 				'/indexPages/tabPartner.html',
-				'/indexPages/tabReport.html',
+				'/indexPages/tabGoods.html',
 				'/indexPages/tabMe.html'
 			];
 			var subpage_style = {
@@ -202,7 +202,7 @@
 					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
 				}
 				//报盘页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				else if (activeTab.indexOf("Report")>0){
+				else if (activeTab.indexOf("Goods")>0){
 					contentWebviewReport = plus.webview.currentWebview().children()[2];
 					contentWebviewReport.evalJS('mui("#TopPopover").popover("toggle")');
 					if (!tabReportShow)
@@ -242,7 +242,7 @@
 			  		tabSuowenShow = false;
 				}
 			  }
-			  else if(page.indexOf("Report")>0){
+			  else if(page.indexOf("Goods")>0){
 			  	if(type == "show"){
 			  		tabReportShow = true;
 			  	}
