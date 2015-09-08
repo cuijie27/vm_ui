@@ -14,6 +14,41 @@
 			#goodsList {
 				margin-top: 20px;
 			}
+			#TopPopover {
+				position: fixed;
+				top: 16px;
+				right: 6px;
+			}
+			#TopPopover .mui-popover-arrow {
+				left: auto;
+				right: 6px;
+			}
+			p {
+				text-indent: 22px;
+			}
+			/*
+			 * 这个需要注释掉，会影响，tab下面文字的位置。
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}*/
+			
+			.mui-popover {
+				height: 300px;
+			}
+			.mui-backdrop {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 998;
+				/*如下语句是调整popover菜单蒙版遮罩的明暗度*/
+				
+				background-color: rgba(0, 0, 0, 0.05);
+			}
 		</style>
 	</head>
 
@@ -81,6 +116,38 @@
 			</ul>
 
 		</div>
+		<!-- ---------------右上角弹出菜单---------------------------->
+		<div id="TopPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="../partners/add_partner.html">添加合作伙伴</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item2</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item3</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item4</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item5</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item6</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item7</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item8</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item9</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">Item10</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
 	<script>
 		var aniShow = "pop-in";
@@ -115,6 +182,49 @@
 				}
 			});
 		});
+		 ///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
+		var main = null;
+		mui.plusReady(function() {
+			main = plus.webview.currentWebview().opener();
+		});
+		mui('.mui-scroll-wrapper').scroll();
+		mui('body').on('shown', '.mui-popover', function(e) {
+			//console.log('shown', e.detail.id);//detail为当前popover元素
+			//mui.fire(main, "popoverOpenOrNot");
+			mui.fire(main, "popoverOpenOrNot", {
+				page: "tabGoods.html",
+				type: "show"
+			});
+		});
+		mui('body').on('hidden', '.mui-popover', function(e) {
+			//console.log('hidden', e.detail.id);//detail为当前popover元素
+			mui.fire(main, "popoverOpenOrNot", {
+				page: "tabGoods.html",
+				type: "hidden"
+			});
+		});
+		mui("#TopPopover").on('tap', 'a', function() {
+			//console.log(this.innerText);
+			var id = this.getAttribute('href');
+			mui.openWindow({
+				id: id,
+				url: this.href,
+				show: {
+					aniShow: aniShow
+				},
+				styles: {
+					popGesture: "close"
+				},
+				waiting: {
+					autoShow: true, //自动显示等待框，默认为true
+					title: '正在加载...', //等待对话框上显示的提示内容
+				}
+			});
+			//传入toggle参数，用户也无需关心当前是显示还是隐藏状态，mui会自动识别处理；
+			mui('.mui-popover').popover('toggle');
+		});
+		 ///////////////////////popover菜单的事件处理函数
+		 ///////////////////////子页面在popover菜单显示或隐藏时发送消息给主页面，popover的显示状态。
 	</script>
 
 </html>

@@ -163,7 +163,7 @@
 		var main = null;
 		mui.plusReady(function () {
 			main = plus.webview.currentWebview().opener();
-		})
+		});
 		mui('.mui-scroll-wrapper').scroll();
 		mui('body').on('shown', '.mui-popover', function(e) {
 			//console.log('shown', e.detail.id);//detail为当前popover元素

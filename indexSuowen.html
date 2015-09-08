@@ -52,11 +52,11 @@
 
 		<script>
 			var showMenu = false;
-			// tab页面中popover菜单显示标志位，false为不显示，true为显示
+			 // tab页面中popover菜单显示标志位，false为不显示，true为显示
 			var tabSuowenShow = false,
-			tabPartnerShow = false,
-			tabReportShow = false,
-			tabMeShow = false;
+				tabPartnerShow = false,
+				tabReportShow = false,
+				tabMeShow = false;
 			/*
 		mui.init({
 			swipeBack: false,
@@ -99,7 +99,7 @@
 		</script>
 
 		<script>
-			//////////////////////////////tab切换页面js代码
+			 //////////////////////////////tab切换页面js代码
 			 // 子页面路径array
 			var subpages = ['/indexPages/tabSuowen.html',
 				'/indexPages/tabPartner.html',
@@ -118,6 +118,13 @@
 					if (i > 0) {
 						sub.hide();
 					}
+					/**
+					 * IOS Andriod 系统的这个函数是有区别的，
+					 * 在Andriod中self.append后元素是顺序排序，即可以用0,1,2,3来访问
+					 * 而在IOS中self.append后，元素是无序排列的。不可以用0,1,2,3来访问，这个问题要注意。
+					 * 在以后的开发中，要有IOS和Andriod 两个环境下进行测试过关。
+					 * add by cuijie 2015.09.08
+					 */
 					self.append(sub);
 				}
 			});
@@ -137,27 +144,49 @@
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
-				
 				//获取该页面中所有的子页面
-				var list = plus.webview.currentWebview().children();
+				var list = null;
+				list = plus.webview.currentWebview().children();
+				//console.log(list.length);
+				//console.log("suowen partner report me is " + tabSuowenShow + " " + tabPartnerShow + " " + tabReportShow + " " + tabMeShow);
 				//如果索问tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
-				if(tabSuowenShow){
-					list[0].evalJS('mui("#TopPopover").popover("toggle")');
+				if (tabSuowenShow) {
+					for (var i = 0; i < 4; i++) {
+						var listURL = list[i].getURL();
+						if (listURL.indexOf("Suowen") > 0) {
+							list[i].evalJS('mui("#TopPopover").popover("toggle")');
+						}
+					}
 					tabSuowenShow = false;
 				}
 				//如果伙伴tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
-				if(tabPartnerShow){
-					list[1].evalJS('mui("#TopPopover").popover("toggle")');
+				if (tabPartnerShow) {
+					for (var i = 0; i < 4; i++) {
+						var listURL = list[i].getURL();
+						if (listURL.indexOf("Partner") > 0) {
+							list[i].evalJS('mui("#TopPopover").popover("toggle")');
+						}
+					}
 					tabPartnerShow = false;
 				}
 				//如果报表tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
-				if(tabReportShow){
-					list[2].evalJS('mui("#TopPopover").popover("toggle")');
+				if (tabReportShow) {
+					for (var i = 0; i < 4; i++) {
+						var listURL = list[i].getURL();
+						if (listURL.indexOf("Goods") > 0) {
+							list[i].evalJS('mui("#TopPopover").popover("toggle")');
+						}
+					}
 					tabReportShow = false;
 				}
 				//如果我tab中有popover菜单弹出，则使其隐藏，并置显示标志位为空
-				if(tabMeShow){
-					list[3].evalJS('mui("#TopPopover").popover("toggle")');
+				if (tabMeShow) {
+					for (var i = 0; i < 4; i++) {
+						var listURL = list[i].getURL();
+						if (listURL.indexOf("Me") > 0) {
+							list[i].evalJS('mui("#TopPopover").popover("toggle")');
+						}
+					}
 					tabMeShow = false;
 				}
 			});
@@ -165,109 +194,98 @@
 		</script>
 
 		<script>
-			////////////////////////////////页面banner上点击图标弹出菜单js
+			 ////////////////////////////////页面banner上点击图标弹出菜单js
 			mui.plusReady(function() {});
 			 //console.log(plus.webview.currentWebview().children());
-			var contentWebviewSuoWen = null, 
-			contentWebviewPartner = null,
-			contentWebviewReport = null,
-			contentWebviewMe = null;
 			document.getElementById("menu").addEventListener('tap', function(e) {
 				e.stopPropagation();
-				//console.log("click the menu");
+				//console.log("click the menu and the page is " + activeTab);
+				//console.log(plus.webview.currentWebview().children().length);
 				/*
 				 * 子页面存在个问题，要测试子页面时，需要关闭程序，重新打款app，重新来一遍进入页面后，方可测试
 				 * 要不然，如下语句会报错
 				 * 报错信息为：“ Uncaught TypeError: Cannot read property 'length' of null”
 				 */
+				/**
+				 * 调测子页面时，一定要退出app，
+				 * 不然程序会重新加载子页面，使得webview中页面越来越多
+				 * list = plus.webview.currentWebview().children();
+				 * list.length 正常情况为4，但是重新加载后，这个值会成为8
+				 * add by cuijie 2015.09.08
+				 */
 				//索问页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				if(activeTab.indexOf("Suowen")>0){
-					contentWebviewSuoWen = plus.webview.currentWebview().children()[0];
-					contentWebviewSuoWen.evalJS('mui("#TopPopover").popover("toggle")');
-					if (!tabSuowenShow) 
-						tabSuowenShow = true;
-					else 
-						tabSuowenShow = false;						
-					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
-				}
-				//伙伴页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				else if (activeTab.indexOf("Partner")>0){
-					contentWebviewPartner = plus.webview.currentWebview().children()[1];
-					contentWebviewPartner.evalJS('mui("#TopPopover").popover("toggle")');
-					if (!tabPartnerShow)
-						tabPartnerShow = true;
-					else	
-						tabPartnerShow = false;
-
-					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
-				}
-				//报盘页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				else if (activeTab.indexOf("Goods")>0){
-					contentWebviewReport = plus.webview.currentWebview().children()[2];
-					contentWebviewReport.evalJS('mui("#TopPopover").popover("toggle")');
-					if (!tabReportShow)
-						tabReportShow = true;
-					else
-						tabReportShow = false
-						
-					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
-				}
-				//我页面中popover弹出菜单显示逻辑，主要是标志位和其它页面popover菜单是否显示的逻辑
-				else if (activeTab.indexOf("Me")>0){
-					contentWebviewMe = plus.webview.currentWebview().children()[3];
-					contentWebviewMe.evalJS('mui("#TopPopover").popover("toggle")');
-					if(!tabMeShow)
-						tabMeShow = true;
-					else
-						tabMeShow = false;
-					
-					//console.log("suowen partner report me is "+tabSuowenShow+" "+tabPartnerShow+" "+tabReportShow+" "+tabMeShow);
+				var list = null;
+				list = plus.webview.currentWebview().children(); // 取当前webview的子页面，一共有4个子页面
+				for (var i = 0; i < 4; i++) {
+					var listURL = list[i].getURL();
+					if (listURL.indexOf(activeTab) > 0) {
+						list[i].evalJS('mui("#TopPopover").popover("toggle")');
+						if (activeTab.indexOf("tabSuowen") > 0) {
+							if (!tabSuowenShow)
+								tabSuowenShow = true;
+							else
+								tabSuowenShow = false;
+						}
+						if (activeTab.indexOf("tabPartner") > 0) {
+							if (!tabPartnerShow)
+								tabPartnerShow = true;
+							else
+								tabPartnerShow = false;
+						}
+						if (activeTab.indexOf("tabGoods") > 0) {
+							if (!tabReportShow)
+								tabReportShow = true;
+							else
+								tabReportShow = false;
+						}
+						if (activeTab.indexOf("tabMe") > 0) {
+							if (!tabMeShow)
+								tabMeShow = true;
+							else
+								tabMeShow = false;
+						}
+						//console.log("suowen partner report me is " + tabSuowenShow + " " + tabPartnerShow + " " + tabReportShow + " " + tabMeShow);
+					}
 				}
 				//console.log("active tab is " + activeTab);
 			});
 			 ////////////////////////////////页面banner上点击图标弹出菜单js
 		</script>
 		<script>
-			//////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
-			//添加newId自定义事件监听
-			window.addEventListener('popoverOpenOrNot',function(event){
-			  //获得事件参数
-			  var type = event.detail.type;
-			  var page = event.detail.page;
-			  if (page.indexOf("Suowen")>0){
-			  	if(type == "show"){
-			  		tabSuowenShow = true;
-			  	}
-			  	else{
-			  		tabSuowenShow = false;
+			 //////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
+			 //添加newId自定义事件监听
+			window.addEventListener('popoverOpenOrNot', function(event) {
+				//获得事件参数
+				var type = event.detail.type;
+				var page = event.detail.page;
+				//console.log(page + " is " + type);
+				if (page.indexOf("Suowen") > 0) {
+					if (type == "show") {
+						tabSuowenShow = true;
+					} else {
+						tabSuowenShow = false;
+					}
+				} else if (page.indexOf("Goods") > 0) {
+					if (type == "show") {
+						tabReportShow = true;
+					} else {
+						tabReportShow = false;
+					}
+				} else if (page.indexOf("Partner") > 0) {
+					if (type == "show") {
+						tabPartnerShow = true;
+					} else {
+						tabPartnerShow = false;
+					}
+				} else if (page.indexOf("Me") > 0) {
+					if (type == "show") {
+						tabMeShow = true;
+					} else {
+						tabMeShow = false;
+					}
 				}
-			  }
-			  else if(page.indexOf("Goods")>0){
-			  	if(type == "show"){
-			  		tabReportShow = true;
-			  	}
-			  	else{
-			  		tabReportShow = false;
-				}
-			  }
-			  else if(page.indexOf("Partner")>0){
-			  	if(type == "show"){
-			  		tabPartnerShow = true;
-			  	}
-			  	else{
-			  		tabPartnerShow = false;
-				}
-			  }
-			  else if(page.indexOf("Me")>0){
-			  	if(type == "show"){
-			  		tabMeShow = true;
-			  	}
-			  	else{
-			  		tabMeShow = false;
-				}
-			  }
 			});
-			//////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
+			 //////////////////////自定义接收popover散弹显示，或隐藏时发送的消息。
 		</script>
 	</body>
 
