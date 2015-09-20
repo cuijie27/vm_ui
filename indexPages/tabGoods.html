@@ -6,6 +6,10 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/Long.min.js"></script>
+		<script src="../js/ByteBufferAB.min.js"></script>
+		<script src="../js/ProtoBuf.noparse.min.js"></script>
+		<script src="../js/Suowen.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
@@ -149,6 +153,43 @@
 		</div>
 		<!-- ---------------右上角弹出菜单---------------------------->
 	</body>
+
+	<script>
+		 ///////////////////////获取商品list信息/////////////////////////
+		 //初始化API头文件一定要加上
+		suowen.api.Init("http://suowen.tiger.mopaas.com");
+		 //添加协议文件
+		suowen.api.AddProto("/sys/GoodsSearch.json");
+		 //编译api成JS调用对象
+		var root = suowen.api.Build();
+		var goodsSearchRequest = new root.sys.GoodsSearchRequest();
+		mui.plusReady(function() {
+			var tokenVal = plus.storage.getItem("token_val");
+			console.log("in tabGoods token is " + tokenVal);
+			// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。vvvv
+			suowen.api.token = tokenVal;
+			// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
+			//goodsSearchRequest.setQuery("");
+			suowen.api.Fetch(goodsSearchRequest, function(response) {
+					var goods = response.getGoods();
+					console.log("msg size isss "+goods.length);
+					
+					for (var i = 0; i < goods.length; i++) {
+						var msg = "";
+						msg += "id is " + goods[i].getId();
+						msg += "name is " + goods[i].getName();
+						msg += "quantity is " + goods[i].getQuantity() + "\n";
+						console.log(msg);
+					}
+				},
+				function(message) {
+					mui.alert(message, '返回错误', function() {});
+				}
+			);
+		});
+		 ///////////////////////获取商品list信息/////////////////////////
+	</script>
+
 	<script>
 		var aniShow = "pop-in";
 		 //只有ios支持的功能需要在Android平台隐藏；
