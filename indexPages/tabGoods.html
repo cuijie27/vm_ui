@@ -170,6 +170,8 @@
 			suowen.api.token = tokenVal;
 			// 所有页面的fetch之前都要加上以下这句话，这个token值需要存起来。保存在本地。^^^^
 			//goodsSearchRequest.setQuery("");
+			
+			
 			suowen.api.Fetch(goodsSearchRequest, function(response) {
 					var goods = response.getGoods();
 					console.log("msg size isss "+goods.length);
