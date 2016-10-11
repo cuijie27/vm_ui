@@ -1,5 +1,4 @@
 <?php
-include_once "xx_xml.class.php";
 
 //////////////////////////////////////////////////////////////////
 // first step
@@ -11,9 +10,6 @@ include_once "xx_xml.class.php";
 //////////////////////////////////////////////////////////////////
 // second step
 // curl -v -T ./ca.xml --cacert ./ca.pem -u admin@internal:5idoris -H "Content-Type: application/xml" -X POST "https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket"
-
-
-echo 'hello vm worldss<br>';
 
 $xml_data = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><action><async>true</async><ticket><expiry>120</expiry></ticket></action>';
 
@@ -54,13 +50,6 @@ else
 
 
 curl_close($ch);
-
-/////////////////////////
-/*    <certificate>
-        <organization>localdomain</organization>
-        <subject>O=localdomain,CN=192.168.0.188</subject>
-    </certificate>*/
-
 
 
 echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
