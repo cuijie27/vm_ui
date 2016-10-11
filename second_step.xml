@@ -1,0 +1,76 @@
+@cuij ➜  vm  curl -v -T ./ca.xml --cacert ./ca.pem -u admin@internal:5idoris -H "Content-Type: application/xml" -X POST "https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket"
+
+
+*   Trying 192.168.0.188...
+* Connected to v001.ganshane.com (192.168.0.188) port 443 (#0)
+* TLS 1.2 connection using TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+* Server certificate: v001.ganshane.com
+* Server certificate: localhost.localdomain.34193
+* Server auth using Basic with user 'admin@internal'
+> POST /ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket HTTP/1.1
+> Host: v001.ganshane.com
+> Authorization: Basic YWRtaW5AaW50ZXJuYWw6NWlkb3Jpcw==
+> User-Agent: curl/7.49.1
+> Accept: */*
+> Content-Type: application/xml
+> Content-Length: 142
+> Expect: 100-continue
+>
+* Done waiting for 100-continue
+* We are completely uploaded and fine
+< HTTP/1.1 200 OK
+< Date: Mon, 10 Oct 2016 13:30:29 GMT
+< Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.1e-fips
+< Content-Type: application/xml
+< Content-Length: 4309
+< Vary: Accept-Encoding
+<
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<action>
+    <async>true</async>
+    <status>complete</status>
+    <ticket>
+        <expiry>120</expiry>
+        <value>6HUN1xJszer1</value>
+    </ticket>
+    <vm href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1" id="24a9b519-9748-4662-b785-e3db7dcdc7e1">
+        <actions>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/undosnapshot" rel="undosnapshot"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/clone" rel="clone"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/reordermacaddresses" rel="reordermacaddresses"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/commitsnapshot" rel="commitsnapshot"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/logon" rel="logon"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/freezefilesystems" rel="freezefilesystems"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/thawfilesystems" rel="thawfilesystems"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/cancelmigration" rel="cancelmigration"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/maintenance" rel="maintenance"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/previewsnapshot" rel="previewsnapshot"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/migrate" rel="migrate"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/reboot" rel="reboot"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket" rel="ticket"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/detach" rel="detach"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/export" rel="export"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/shutdown" rel="shutdown"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/start" rel="start"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/stop" rel="stop"/>
+            <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/suspend" rel="suspend"/>
+        </actions>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/affinitylabels" rel="affinitylabels"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/applications" rel="applications"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/cdroms" rel="cdroms"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/diskattachments" rel="diskattachments"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/graphicsconsoles" rel="graphicsconsoles"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/hostdevices" rel="hostdevices"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/katelloerrata" rel="katelloerrata"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/nics" rel="nics"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/numanodes" rel="numanodes"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/permissions" rel="permissions"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/reporteddevices" rel="reporteddevices"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/sessions" rel="sessions"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/snapshots" rel="snapshots"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/statistics" rel="statistics"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/tags" rel="tags"/>
+        <link href="/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/watchdogs" rel="watchdogs"/>
+    </vm>
+</action>
+* Connection #0 to host v001.ganshane.com left intact

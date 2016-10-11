@@ -1,0 +1,46 @@
+bash-3.2$ /Applications/RemoteViewer.app/Contents/MacOS/RemoteViewer --spice-ca-file ca.pem --spice-host-subject "O-localdomain,CN=192.168.0.188" spice://192.168.0.188/?port=-1\&tls-port=5901
+
+
+2016-10-10 19:31:03.779 defaults[34794:21573582]
+The domain/default pair of (.GlobalPreferences, AppleCollationOrder) does not exist
+/Applications/RemoteViewer.app/Contents/MacOS/RemoteViewer: line 79: test: argument expected
+
+(process:34786): Gtk-WARNING **: Locale not supported by C library.
+	Using the fallback 'C' locale.
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): Gtk-WARNING **: Attempting to store changes into `/Users/cuijie/.local/share/recently-used.xbel', but failed: Failed to create file '/Users/cuijie/.local/share/recently-used.xbel.TA35OY': No such file or directory
+
+(RemoteViewer-bin:34786): Gtk-WARNING **: Attempting to set the permissions of `/Users/cuijie/.local/share/recently-used.xbel', but failed: No such file or directory
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: sync_keyboard_lock_modifiers not implemented
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Invalid port value -1
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: sync_keyboard_lock_modifiers not implemented
+
+(RemoteViewer-bin:34786): GSpice-CRITICAL **: send_key: assertion `scancode != 0' failed
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: sync_keyboard_lock_modifiers not implemented
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: sync_keyboard_lock_modifiers not implemented
+
+(RemoteViewer-bin:34786): GSpice-WARNING **: Error receiving data: Operation timed out
+
+(RemoteViewer-bin:34786): GSpice-CRITICAL **: recv hdr: Operation timed out
+
+(RemoteViewer-bin:34786): Gtk-WARNING **: Attempting to store changes into `/Users/cuijie/.local/share/recently-used.xbel', but failed: Failed to create file '/Users/cuijie/.local/share/recently-used.xbel.SIZSOY': No such file or directory
+
+(RemoteViewer-bin:34786): Gtk-WARNING **: Attempting to set the permissions of `/Users/cuijie/.local/share/recently-used.xbel', but failed: No such file or directory
+bash-3.2$
