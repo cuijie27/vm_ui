@@ -21,8 +21,8 @@
 echo 'hello vm worldss<br>';
 
 $fp = fopen('test.vv', 'w');
-fwrite($fp, '1');
-fwrite($fp, '23');
+fwrite($fp, '1\\');
+fwrite($fp, '23\\');
 fclose($fp);
 
 ?>
