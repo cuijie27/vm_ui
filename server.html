@@ -78,42 +78,35 @@ h1 {
     font-weight: 700;
     text-shadow: 0 1px 4px rgba(0,0,0,.2);
 }
-#ajax-indicator {
-    position: absolute;
-    background-color: #eee;
-    border: 1px solid #bbb;
-    top: 35%;
-    left: 40%;
-    width: 20%;
-    font-weight: bold;
-    text-align: center;
-    padding: 0.6em;
-    z-index: 100;
-    opacity: 0.5;
-}
 #message{
   margin-bottom:0px;
   display:inline;
+  font-size:20px;
 }
 .notice{
 color:green;
+display:inline;
 }
 .error{
   color:red;
+display:inline;
 }
 </style>
 </head>
 <body>
   <div id="page-container">
     <h1 style="padding-top:130px;">桌面云登陆平台</h1>
-    <div id="message"><div>&nbsp;</div></div>
     <input placeholder="服务器IP地址" style="width: 260px; display: inline;" id="ip">
     <button style="display:inline;" id="connBtn"> 连 接 </button>
+    <div id="message"></div>
   </div>
-<div id="ajax-indicator" style="display: none;"><span>载入中...</span></div>
-
 <script type="text/javascript">
 (function() {
+  //此处设置
+  var verifyURL= "/verify.php"
+  var loginURL= "/login.php"
+
+  var key="_ACAI_IP"
   function $(id){
 	 return document.getElementById(id);
   }
@@ -125,15 +118,15 @@ color:green;
   }
  
   var httpRequest;
-  $("connBtn").onclick = function() { makeRequest('http://suowen.daoapp.io'); };
+  $("connBtn").onclick = function() { makeRequest(); };
 
-  function makeRequest(url) {
+  function makeRequest() {
     notice("开始连接");
-	  document.getElementById("ajax-indicator").style.display = "block";
+    var url='http://'+$('ip').value+verifyURL;
     httpRequest = new XMLHttpRequest();
 
     if (!httpRequest) {
-      alert('Giving up :( Cannot create an XMLHTTP instance');
+      error('Giving up :( Cannot create an XMLHTTP instance');
       return false;
     }
     httpRequest.onreadystatechange = alertContents;
@@ -143,14 +136,29 @@ color:green;
 
   function alertContents() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      notice("请求完成");
       if (httpRequest.status === 200) {
-        //alert(httpRequest.responseText);
-        //window.location="http://suowen.daoapp.io"
+        notice("连接成功");
+        var url='http://'+$('ip').value+loginURL;
+        localStorage.setItem(key,$('ip').value);
+        window.location=url;
       } else {
-        alert('There was a problem with the request.');
+        error('连接错误:status:'+httpRequest.status);
       }
-	   document.getElementById("ajax-indicator").style.display = "none";
     }
+  }
+  function GetQueryString(name)
+  {
+       var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+       var r = window.location.search.substr(1).match(reg);
+       if(r!=null)return  unescape(r[2]); return null;
+  }
+
+  var serverIp = localStorage.getItem(key);
+  if(serverIp){
+    $('ip').value = serverIp;
+    if(!GetQueryString("reset"))
+      makeRequest();
   }
 })();
 </script>
