@@ -1,8 +1,11 @@
 <?php
+
+require("./getHostInfo.php");
+
 function getVMInfo($userpwd_u){
 
 	echo "in func of getVMInfo()";
-	
+
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_VERBOSE, true);	// -v
@@ -34,6 +37,40 @@ function getVMInfo($userpwd_u){
 
 	curl_close($ch);
 
-	return $ret;
+
+	$xml = new SimpleXMLElement($ret);
+	$vms = $xml->xpath('/vms/vm');
+
+	$vmArr = array();
+	$i = 0;
+	foreach($vms as $vm){
+		$vmName = $vm->name;
+		$vmId = $vm['id'];
+		$vmStatus = $vm->status;
+		$vmPort = $vm->display->secure_port;
+		$hostId = $vm->host['id'];
+
+		$vmArr[$i] = array();
+		$vmArr[$i]['vmName'] = $vmName;
+		$vmArr[$i]['vmId'] = $vmId;
+		$vmArr[$i]['status'] = $vmStatus;
+		$vmArr[$i]['port'] = $vmPort;
+		$vmArr[$i]['hostId'] = $hostId;
+
+		$retOfHost = getHostInfo($userpwd_u, $hostId);
+
+		$xml_h = new SimpleXMLElement($retOfHost);
+		$vms_h = $xml_h->xpath('/host');
+		foreach($vms_h as $vm_h){
+
+			$vmArr[$i]['organization'] = $vm_h->certificate->organization; 
+			$vmArr[$i]['subject'] = $vm_h->certificate->subject; 
+			$vmArr[$i]['address'] = $vm_h->address; 
+		}
+
+		$i++;
+	}
+
+	return $vmArr;
 }
 ?>
