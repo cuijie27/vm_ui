@@ -1,18 +1,19 @@
 <?php
-function getPswd(){
+function getPswd($userpwd_u, $vmid){
 
 	$xml_data = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><action><async>true</async><ticket><expiry>120</expiry></ticket></action>';
 
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_VERBOSE, true);	// -v
-	curl_setopt($ch, CURLOPT_USERPWD, "admin@internal:5idoris");	//-u
+	curl_setopt($ch, CURLOPT_USERPWD, $userpwd_u);	//-u
+	//curl_setopt($ch, CURLOPT_USERPWD, "admin@internal:5idoris");	//-u
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);//-k
 	curl_setopt($ch, CURLOPT_CAINFO,  getcwd().'/ca.pem'); 
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_data);	//-X
 	curl_setopt($ch, CURLOPT_POST, true);		//-X
 	curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Content-Type: application/xml"));	//-H
-	curl_setopt($ch, CURLOPT_URL, "https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket");		// url
+	curl_setopt($ch, CURLOPT_URL, "https://v001.ganshane.com/ovirt-engine/api/vms/".$vmid."/ticket");		// url
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	$ret = curl_exec($ch);
