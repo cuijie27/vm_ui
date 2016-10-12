@@ -18,7 +18,7 @@ function getCa(){
 	else
 	{
 	    echo '操作完成没有任何错误<br>';
-		echo '返回结果为：'.$ret;
+		//echo '返回结果为：'.$ret;
 	}
 
 	curl_close($ch);
