@@ -20,7 +20,7 @@ foreach($vmArr as $vm){
 
 	echo "<tr>";
 	echo "<td>".$vm['vmName']."</td>";
-	echo "<td>".$vm['vmName']."</td>";
+	echo "<td><a href=\"./third.php?vmid=".$vm["vmId"]."&hostid=".$vm["hostId"]."&usrpswd=".$userpwd_u."\">打开虚拟机 ".$vm['vmName']."</a></td>";
 	echo "</tr>";
 }
 echo "</table>";

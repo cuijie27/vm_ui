@@ -17,61 +17,37 @@
 // third step create console.vv
 //bash-3.2$ /Applications/RemoteViewer.app/Contents/MacOS/RemoteViewer --spice-ca-file ca.pem --spice-host-subject "O-localdomain,CN=192.168.0.188" spice://192.168.0.188/?port=-1\&tls-port=5901
 
+require("./getPswd.php");
+require("./getCa.php");
 
-function getPswd(){
+$vmid=$_GET['vmid'];
+$hostid=$_GET['hostid'];
+$usrpswd=$_GET['usrpswd'];
 
-	$xml_data = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><action><async>true</async><ticket><expiry>120</expiry></ticket></action>';
+echo $vmid."<br>";
+echo $usrpswd."<br>";
+echo $hostid."<br>";
 
-	$ch = curl_init();
+$pswd = getPswd($usrpswd, $vmid);
 
-	curl_setopt($ch, CURLOPT_VERBOSE, true);	// -v
-	curl_setopt($ch, CURLOPT_USERPWD, "admin@internal:5idoris");	//-u
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);//-k
-	curl_setopt($ch, CURLOPT_CAINFO,  getcwd().'/ca.pem'); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_data);	//-X
-	curl_setopt($ch, CURLOPT_POST, true);		//-X
-	curl_setopt($ch, CURLOPT_HTTPHEADER, Array("Content-Type: application/xml"));	//-H
-	curl_setopt($ch, CURLOPT_URL, "https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/ticket");		// url
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+echo $pswd;
 
-	$ret = curl_exec($ch);
+die;
 
-	if($ret === false)
-	{
-	    echo 'Curl error: ' . curl_error($ch);
-	}
-	else
-	{
-	    //echo '操作完成没有任何错误<br>';
-		//echo '返回结果为：'.$ret;
-	}
-
-
-	curl_close($ch);
-
-
-	//echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
-	$xml = new SimpleXMLElement($ret);
-	$vms = $xml->xpath('/action/ticket');
-	foreach($vms as $vm){
-		//echo 'expiry : '. $vm->expiry."\n";
-		//echo 'value: '.$vm->value."\n";
-		if($vm->value){
-			return $vm->value;
-		}
-	}
-	return "";
-}
-
-header("Content-type:application/x-virt-viewer");
-
-$pswd = getPswd();
+$type;
+$host;
+$title;
+$tlsPort;
+$hostSubject;
+$ca=getCa();
 
 if ("" == $pswd){
 	echo "the pswd is empty";
 }
 
+header("Content-type:application/x-virt-viewer");
 
+/*
 $console = "[virt-viewer]
 type=spice
 host=192.168.0.188
@@ -94,6 +70,7 @@ ca=-----BEGIN CERTIFICATE-----\\nMIIDxjCCAq6gAwIBAgICEAAwDQYJKoZIhvcNAQEFBQAwSTE
 secure-channels=main;inputs;cursor;playback;record;display;smartcard;usbredir
 versions=rhev-win64:2.0-160;rhev-win32:2.0-160;rhel7:2.0-6;rhel6:99.0-1
 newer-version-url=http://www.ovirt.org/documentation/admin-guide/virt/console-client-resources";
+*/
 
 echo $console; 
 
