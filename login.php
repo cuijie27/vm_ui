@@ -2,10 +2,17 @@
 //https://v001.ganshane.com/ovirt-engine/sso/login.html
 echo 'hello vm worldss<br>';
 
+$usrName = $_POST['username'];
+$pswd = $_POST['password'];
+
+$userpwd_u = $usrName."@internal:".$pswd;
+
+
 $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_VERBOSE, true);	// -v
-curl_setopt($ch, CURLOPT_USERPWD, "admin@internal:5idoris");	//-u
+curl_setopt($ch, CURLOPT_USERPWD, $userpwd_u);	//-u
+//curl_setopt($ch, CURLOPT_USERPWD, "admin@internal:5idoris");	//-u
 curl_setopt($ch, CURLOPT_CERTINFO, FALSE);		//-k
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);//-k
 //curl_setopt($ch, CURLOPT_POST, true);		//-X
@@ -28,7 +35,7 @@ if($ret === false)
 else
 {
     echo '操作完成没有任何错误<br>';
-	echo '返回结果为：'.$ret;
+	//echo '返回结果为：'.$ret;
 }
 
 
