@@ -1,6 +1,7 @@
 <?php
 //https://v001.ganshane.com/ovirt-engine/sso/login.html
 require("./getVMInfo.php");
+require("./getHostInfo.php");
 
 
 $usrName = $_POST['username'];
@@ -12,14 +13,36 @@ $ret = getVMInfo($userpwd_u);
 
 $xml = new SimpleXMLElement($ret);
 $vms = $xml->xpath('/vms/vm');
-foreach($vms as $vm){
-	echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
-	echo 'name	: '. $vm->name."\n";
-	echo 'vm_id	: '.$vm['id']."\n";
-	echo 'status	: '.$vm->status."\n";
-	echo 'port	: '.$vm->display->secure_port."\n";
-	echo 'host_id	: '.$vm->host['id']."\n";
 
+$vmArr = array();
+$i = 0;
+foreach($vms as $vm){
+	$vmName = $vm->name;
+	$vmId = $vm['id'];
+	$vmStatus = $vm->status;
+	$vmPort = $vm->display->secure_port;
+	$hostId = $vm->host['id'];
+
+	$vmArr[$i] = array();
+	$vmArr[$i]['vmName'] = $vmName;
+	$vmArr[$i]['vmId'] = $vmId;
+	$vmArr[$i]['status'] = $vmStatus;
+	$vmArr[$i]['port'] = $vmPort;
+	$vmArr[$i]['hostId'] = $hostId;
+
+	$retOfHost = getHostInfo($userpwd_u, $hostId);
+
+	$xml_h = new SimpleXMLElement($retOfHost);
+	$vms_h = $xml_h->xpath('/host/certificate');
+	foreach($vms_h as $vm_h){
+
+		$vmArr[$i]['organization'] = $vm_h->organization; 
+		$vmArr[$i]['subject'] = $vm_h->subject; 
+	}
+	$i++;
 }
+
+print_r($vmArr);
+
 
 ?>
