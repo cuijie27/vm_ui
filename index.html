@@ -1,0 +1,90 @@
+﻿<html>
+<!DOCTYPE html>
+<html lang="cn" class="no-js">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>登录(Login)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/supersized.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="assets/js/html5.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="page-container">
+            <div class="connect">
+                <p></p>
+                <p></p><p></p><p></p><p></p>
+            </div>
+            <h1>acai桌面云登陆平台</h1>
+            <form id="pc" action="" method="post">
+                <input type="text" name="username" class="username" placeholder="用户名">
+                <input type="password" name="password" class="password" placeholder="密码">
+                <input type="Captcha" class="Captcha" name="Captcha" id="Captcha" placeholder="服务器IP地址">
+                <button type="submit" class="submit_button">登录</button>
+                <div class="error"><span>+</span></div>
+            </form>
+            <div class="connect">
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+		
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.8.2.min.js" ></script>
+        <script src="assets/js/supersized.3.2.7.min.js" ></script>
+        <script src="assets/js/supersized-init.js" ></script>
+        <script src="assets/js/scripts.js" ></script>
+
+    </body>
+<div style="text-align:center;">
+<p>PCsystem by acai 2016</p>
+</div>
+<script>
+
+//alert(GetLocalIPAddress());
+ //document.write("你的IP是：" + );
+ //t1 = document.form.getElementById("Captcha");
+ //t1.value = "12.1.2.1";   
+ //alert(document.getElementById("Captcha").value);
+ //alert(form.document.getElementById('Captcha').value);
+ //alert(document.getElementById("Captcha").value);
+
+ //-->
+    document.getElementById("Captcha").style.visibility="hidden";   //默认不显示ServerIP
+    if(window.localStorage){
+        //localStorage.serverip = "14.12.12.12";
+        var serverip = localStorage.serverip;        //获取值
+        if (!serverip){ //判断localStorage 是否有ServerIP
+            //无ServerIP
+            alert("无ServerIP ！");
+            //$("#Captcha").show();//显示
+            document.getElementById("Captcha").style.visibility="visible";
+        }else{
+            //有ServerIP
+            //alert("有ServerIp ！");
+            document.getElementById("Captcha").style.visibility="hidden";
+            document.getElementById("Captcha").value=serverip;
+            document.getElementById("pc").action="http://"+serverip+"/action.php";
+        }
+        //alert(serverip.length);
+        localStorage.removeItem("serverip");//清除c的值
+    }else{
+        alert('This browser does NOT support localStorage');
+    }
+ </script>
+</html>
+
