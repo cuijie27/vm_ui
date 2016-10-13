@@ -4,8 +4,6 @@ require("./getHostInfo.php");
 
 function getVMInfo($userpwd_u){
 
-	echo "in func of getVMInfo()";
-
 	$ch = curl_init();
 
 	curl_setopt($ch, CURLOPT_VERBOSE, true);	// -v
@@ -31,7 +29,7 @@ function getVMInfo($userpwd_u){
 	}
 	else
 	{
-	    echo '操作完成没有任何错误<br>';
+	    //echo '操作完成没有任何错误<br>';
 		//echo '返回结果为：'.$ret;
 	}
 
@@ -48,6 +46,7 @@ function getVMInfo($userpwd_u){
 		$vmId = $vm['id'];
 		$vmStatus = $vm->status;
 		$vmPort = $vm->display->secure_port;
+		$vmType = $vm->display->type;
 		$hostId = $vm->host['id'];
 
 		$vmArr[$i] = array();
@@ -56,6 +55,7 @@ function getVMInfo($userpwd_u){
 		$vmArr[$i]['status'] = $vmStatus;
 		$vmArr[$i]['port'] = $vmPort;
 		$vmArr[$i]['hostId'] = $hostId;
+		$vmArr[$i]['vmType'] = $vmType;
 
 		$retOfHost = getHostInfo($userpwd_u, $hostId);
 

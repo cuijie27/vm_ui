@@ -40,5 +40,5 @@ curl_close($ch);
 -T test.xml \
 https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/shutdown
  */
-
+//curl -v -u "admin@internal:5idoris" -k -X POST -H "Content-type: application/xml" -T test.xml https://v001.ganshane.com/ovirt-engine/api/vms/24a9b519-9748-4662-b785-e3db7dcdc7e1/reboot
 ?>

@@ -31,7 +31,7 @@ function getHostInfo($userpwd_u, $host_id){
 	}
 	else
 	{
-	    echo '操作完成没有任何错误<br>';
+	    //echo '操作完成没有任何错误<br>';
 		//echo '返回结果为：'.$ret;
 	}
 
